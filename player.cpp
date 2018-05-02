@@ -4,6 +4,8 @@ Player::~Player(){}
 Human::Human(){}
 Human::~Human(){}
 Action *Human::decide(){
-	action=getchar();
+	do{
+		action=getchar();
+	}while(action=='\n');
 	return &action;
 }
