@@ -6,11 +6,18 @@ class Player{
 public:
 	Player();
 	~Player();
+//	virtual void decide(Action &,Info &);
 };
-class Human{
+class Human:public Player{
 public:
 	Human();
 	~Human();
-	void decide(Action &);
+	void decide(Action &,Info &);
+};
+class Agent:public Player{
+public:
+	Agent();
+	~Agent();
+	void decide(Action &,Info &);
 };
 #endif

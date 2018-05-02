@@ -71,9 +71,7 @@ void Game::step(Action action,Info &info){
 	return;
 }
 void Game::getState(Info &info){
-	for(int i=0;i<10;i++){
-//		info.state[i++]=map.state[i];
-	}
+	memcpy(info.state,map.state,sizeof(double)*STATEVARS);
 }
 void Game::updateState(){
 	map.updateState();
