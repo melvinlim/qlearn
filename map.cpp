@@ -84,7 +84,6 @@ Map::Map():
 	reset();
 }
 void Map::reset(){
-	updateState();
 	generateMap();
 	mat.item[playerObject.i*10+playerObject.j]=0;
 	srand(time(0));
@@ -98,6 +97,7 @@ void Map::reset(){
 	i=t;
 	j=random()%10;
 	placeObject(stairs,i,j);
+	updateState();
 }
 bool Map::movePlayer(int i,int j){
 	int i0=playerObject.i;
