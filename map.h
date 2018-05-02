@@ -18,6 +18,7 @@ public:
 	~Map();
 	void reset();
 	void display();
+	void displayMat(const Matrix<char> &);
 	void generateMap();
 	void updateState();
 	void placeObject(Object &,int,int);

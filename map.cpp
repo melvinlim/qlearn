@@ -2,7 +2,11 @@
 void Map::updateState(){
 	int i=playerObject.i;
 	int j=playerObject.j;
-//	vision.atIndex(1,1)='@';
+	for(int m=0;m<3;m++){
+		for(int n=0;n<3;n++){
+			vision(m,n)='.';
+		}
+	}
 	vision(1,1)='@';
 	if(i<=0){
 		vision(0,0)=' ';
@@ -23,6 +27,15 @@ void Map::updateState(){
 		vision(2,0)=' ';
 		vision(2,1)=' ';
 		vision(2,2)=' ';
+	}
+	displayMat(vision);
+}
+void Map::displayMat(const Matrix<char> &m){
+	for(int i=0;i<m.nRows;i++){
+		for(int j=0;j<m.nCols;j++){
+			printf("%c",m(i,j));
+		}
+		printf("\n");
 	}
 }
 Map::Map():
