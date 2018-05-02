@@ -1,6 +1,7 @@
 #ifndef _DEFS_H
 #define _DEFS_H
 #define STATEVARS 18
+#define RANDSCALING 10
 typedef char Action;
 struct Info{
 	double reward;

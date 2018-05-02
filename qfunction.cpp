@@ -1,6 +1,9 @@
 #include"qfunction.h"
 Qfunction::Qfunction(int nActions){
+	double gamma=0.1;
+	int hiddenUnits=50;
 	this->nActions=nActions;
+	net=new SingleHidden(STATEVARS,hiddenUnits,nActions,gamma);
 }
 Qfunction::~Qfunction(){}
 double Qfunction::getReward(int action,double *state){
