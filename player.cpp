@@ -11,12 +11,28 @@ void Human::decide(Action &action,Info &info){
 		tmp=getchar();
 	}
 }
-Agent::Agent(){}
+Agent::Agent():
+qfunction(4)
+{}
 Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
-	Action tmp=0;
-	while(tmp!='\n'){
-		action=tmp;
-		tmp=getchar();
+	int y=qfunction.getBestAction(info.state);
+	switch(y){
+		case 0:
+			action='n';
+		break;
+		case 1:
+			action='s';
+		break;
+		case 2:
+			action='e';
+		break;
+		case 3:
+			action='w';
+		break;
+		default:
+			assert(false);
+		break;
 	}
+	getchar();
 }

@@ -4,7 +4,10 @@
 #include<stdio.h>
 class Qfunction{
 public:
-	Qfunction();
+	int nActions;
+	Qfunction(int);
 	~Qfunction();
+	double getReward(int,double *);
+	int getBestAction(double *);
 };
 #endif
