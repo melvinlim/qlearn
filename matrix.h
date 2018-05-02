@@ -9,11 +9,13 @@ class Matrix{
 public:
 	int nRows;
 	int nCols;
+	int nElements;
 	T *item;
 	Matrix(int m,int n){
 		int i;
 		nRows=m;
 		nCols=n;
+		nElements=nRows*nCols;
 		item=new T[m*n];
 		for(i=0;i<m*n;i++){
 			item[i]=0;
@@ -27,6 +29,12 @@ public:
 	}
 	T atIndex(int i,int j){
 		return item[i*nCols+j];
+	}
+	void clear(){
+		T *p=item;
+		for(int i=0;i<nElements;i++){
+			*p++=0;
+		}
 	}
 	void randomize(int max){
 		int i,j;

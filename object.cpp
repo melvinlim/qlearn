@@ -1,0 +1,11 @@
+#include"object.h"	
+Object::Object(){}
+Object::~Object(){}
+Stairs::Stairs(){
+	self='<';
+}
+Stairs::~Stairs(){}
+PlayerObject::PlayerObject(){
+	self='@';
+}
+PlayerObject::~PlayerObject(){}

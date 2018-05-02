@@ -1,6 +1,7 @@
 #include"map.h"
 Map::Map():mat(10,10){
 	nRows=nCols=10;
+	mat.clear();
 }
 Map::~Map(){}
 void Map::display(){
@@ -16,6 +17,8 @@ void Map::display(){
 				case 2:
 					printf("<");
 				break;
+				default:
+					printf("?");
 			}
 		}
 		printf("\n");

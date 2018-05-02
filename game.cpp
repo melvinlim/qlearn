@@ -4,7 +4,6 @@ Game::Game(){
 Game::~Game(){}
 void Game::start(){
 	running=true;
-	map=Map();
 }
 void Game::reset(){
 }

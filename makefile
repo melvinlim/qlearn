@@ -1,7 +1,7 @@
 CXX =				g++
 CXXFLAGS =	-std=c++11 -Wall -Wextra -pedantic -g -c
 LFLAGS =		-std=c++11 -Wall -Wextra -pedantic -g -o qlearn
-OBJECTS =		main.o game.o player.o map.o
+OBJECTS =		main.o game.o player.o map.o object.o
 qlearn:		$(OBJECTS)
 	$(CXX) $(LFLAGS) $(OBJECTS)
 main:			main.cpp defs.h
@@ -11,6 +11,8 @@ game:			game.cpp defs.h
 player:		player.cpp defs.h
 	$(CXX) $(CXXFLAGS) player.cpp
 map:			map.cpp defs.h
+	$(CXX) $(CXXFLAGS) map.cpp
+object:		object.cpp defs.h
 	$(CXX) $(CXXFLAGS) map.cpp
 clean:
 	rm -f mynn *.o a.out
