@@ -14,7 +14,7 @@ bool Map::movePlayer(int i,int j){
 	int i0=playerObject.i;
 	int j0=playerObject.j;
 	bool result=false;
-	if(mat.item[i*10+j]=='<')	result=true;
+	if(i==stairs.i&&j==stairs.j)	result=true;
 	mat.item[i0*10+j0]=0;
 	placeObject(playerObject,i,j);
 	return result;
