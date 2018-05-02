@@ -19,7 +19,7 @@ void Game::step(Action action,Info &info){
 	int i=map.playerObject.i;
 	int j=map.playerObject.j;
 	bool result=false;
-	int reward;
+	int reward=0;
 	switch(action){
 		case'n':
 			if(i>0)
@@ -61,7 +61,19 @@ void Game::step(Action action,Info &info){
 	}
 	if(result){
 		printf("win\n");
+		reward=1;
 		running=false;
 	}
+	info.reward=reward;
+	getState(info);
+	updateState();
 	return;
+}
+void Game::getState(Info &info){
+	int j=0;
+	for(int i=5;i<10;i++){
+		info.state[j++]=i;
+	}
+}
+void Game::updateState(){
 }

@@ -14,5 +14,7 @@ public:
 	void end();
 	void display();
 	void step(Action,Info &);
+	void getState(Info &);
+	void updateState();
 };
 #endif
