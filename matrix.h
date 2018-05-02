@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include"defs.h"
+#include<algorithm>
 template<typename T>
 class Matrix{
 public:
@@ -24,10 +25,10 @@ public:
 	~Matrix(){
 		delete[] item;
 	}
-	T atIndex(int i,int j) const{
+	const T atIndex(int i,int j) const{
 		return item[i*nCols+j];
 	}
-	T atIndex(int i,int j){
+	T &atIndex(int i,int j){
 		return item[i*nCols+j];
 	}
 	void clear(){
@@ -36,15 +37,46 @@ public:
 			*p++=0;
 		}
 	}
-	void randomize(int max){
+	void randomize(int scalefactor){
+		int i,j;
+		T *p=item;
+		for(i=0;i<nRows;i++){
+			for(j=0;j<nCols;j++){
+				*p++=(random()-(RAND_MAX/2))*2.0/((T)RAND_MAX)/((T)scalefactor);
+			}
+		}
+	}
+	void randomizeInt(int max){
 		int i,j;
 		T *p=item;
 		for(i=0;i<nRows;i++){
 			for(j=0;j<nCols;j++){
 				*p++=random()%max;
-				//*p++=(random()-(RAND_MAX/2))*2.0/((T)RAND_MAX)/((T)RANDSCALING);
 			}
 		}
+	}
+	//modified from cppreference.com/w/cpp/language/operators
+	T& operator=(const T& other) // copy assignment
+	{
+			if (this != &other) { // self-assignment check expected
+					if (other.nElements != nElements) {         // storage cannot be reused
+							delete[] item;              // destroy storage in this
+							nElements = 0;
+							item = nullptr;             // preserve invariants in case next line throws
+							item = new T[other.size]; // create storage in this
+							nElements = other.size;
+					} 
+					std::copy(other.item, other.item + other.nElements, item);
+			}
+			return *this;
+	}
+	T& operator[](std::size_t idx)       { return item[idx]; }
+	const T& operator[](std::size_t idx) const { return item[idx]; }
+	T &operator()(int i,int j){
+		return atIndex(i,j);
+	}
+	const T &operator()(int i,int j) const{
+		return atIndex(i,j);
 	}
 	void print(){
 		int i,j;

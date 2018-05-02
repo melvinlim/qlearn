@@ -70,10 +70,10 @@ void Game::step(Action action,Info &info){
 	return;
 }
 void Game::getState(Info &info){
-	int j=0;
-	for(int i=5;i<10;i++){
-		info.state[j++]=i;
+	for(int i=0;i<10;i++){
+//		info.state[i++]=map.state[i];
 	}
 }
 void Game::updateState(){
+	map.updateState();
 }
