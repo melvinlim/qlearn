@@ -10,23 +10,32 @@ void Map::updateState(){
 	vision(1,1)='@';
 	if(i<=0){
 		vision(0,0)=' ';
+		vision(0,1)=' ';
+		vision(0,2)=' ';
+	}
+	if(i>=9){
+		vision(2,0)=' ';
+		vision(2,1)=' ';
+		vision(2,2)=' ';
+	}
+	if(j<=0){
+		vision(0,0)=' ';
 		vision(1,0)=' ';
 		vision(2,0)=' ';
 	}
-	if(i>=9){
+	if(j>=9){
 		vision(0,2)=' ';
 		vision(1,2)=' ';
 		vision(2,2)=' ';
 	}
-	if(i<=0){
-		vision(0,0)=' ';
-		vision(0,1)=' ';
-		vision(0,2)=' ';
-	}
-	if(j>=9){
-		vision(2,0)=' ';
-		vision(2,1)=' ';
-		vision(2,2)=' ';
+	for(int m=0;m<3;m++){
+		for(int n=0;n<3;n++){
+			if(vision(m,n)!=' '){
+				if(mat(i+m-1,j+n-1)==2){
+					vision(m,n)='<';
+				}
+			}
+		}
 	}
 	displayMat(vision);
 }
