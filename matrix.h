@@ -4,21 +4,53 @@
 #include<stdlib.h>
 #include<math.h>
 #include"defs.h"
-
+template<typename T>
 class Matrix{
 public:
 	int nRows;
 	int nCols;
-	double *item;
-	Matrix(int,int);
-	~Matrix();
-	double atIndex(int,int) const;
-	double atIndex(int,int);
-	void randomize(int);
-	void print();
+	T *item;
+	Matrix(int m,int n){
+		int i;
+		nRows=m;
+		nCols=n;
+		item=new T[m*n];
+		for(i=0;i<m*n;i++){
+			item[i]=0;
+		}
+	}
+	~Matrix(){
+		delete[] item;
+	}
+	T atIndex(int i,int j) const{
+		return item[i*nCols+j];
+	}
+	T atIndex(int i,int j){
+		return item[i*nCols+j];
+	}
+	void randomize(int max){
+		int i,j;
+		T *p=item;
+		for(i=0;i<nRows;i++){
+			for(j=0;j<nCols;j++){
+				*p++=random()%max;
+				//*p++=(random()-(RAND_MAX/2))*2.0/((T)RAND_MAX)/((T)RANDSCALING);
+			}
+		}
+	}
+	void print(){
+		int i,j;
+		for(i=0;i<nRows;i++){
+			for(j=0;j<nCols;j++){
+				printf("[%3i,%3i] %+.09f ",i,j,atIndex(i,j));
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
 	friend bool operator==(const Matrix &lhs,const Matrix &rhs){
 		int mn=lhs.nRows*lhs.nCols;
-		double tol=0.0001;
+		T tol=0.0001;
 		for(int i=0;i<mn;i++){
 			if(fabs(lhs.item[i]-rhs.item[i])>tol){
 				return false;
