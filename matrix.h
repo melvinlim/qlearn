@@ -55,10 +55,16 @@ public:
 			}
 		}
 	}
-	T &operator()(int i,int j){
+	T &operator[](int i){
+		return item[i];
+	}
+	const T &operator[](int i) const{
+		return item[i];
+	}
+	inline T &operator()(int i,int j){
 		return item[i*nCols+j];
 	}
-	const T &operator()(int i,int j) const{
+	inline const T &operator()(int i,int j) const{
 		return item[i*nCols+j];
 	}
 	void print(){

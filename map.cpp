@@ -52,14 +52,22 @@ Map::Map():
 	vision(3,3)
 {
 	nRows=nCols=10;
-	generateMap();
-	placeObject(playerObject,4,4);
-	placeObject(stairs,9,9);
+	reset();
 }
 void Map::reset(){
+	generateMap();
 	mat.item[playerObject.i*10+playerObject.j]=0;
-	placeObject(playerObject,4,4);
-	placeObject(stairs,9,9);
+	srand(time(0));
+	int i=random()%10;
+	int j=random()%10;
+	placeObject(playerObject,i,j);
+	int t=0;
+	do{
+		t=random()%10;
+	}while(t==i);
+	i=t;
+	j=random()%10;
+	placeObject(stairs,i,j);
 }
 bool Map::movePlayer(int i,int j){
 	int i0=playerObject.i;
