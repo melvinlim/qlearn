@@ -85,17 +85,17 @@ Map::Map():
 }
 void Map::reset(){
 	generateMap();
-	mat.item[playerObject.i*10+playerObject.j]=0;
+	mat.item[playerObject.i*nCols+playerObject.j]=0;
 	srand(time(0));
-	int i=random()%10;
-	int j=random()%10;
+	int i=random()%nRows;
+	int j=random()%nCols;
 	placeObject(playerObject,i,j);
 	int t=0;
 	do{
-		t=random()%10;
+		t=random()%nRows;
 	}while(t==i);
 	i=t;
-	j=random()%10;
+	j=random()%nCols;
 	placeObject(stairs,i,j);
 	updateState();
 }
@@ -104,20 +104,20 @@ bool Map::movePlayer(int i,int j){
 	int j0=playerObject.j;
 	bool result=false;
 	if(i==stairs.i&&j==stairs.j)	result=true;
-	mat.item[i0*10+j0]=0;
+	mat.item[i0*nCols+j0]=0;
 	placeObject(playerObject,i,j);
 	return result;
 }
 void Map::generateMap(){
 	for(int i=0;i<mat.nRows;i++){
 		for(int j=0;j<mat.nCols;j++){
-			mat.item[i*10+j]=0;
+			mat.item[i*nCols+j]=0;
 		}
 	}
 }
 Map::~Map(){}
 void Map::placeObject(Object &obj,int i,int j){
-	mat.item[i*10+j]=obj.id;
+	mat.item[i*nCols+j]=obj.id;
 	obj.i=i;
 	obj.j=j;
 }
