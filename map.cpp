@@ -38,6 +38,35 @@ void Map::updateState(){
 		}
 	}
 	displayMat(vision);
+	double *p=state;
+	for(i=0;i<3;i++){
+		for(j=0;j<3;j++){
+			if(vision(i,j)=='.'){
+				*p++=1.;
+			}else{
+				*p++=-1.;
+			}
+		}
+	}
+	for(i=0;i<3;i++){
+		for(j=0;j<3;j++){
+			if(vision(i,j)=='<'){
+				*p++=1.;
+			}else{
+				*p++=-1.;
+			}
+		}
+	}
+	debugState();
+}
+void Map::debugState(){
+	for(int i=0;i<STATEVARS;i++){
+		if(i%3==0){
+			printf("\n");
+		}
+		printf("%2.2f ",state[i]);
+	}
+	printf("\n");
 }
 void Map::displayMat(const Matrix<char> &m){
 	for(int i=0;i<m.nRows;i++){

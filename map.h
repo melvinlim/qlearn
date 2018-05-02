@@ -9,7 +9,7 @@ class Map{
 	Matrix<int> mat;
 	Matrix<char> vision;
 public:
-	State state[STATEVARS];
+	double state[STATEVARS];
 	PlayerObject playerObject;
 	Stairs stairs;
 	int nRows;
@@ -23,5 +23,6 @@ public:
 	void updateState();
 	void placeObject(Object &,int,int);
 	bool movePlayer(int,int);
+	void debugState();
 };
 #endif
