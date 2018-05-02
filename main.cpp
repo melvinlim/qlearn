@@ -12,6 +12,7 @@ int main(){
 			game.display();
 			state=game.step(*player.decide());
 		}
+		game.end();
 	}
 	return 0;
 }

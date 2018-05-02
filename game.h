@@ -11,6 +11,7 @@ public:
 	~Game();
 	void start();
 	void reset();
+	void end();
 	void display();
 	State *step(Action);
 };

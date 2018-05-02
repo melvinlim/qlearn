@@ -6,6 +6,10 @@ void Game::start(){
 	running=true;
 }
 void Game::reset(){
+	map.reset();
+}
+void Game::end(){
+	printf("game over\n");
 }
 void Game::display(){
 	map.display();
@@ -14,11 +18,12 @@ void Game::display(){
 State *Game::step(Action action){
 	int i=map.playerObject.i;
 	int j=map.playerObject.j;
+	bool result=false;
 	int reward;
 	switch(action){
 		case'n':
 			if(i>0)
-				map.movePlayer(i-1,j);
+				result=map.movePlayer(i-1,j);
 			else{
 				reward=-1;
 				running=false;
@@ -26,7 +31,7 @@ State *Game::step(Action action){
 		break;
 		case's':
 			if(i<9)
-				map.movePlayer(i+1,j);
+				result=map.movePlayer(i+1,j);
 			else{
 				reward=-1;
 				running=false;
@@ -34,7 +39,7 @@ State *Game::step(Action action){
 		break;
 		case'e':
 			if(j<9)
-				map.movePlayer(i,j+1);
+				result=map.movePlayer(i,j+1);
 			else{
 				reward=-1;
 				running=false;
@@ -42,7 +47,7 @@ State *Game::step(Action action){
 		break;
 		case'w':
 			if(j>0)
-				map.movePlayer(i,j-1);
+				result=map.movePlayer(i,j-1);
 			else{
 				reward=-1;
 				running=false;
@@ -53,6 +58,10 @@ State *Game::step(Action action){
 			printf("received: %c (%d)\n",action,action);
 			return 0;
 		break;
+	}
+	if(result){
+		printf("win\n");
+		running=false;
 	}
 	return 0;
 }

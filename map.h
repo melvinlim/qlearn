@@ -13,9 +13,10 @@ public:
 	int nCols;
 	Map();
 	~Map();
+	void reset();
 	void display();
 	void generateMap();
 	void placeObject(Object &,int,int);
-	void movePlayer(int,int);
+	bool movePlayer(int,int);
 };
 #endif
