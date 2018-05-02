@@ -5,12 +5,14 @@ int main(){
 	Game game;
 	Human player;
 	Info info;
+	Action action;
 	for(;;){
 		game.reset();
 		game.start();
 		while(game.running){
 			game.display();
-			game.step(*player.decide(),info);
+			player.decide(action);
+			game.step(action,info);
 		}
 		game.end();
 	}

@@ -8,14 +8,14 @@ Map::Map():mat(10,10){
 void Map::reset(){
 	mat.item[playerObject.i*10+playerObject.j]=0;
 	placeObject(playerObject,4,4);
+	placeObject(stairs,9,9);
 }
 bool Map::movePlayer(int i,int j){
 	int i0=playerObject.i;
 	int j0=playerObject.j;
 	bool result=false;
-	Floor floor;
 	if(mat.item[i*10+j]=='<')	result=true;
-	placeObject(floor,i0,j0);
+	mat.item[i0*10+j0]=0;
 	placeObject(playerObject,i,j);
 	return result;
 }

@@ -8,10 +8,9 @@ public:
 	~Player();
 };
 class Human{
-	Action action;
 public:
 	Human();
 	~Human();
-	Action *decide();
+	void decide(Action &);
 };
 #endif
