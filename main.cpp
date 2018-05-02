@@ -10,7 +10,7 @@ int main(){
 		game.start();
 		while(game.running){
 			game.display();
-			state=game.step(player.decide());
+			state=game.step(*player.decide());
 		}
 	}
 	return 0;

@@ -12,6 +12,6 @@ public:
 	void start();
 	void reset();
 	void display();
-	State *step(Action *);
+	State *step(Action);
 };
 #endif

@@ -1,11 +1,18 @@
 #include"object.h"	
 Object::Object(){}
 Object::~Object(){}
+Floor::Floor(){
+	id=0;
+	self='.';
+}
+Floor::~Floor(){}
 Stairs::Stairs(){
+	id=2;
 	self='<';
 }
 Stairs::~Stairs(){}
 PlayerObject::PlayerObject(){
+	id=1;
 	self='@';
 }
 PlayerObject::~PlayerObject(){}

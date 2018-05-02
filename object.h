@@ -2,11 +2,17 @@
 #define _OBJECT_H
 class Object{
 public:
+	int id;
 	Object();
 	~Object();
-	int xLoc;
-	int yLoc;
+	int i;
+	int j;
 	char self;
+};
+class Floor:public Object{
+public:
+	Floor();
+	~Floor();
 };
 class Stairs:public Object{
 public:
