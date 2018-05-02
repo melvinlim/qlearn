@@ -4,13 +4,13 @@
 int main(){
 	Game game;
 	Human player;
-	State *state;
+	Info info;
 	for(;;){
 		game.reset();
 		game.start();
 		while(game.running){
 			game.display();
-			state=game.step(*player.decide());
+			game.step(*player.decide(),info);
 		}
 		game.end();
 	}

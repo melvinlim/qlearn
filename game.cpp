@@ -15,7 +15,7 @@ void Game::display(){
 	map.display();
 	printf(":");
 }
-State *Game::step(Action action){
+void Game::step(Action action,Info &info){
 	int i=map.playerObject.i;
 	int j=map.playerObject.j;
 	bool result=false;
@@ -56,12 +56,12 @@ State *Game::step(Action action){
 		default:
 			printf("error\n");
 			printf("received: %c (%d)\n",action,action);
-			return 0;
+			return;
 		break;
 	}
 	if(result){
 		printf("win\n");
 		running=false;
 	}
-	return 0;
+	return;
 }

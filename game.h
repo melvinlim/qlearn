@@ -13,6 +13,6 @@ public:
 	void reset();
 	void end();
 	void display();
-	State *step(Action);
+	void step(Action,Info &);
 };
 #endif
