@@ -4,6 +4,7 @@ Game::Game(){
 Game::~Game(){}
 void Game::start(){
 	running=true;
+	Matrix<int> m(5,5);
 }
 void Game::reset(){
 	map.reset();
