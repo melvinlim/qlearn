@@ -7,6 +7,7 @@ int main(){
 //	Human player;
 	Agent player;
 	Info info;
+	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);
 	Action action;
 	for(;;){

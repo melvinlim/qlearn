@@ -84,6 +84,7 @@ Map::Map():
 	reset();
 }
 void Map::reset(){
+	updateState();
 	generateMap();
 	mat.item[playerObject.i*10+playerObject.j]=0;
 	srand(time(0));

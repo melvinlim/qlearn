@@ -57,6 +57,7 @@ void Game::step(Action action,Info &info){
 		default:
 			printf("error\n");
 			printf("received: %c (%d)\n",action,action);
+			info.reward=0;
 			return;
 		break;
 	}
