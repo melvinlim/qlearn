@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef _GAME_H
+#define _GAME_H
 #include"defs.h"
 #include"map.h"
 #include<stdio.h>
