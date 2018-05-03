@@ -39,29 +39,11 @@ trainSet(BATCHSIZE)
 }
 Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
-	int y;
 	currentTime++;
 	if(currentTime<TRAININGTIME)
-		y=qfunction.getRandomAction(info.state);
+		action=qfunction.getRandomAction(info.state);
 	else
-		y=qfunction.getBestAction(info.state);
-	switch(y){
-		case 0:
-			action='n';
-		break;
-		case 1:
-			action='e';
-		break;
-		case 2:
-			action='s';
-		break;
-		case 3:
-			action='w';
-		break;
-		default:
-			assert(false);
-		break;
-	}
+		action=qfunction.getBestAction(info.state);
 	if(currentTime>TRAININGTIME)
 		getchar();
 }

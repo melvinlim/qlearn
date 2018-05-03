@@ -29,23 +29,8 @@ double Qfunction::getReward(int action,double *state){
 	return resp;
 }
 void Qfunction::updateQ(Info &info){
-	int iAction;
-	switch(info.action){
-		case 'n':
-			iAction=0;
-		break;
-		case 'e':
-			iAction=1;
-		break;
-		case 's':
-			iAction=2;
-		break;
-		case 'w':
-			iAction=3;
-		break;
-	}
 	rewardArray->item[0]=info.reward;
-	updateStateArray(stateArray,iAction,info.state);
+	updateStateArray(stateArray,info.action,info.state);
 #ifdef DEBUG
 	stateArray->print();
 	rewardArray->print();
@@ -53,7 +38,7 @@ void Qfunction::updateQ(Info &info){
 #endif
 	net->trainBatch(stateArray,rewardArray);
 #ifdef DEBUG
-	newReward=getReward(iAction,info.state);
+	newReward=getReward(info.action,info.state);
 	printf("Q reward=%f\n",newReward);
 	getchar();
 #endif
