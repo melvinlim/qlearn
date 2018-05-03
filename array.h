@@ -42,12 +42,25 @@ public:
 		if(item)
 			delete[] item;
 	}
-	virtual void print(){
+	virtual void print(int rowSize=0) const{
 		int i;
 		T *x;
 		x=item;
+		if(rowSize==0)	rowSize=nElements;
 		for(i=0;i<nElements;i++){
 			printf("[%3i] %+.02f\t",i,*x++);
+			if(i%rowSize==0)	printf("\n");
+		}
+		printf("\n");
+	}
+	virtual void print(int rowSize=0){
+		int i;
+		T *x;
+		x=item;
+		if(rowSize==0)	rowSize=nElements;
+		for(i=0;i<nElements;i++){
+			printf("[%3i] %+.02f\t",i,*x++);
+			if(i%rowSize==0)	printf("\n");
 		}
 		printf("\n");
 	}

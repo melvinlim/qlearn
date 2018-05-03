@@ -6,6 +6,7 @@
 #include<assert.h>
 #include<vector>
 #include"stack.h"
+#include"mynn/data.h"
 using namespace std;
 class Player{
 public:
@@ -22,6 +23,7 @@ public:
 };
 class Agent:public Player{
 public:
+	Data data;
 	int currentTime;
 	Qfunction qfunction;
 	Stack<Info> trainSet;

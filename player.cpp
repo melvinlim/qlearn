@@ -99,11 +99,19 @@ void Agent::train(Stack<Info> &records){
 	}
 	info.reward=0;
 //	verifyRecords(records);
-	while(!records.empty()){
-		info=records.back();
-		qfunction.updateQ(info);
-		records.pop_back();
-		if(i++%BATCHSIZE==0)
-			qfunction.net->updateWeights();
+	double sse=1000;
+	while(sse>1){
+		sse=0;
+		for(int i=0;i<BATCHSIZE;i++){
+			//info=records.item[random()%MEMORYSIZE];
+			info=records.item[i];
+			qfunction.updateQ(info);
+			sse+=data.sumSqError(&qfunction.net->error);
+		}
+		sse/=(float)BATCHSIZE;
+		printf("sse:%f\n",sse);
+		assert(sse<1000);
+		qfunction.net->updateWeights();
 	}
+	records.clear();
 }

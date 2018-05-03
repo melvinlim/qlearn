@@ -3,7 +3,7 @@
 #define STATEVARS 18
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
-#define BATCHSIZE 20
+#define BATCHSIZE 50
 #define GAMMA 0.01
 #define DISCOUNT 0.6
 #define HIDDENUNITS 100
