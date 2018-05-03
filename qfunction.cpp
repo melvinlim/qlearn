@@ -12,14 +12,20 @@ double Qfunction::getReward(int action,double *state){
 	double resp;
 	//should convert fully to Arrays to speed things up.
 	for(int i=0;i<4;i++){
-		printf("%f\n", aStates[action][i]);
+//		printf("%f\n", aStates[action][i]);
 	}
 	stateArray=new Array<double>(aStates[action],state,4,STATEVARS);
 	net->forward(stateArray);
 	delete stateArray;
 	resp=net->response->item[0];
-	printf("resp: %f\n",resp);
+//	printf("resp: %f\n",resp);
 	return resp;
+}
+void Qfunction::updateQ(double reward){
+//	previousStateArray;
+	Array<double> *rewardArray=new Array<double>(&reward,1);
+	net->trainOnce(previousStateArray,rewardArray);
+	delete rewardArray;
 }
 int Qfunction::getBestAction(double *state){
 	int best=0;
@@ -32,5 +38,7 @@ int Qfunction::getBestAction(double *state){
 			best=i;
 		}
 	}
+	previousStateArray=new Array<double>(aStates[best],state,4,STATEVARS);
+	previousRewardEst=bestVal;
 	return best;
 }

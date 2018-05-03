@@ -57,7 +57,7 @@ void Map::updateState(){
 			}
 		}
 	}
-	debugState();
+	//debugState();
 }
 void Map::debugState(){
 	for(int i=0;i<STATEVARS;i++){

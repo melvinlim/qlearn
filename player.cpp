@@ -34,5 +34,6 @@ void Agent::decide(Action &action,Info &info){
 			assert(false);
 		break;
 	}
+	qfunction.updateQ(info.reward);
 	getchar();
 }
