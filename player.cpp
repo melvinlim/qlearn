@@ -43,5 +43,5 @@ void Agent::decide(Action &action,Info &info){
 		break;
 	}
 	qfunction.updateQ(info.reward);
-//	getchar();
+	getchar();
 }

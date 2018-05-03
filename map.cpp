@@ -103,7 +103,7 @@ bool Map::movePlayer(int i,int j){
 	int j0=playerObject.j;
 	bool result=false;
 	if(i==stairs.i&&j==stairs.j)	result=true;
-	mat(i0,j0)=' ';
+	mat(i0,j0)='.';
 	placeObject(playerObject,i,j);
 	return result;
 }
