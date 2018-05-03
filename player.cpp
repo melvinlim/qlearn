@@ -75,18 +75,18 @@ void Agent::verifyRecords(vector<Info> &records){
 void Agent::train(vector<Info> &records){
 //	verifyRecords(records);
 	Info info;
-	double sse;
 	int r=0;
-	int size=BATCHSIZE;
+	int size;
+	int i=0;
+	size=MEMORYSIZE;
 	while(!records.empty()){
-		for(int i=0;i<size;i++){
-			r=random()%size;
-			size--;
-			info=records[r];
-			records.erase(records.begin()+r);
-			qfunction.updateQ(info.reward);
+		r=random()%records.size();
+		info=records[r];
+		records.erase(records.begin()+r);
+		qfunction.updateQ(info.reward);
+		if(i%BATCHSIZE==0)
 			qfunction.net->updateWeights();
-		}
+		i++;
 	}
 //	if(currentTime%40)	
 }
