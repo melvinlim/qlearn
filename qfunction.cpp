@@ -3,7 +3,7 @@ Qfunction::Qfunction(int nActions){
 	double gamma=0.1;
 	int hiddenUnits=50;
 	this->nActions=nActions;
-	net=new SingleHidden(STATEVARS,hiddenUnits,1,gamma);
+	net=new SingleHiddenLinear(STATEVARS,hiddenUnits,1,gamma);
 }
 Qfunction::~Qfunction(){}
 double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
