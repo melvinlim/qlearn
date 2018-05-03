@@ -4,9 +4,22 @@ Qfunction::Qfunction(int nActions){
 	int hiddenUnits=50;
 	this->nActions=nActions;
 	net=new SingleHiddenLinear(STATEVARS,hiddenUnits,1,gamma);
+	rewardArray=new Array<double>(1);
+	stateArray=new Array<double>(4+STATEVARS);
+	previousStateArray=new Array<double>(4+STATEVARS);
 }
 Qfunction::~Qfunction(){}
 double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
+void Qfunction::updateStateArray(Array<double> *array,int action,double *state){
+	int p=0;
+	int n=4+STATEVARS;
+	for(int i=0;i<4;i++){
+		array->item[p++]=aStates[action][i];
+	}
+	for(int i=0;i<STATEVARS;i++){
+		array->item[p++]=state[i];
+	}
+}
 //this will need to be dynamically created to vary with different action space sizes;
 double Qfunction::getReward(int action,double *state){
 	double resp;
@@ -14,18 +27,17 @@ double Qfunction::getReward(int action,double *state){
 	for(int i=0;i<4;i++){
 //		printf("%f\n", aStates[action][i]);
 	}
-	stateArray=new Array<double>(aStates[action],state,4,STATEVARS);
+	updateStateArray(stateArray,action,state);
 	net->forward(stateArray);
-	delete stateArray;
 	resp=net->response->item[0];
-//	printf("resp: %f\n",resp);
+	printf("resp: %f\n",resp);
 	return resp;
 }
 void Qfunction::updateQ(double reward){
 	double *var=new double(reward);
-	Array<double> *rewardArray=new Array<double>(var,1);
+	rewardArray->print();
+	previousStateArray->print();
 	net->trainOnce(previousStateArray,rewardArray);
-	delete rewardArray;
 }
 int Qfunction::getBestAction(double *state){
 	int best=0;
@@ -38,7 +50,8 @@ int Qfunction::getBestAction(double *state){
 			best=i;
 		}
 	}
-	previousStateArray=new Array<double>(aStates[best],state,4,STATEVARS);
+	updateStateArray(previousStateArray,best,state);
+	previousStateArray->print();
 	previousRewardEst=bestVal;
 	return best;
 }

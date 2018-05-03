@@ -6,8 +6,10 @@
 #include<stdio.h>
 class Qfunction{
 public:
+	Array<double> *rewardArray;
 	Array<double> *stateArray;
 	Array<double> *previousStateArray;
+	void updateStateArray(Array<double> *,int,double *);
 	double previousRewardEst;
 	Net *net;
 	int nActions;
