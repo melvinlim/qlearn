@@ -6,7 +6,7 @@
 #include<vector>
 using namespace std;
 class Map{
-	Matrix<int> mat;
+	Matrix<char> mat;
 	Matrix<char> vision;
 public:
 	double state[STATEVARS];

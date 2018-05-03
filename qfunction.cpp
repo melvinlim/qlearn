@@ -13,7 +13,6 @@ Qfunction::~Qfunction(){}
 double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 void Qfunction::updateStateArray(Array<double> *array,int action,double *state){
 	int p=0;
-	int n=4+STATEVARS;
 	for(int i=0;i<4;i++){
 		array->item[p++]=aStates[action][i];
 	}
@@ -65,5 +64,17 @@ int Qfunction::getBestAction(double *state){
 	}
 	previousStateArray->print();
 	previousRewardEst=bestVal;
+	return best;
+}
+int Qfunction::getRandomAction(double *state){
+	int best=0;
+	best=random()%4;
+	previousAction=best;
+	updateStateArray(previousStateArray,best,state);
+	for(int i=0;i<STATEVARS;i++){
+		previousState[i]=state[i];
+	}
+	previousStateArray->print();
+	previousRewardEst=1234;
 	return best;
 }

@@ -18,6 +18,7 @@ public:
 };
 class Agent:public Player{
 public:
+	int currentTime;
 	Qfunction qfunction;
 	Agent();
 	~Agent();

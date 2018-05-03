@@ -14,10 +14,17 @@ void Human::decide(Action &action,Info &info){
 }
 Agent::Agent():
 qfunction(4)
-{}
+{
+	currentTime=0;
+}
 Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
-	int y=qfunction.getBestAction(info.state);
+	int y;
+	currentTime++;
+	if(currentTime<2000)
+		y=qfunction.getRandomAction(info.state);
+	else
+		y=qfunction.getBestAction(info.state);
 	switch(y){
 		case 0:
 			action='n';

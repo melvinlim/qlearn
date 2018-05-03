@@ -31,7 +31,7 @@ void Map::updateState(){
 	for(int m=0;m<3;m++){
 		for(int n=0;n<3;n++){
 			if(vision(m,n)!=' '){
-				if(mat(i+m-1,j+n-1)==2){
+				if(mat(i+m-1,j+n-1)=='<'){
 					vision(m,n)='<';
 				}
 			}
@@ -85,7 +85,6 @@ Map::Map():
 }
 void Map::reset(){
 	generateMap();
-	mat.item[playerObject.i*nCols+playerObject.j]=0;
 	srand(time(0));
 	int i=random()%nRows;
 	int j=random()%nCols;
@@ -104,42 +103,27 @@ bool Map::movePlayer(int i,int j){
 	int j0=playerObject.j;
 	bool result=false;
 	if(i==stairs.i&&j==stairs.j)	result=true;
-	mat.item[i0*nCols+j0]=0;
+	mat(i0,j0)=' ';
 	placeObject(playerObject,i,j);
 	return result;
 }
 void Map::generateMap(){
 	for(int i=0;i<mat.nRows;i++){
 		for(int j=0;j<mat.nCols;j++){
-			mat.item[i*nCols+j]=0;
+			mat(i,j)='.';
 		}
 	}
 }
 Map::~Map(){}
 void Map::placeObject(Object &obj,int i,int j){
-	mat.item[i*nCols+j]=obj.id;
+	mat(i,j)=obj.self;
 	obj.i=i;
 	obj.j=j;
 }
 void Map::display(){
 	for(int i=0;i<nRows;i++){
 		for(int j=0;j<nCols;j++){
-			switch(mat(i,j)){
-				case 0:
-					printf(".");
-				break;
-				case 1:
-					printf("@");
-				break;
-				case 2:
-					printf("<");
-				break;
-				case 3:
-					printf(" ");
-				break;
-				default:
-					printf("?");
-			}
+			printf("%c",mat(i,j));
 		}
 		printf("\n");
 	}

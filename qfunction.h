@@ -4,6 +4,7 @@
 #include"mynn/net.h"
 #include"array.h"
 #include<stdio.h>
+#include<stdlib.h>
 class Qfunction{
 public:
 	Array<double> *rewardArray;
@@ -19,6 +20,7 @@ public:
 	~Qfunction();
 	double getReward(int,double *);
 	int getBestAction(double *);
+	int getRandomAction(double *);
 	void updateQ(double);
 };
 #endif
