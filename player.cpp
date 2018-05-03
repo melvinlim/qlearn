@@ -77,9 +77,11 @@ void Agent::train(vector<Info> &records){
 	Info info;
 	double sse;
 	int r=0;
+	int size=BATCHSIZE;
 	while(!records.empty()){
-		for(int i=0;i<BATCHSIZE;i++){
-			r=random()%BATCHSIZE;
+		for(int i=0;i<size;i++){
+			r=random()%size;
+			size--;
 			info=records[r];
 			records.erase(records.begin()+r);
 			qfunction.updateQ(info.reward);
