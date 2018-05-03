@@ -1,9 +1,7 @@
 #include"qfunction.h"
 Qfunction::Qfunction(int nActions){
-	double gamma=0.1;
-	int hiddenUnits=50;
 	this->nActions=nActions;
-	net=new SingleHiddenLinear(STATEVARS,hiddenUnits,1,gamma);
+	net=new SingleHiddenLinear(STATEVARS,HIDDENUNITS,1,GAMMA);
 	rewardArray=new Array<double>(1);
 	stateArray=new Array<double>(4+STATEVARS);
 	previousStateArray=new Array<double>(4+STATEVARS);
