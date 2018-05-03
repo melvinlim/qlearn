@@ -4,8 +4,6 @@ Qfunction::Qfunction(int nActions){
 	net=new SingleHiddenLinear(4+STATEVARS,HIDDENUNITS,1,GAMMA);
 	rewardArray=new Array<double>(1);
 	stateArray=new Array<double>(4+STATEVARS);
-	previousStateArray=new Array<double>(4+STATEVARS);
-	previousState=new double[STATEVARS];
 }
 Qfunction::~Qfunction(){}
 double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
@@ -30,7 +28,6 @@ double Qfunction::getReward(int action,double *state){
 	return resp;
 }
 void Qfunction::updateQ(Info &info){
-	double newReward=0;
 	int iAction;
 	switch(info.action){
 		case 'n':
@@ -47,29 +44,18 @@ void Qfunction::updateQ(Info &info){
 		break;
 	}
 	rewardArray->item[0]=info.reward;
-	updateStateArray(previousStateArray,iAction,info.state);
+	updateStateArray(stateArray,iAction,info.state);
 #ifdef DEBUG
-	previousStateArray->print();
+	stateArray->print();
 	rewardArray->print();
 	printf("training w. reward=%f -> ",info.reward);
 #endif
-	net->trainBatch(previousStateArray,rewardArray);
+	net->trainBatch(stateArray,rewardArray);
 #ifdef DEBUG
 	newReward=getReward(iAction,info.state);
 	printf("Q reward=%f\n",newReward);
 	getchar();
 #endif
-}
-void Qfunction::updateQ(double reward){
-	double newReward=0;
-	rewardArray->item[0]=reward;
-	rewardArray->print();
-	previousStateArray->print();
-	printf("training w. reward=%f\n",reward);
-	printf("before: %f\n",getReward(previousAction,previousState));
-	net->trainBatch(previousStateArray,rewardArray);
-	newReward=getReward(previousAction,previousState);
-	printf("after %f\n",newReward);
 }
 int Qfunction::getBestAction(double *state){
 	int best=0;
@@ -82,26 +68,14 @@ int Qfunction::getBestAction(double *state){
 			best=i;
 		}
 	}
-	updateStateArray(previousStateArray,best,state);
-	for(int i=0;i<STATEVARS;i++){
-		previousState[i]=state[i];
-	}
-	previousStateArray->print();
-	previousRewardEst=bestVal;
-	previousAction=best;
 	return best;
 }
 int Qfunction::getRandomAction(double *state){
 	int best=0;
 	best=random()%4;
-	updateStateArray(previousStateArray,best,state);
-	for(int i=0;i<STATEVARS;i++){
-		previousState[i]=state[i];
-	}
+	updateStateArray(stateArray,best,state);
 #ifdef DEBUG
-	previousStateArray->print();
+	stateArray->print();
 #endif
-	previousRewardEst=-4;
-	previousAction=best;
 	return best;
 }

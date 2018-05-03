@@ -9,11 +9,7 @@ class Qfunction{
 public:
 	Array<double> *rewardArray;
 	Array<double> *stateArray;
-	Array<double> *previousStateArray;
 	void updateStateArray(Array<double> *,int,double *);
-	double previousRewardEst;
-	double *previousState;
-	int previousAction;
 	Net *net;
 	int nActions;
 	Qfunction(int);
@@ -21,7 +17,6 @@ public:
 	double getReward(int,double *);
 	int getBestAction(double *);
 	int getRandomAction(double *);
-	void updateQ(double);
 	void updateQ(Info &);
 };
 #endif
