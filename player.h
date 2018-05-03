@@ -23,6 +23,7 @@ class Agent:public Player{
 public:
 	int currentTime;
 	Qfunction qfunction;
+	vector<Info> trainSet;
 	Agent();
 	~Agent();
 	void decide(Action &,Info &);

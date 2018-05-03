@@ -75,17 +75,25 @@ void Agent::verifyRecords(vector<Info> &records){
 void Agent::train(vector<Info> &records){
 //	verifyRecords(records);
 	Info info;
-	int r=0;
-	int size;
+	double targetQ;
+	targetQ=0;
+	info.reward=0;
 	int i=0;
-	size=MEMORYSIZE;
+	for(vector<Info>::reverse_iterator i=records.rbegin();i!=records.rend();i++){
+		if(info.reward!=0){
+			targetQ=0;
+		}
+		info=records.back();
+		targetQ+=info.reward;
+		info.reward=targetQ;
+		targetQ*=DISCOUNT;
+	}
+	info.reward=0;
 	while(!records.empty()){
-		r=random()%records.size();
-		info=records[r];
-		records.erase(records.begin()+r);
+		info=records.back();
 		qfunction.updateQ(info);
-		if(i%BATCHSIZE==0)
+		records.pop_back();
+		if(i++%BATCHSIZE==0)
 			qfunction.net->updateWeights();
-		i++;
 	}
 }
