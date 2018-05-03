@@ -83,10 +83,9 @@ void Agent::train(vector<Info> &records){
 		r=random()%records.size();
 		info=records[r];
 		records.erase(records.begin()+r);
-		qfunction.updateQ(info.reward);
+		qfunction.updateQ(info);
 		if(i%BATCHSIZE==0)
 			qfunction.net->updateWeights();
 		i++;
 	}
-//	if(currentTime%40)	
 }

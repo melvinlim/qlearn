@@ -10,6 +10,7 @@ Qfunction::Qfunction(int nActions){
 Qfunction::~Qfunction(){}
 double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 void Qfunction::updateStateArray(Array<double> *array,int action,double *state){
+	assert(action<4);
 	int p=0;
 	for(int i=0;i<4;i++){
 		array->item[p++]=aStates[action][i];
@@ -33,14 +34,30 @@ double Qfunction::getReward(int action,double *state){
 }
 void Qfunction::updateQ(Info &info){
 	double newReward=0;
+	int iAction;
+	switch(info.action){
+		case 'n':
+			iAction=0;
+		break;
+		case 'e':
+			iAction=1;
+		break;
+		case 's':
+			iAction=2;
+		break;
+		case 'w':
+			iAction=3;
+		break;
+	}
 	rewardArray->item[0]=info.reward;
-//	rewardArray->print();
-	updateStateArray(previousStateArray,info.action,info.state);
-//	previousStateArray->print();
+	rewardArray->print();
+	updateStateArray(previousStateArray,iAction,info.state);
+	previousStateArray->print();
 	printf("training w. reward=%f -> ",info.reward);
 	net->trainBatch(previousStateArray,rewardArray);
-	newReward=getReward(info.action,info.state);
+	newReward=getReward(iAction,info.state);
 	printf("Q reward=%f\n",newReward);
+	getchar();
 }
 void Qfunction::updateQ(double reward){
 	double newReward=0;
