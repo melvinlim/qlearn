@@ -97,7 +97,7 @@ void Agent::train(Stack<Info> &records){
 		}
 	}
 	info.reward=0;
-	verifyRecords(records);
+//	verifyRecords(records);
 	while(!records.empty()){
 		info=records.back();
 		qfunction.updateQ(info);

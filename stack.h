@@ -24,6 +24,7 @@ public:
 		*p=x;
 		size++;
 */
+		assert(size<maxSize);
 		item[size++]=x;
 	}
 	void setIndex(T &x,int i){

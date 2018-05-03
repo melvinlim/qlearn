@@ -11,20 +11,23 @@ int main(){
 	memset(info.state,0,sizeof(double)*STATEVARS);
 	Action action;
 	int t=0;
+	int i=0;
 	for(;;){
-		for(int i=0;i<MEMORYSIZE;i++){
-			game.reset();
-			game.start();
-			while(game.running){
-				t++;
-				if(t>TRAININGTIME)
-					game.display();
-				player.decide(action,info);
-				game.step(action,info);
+		game.reset();
+		game.start();
+		while(game.running){
+			t++;
+			i++;
+			if(t>TRAININGTIME)
+				game.display();
+			player.decide(action,info);
+			game.step(action,info);
+			if(i>=MEMORYSIZE){
+				player.train(game.records);
+				i=0;
 			}
-			game.end();
 		}
-		player.train(game.records);
+		game.end();
 	}
 	return 0;
 }
