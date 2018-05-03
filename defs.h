@@ -3,6 +3,7 @@
 #define STATEVARS 18
 #define RANDSCALING 10
 #define MEMORYSIZE 500
+#define BATCHSIZE 50
 typedef char Action;
 struct Info{
 	double reward;

@@ -22,5 +22,6 @@ public:
 	int getBestAction(double *);
 	int getRandomAction(double *);
 	void updateQ(double);
+	void updateQ(Info &);
 };
 #endif

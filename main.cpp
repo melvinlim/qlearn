@@ -4,8 +4,8 @@
 #include<string.h>
 int main(){
 	Game game;
-	Human player;
-//	Agent player;
+//	Human player;
+	Agent player;
 	Info info;
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);

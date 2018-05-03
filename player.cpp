@@ -58,21 +58,33 @@ void Agent::verifyRecords(vector<Info> &records){
 		k=0;
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){
-				printf("%f,",info.state[k++]);
+				printf("%+f,",info.state[k++]);
 			}
 			printf("\n");
 		}
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){
-				printf("%f,",info.state[k++]);
+				printf("%+f,",info.state[k++]);
 			}
 			printf("\n");
 		}
+//if(info.reward>0)
 		getchar();
 	}
 }
 void Agent::train(vector<Info> &records){
-	verifyRecords(records);
-//	qfunction.updateQ(info.reward);
-//	if(currentTime%40)	qfunction.net->updateWeights();
+//	verifyRecords(records);
+	Info info;
+	double sse;
+	int r=0;
+	while(!records.empty()){
+		for(int i=0;i<BATCHSIZE;i++){
+			r=random()%BATCHSIZE;
+			info=records[r];
+			records.erase(records.begin()+r);
+			qfunction.updateQ(info.reward);
+			qfunction.net->updateWeights();
+		}
+	}
+//	if(currentTime%40)	
 }
