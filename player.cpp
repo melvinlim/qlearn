@@ -48,12 +48,13 @@ void Agent::decide(Action &action,Info &info){
 void Agent::verifyRecords(vector<Info> &records){
 	Info info;
 	int k;
-	int r;
+	int r=0;
 	while(!records.empty()){
 		r++;
 		info=records.back();
 		records.pop_back();
-		printf("%lu: %c\n",r,info.action);
+		printf("%d: %c\n",r,info.action);
+		printf("reward: %f\n",info.reward);
 		k=0;
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){

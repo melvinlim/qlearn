@@ -17,6 +17,7 @@ public:
 	Human();
 	~Human();
 	void decide(Action &,Info &);
+	void train(vector<Info> &){}
 };
 class Agent:public Player{
 public:
