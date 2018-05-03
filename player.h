@@ -4,6 +4,8 @@
 #include"qfunction.h"
 #include<stdio.h>
 #include<assert.h>
+#include<vector>
+using namespace std;
 class Player{
 public:
 	Player();
@@ -23,5 +25,6 @@ public:
 	Agent();
 	~Agent();
 	void decide(Action &,Info &);
+	void train(vector<Info> records);
 };
 #endif

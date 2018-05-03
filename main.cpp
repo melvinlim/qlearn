@@ -14,9 +14,12 @@ int main(){
 		game.reset();
 		game.start();
 		while(game.running){
-			game.display();
-			player.decide(action,info);
-			game.step(action,info);
+			for(int i=0;i<MEMORYSIZE;i++){
+				game.display();
+				player.decide(action,info);
+				game.step(action,info);
+			}
+			player.train(game.records);
 		}
 		game.end();
 	}

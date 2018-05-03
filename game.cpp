@@ -4,7 +4,6 @@ Game::Game(){
 Game::~Game(){}
 void Game::start(){
 	running=true;
-	Matrix<int> m(5,5);
 }
 void Game::reset(){
 	map.reset();
@@ -65,9 +64,10 @@ void Game::step(Action action,Info &info){
 		reward=1;
 		running=false;
 	}
-	info.reward=reward;
 	getState(info);
 	updateState();
+	info.reward=reward;
+	records.push_back(info);
 	return;
 }
 void Game::getState(Info &info){

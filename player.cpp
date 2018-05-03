@@ -42,8 +42,10 @@ void Agent::decide(Action &action,Info &info){
 			assert(false);
 		break;
 	}
-	qfunction.updateQ(info.reward);
-	if(currentTime%40)	qfunction.net->updateWeights();
 	if(currentTime>50000)
 		getchar();
+}
+void Agent::train(vector<Info> records){
+//	qfunction.updateQ(info.reward);
+//	if(currentTime%40)	qfunction.net->updateWeights();
 }
