@@ -64,6 +64,7 @@ void Game::step(Action action,Info &info){
 		reward=1;
 		running=false;
 	}
+	info.action=action;
 	getState(info);
 	updateState();
 	info.reward=reward;

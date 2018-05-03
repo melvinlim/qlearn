@@ -6,6 +6,7 @@
 typedef char Action;
 struct Info{
 	double reward;
+	Action action;
 	double state[STATEVARS];
 };
 #endif

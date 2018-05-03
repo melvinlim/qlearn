@@ -25,6 +25,7 @@ public:
 	Agent();
 	~Agent();
 	void decide(Action &,Info &);
-	void train(vector<Info> records);
+	void train(vector<Info> &);
+	void verifyRecords(vector<Info> &);
 };
 #endif

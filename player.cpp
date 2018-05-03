@@ -45,7 +45,33 @@ void Agent::decide(Action &action,Info &info){
 	if(currentTime>50000)
 		getchar();
 }
-void Agent::train(vector<Info> records){
+void Agent::verifyRecords(vector<Info> &records){
+	Info info;
+	int k;
+	int r;
+	while(!records.empty()){
+		r++;
+		info=records.back();
+		records.pop_back();
+		printf("%lu: %c\n",r,info.action);
+		k=0;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				printf("%f,",info.state[k++]);
+			}
+			printf("\n");
+		}
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				printf("%f,",info.state[k++]);
+			}
+			printf("\n");
+		}
+		getchar();
+	}
+}
+void Agent::train(vector<Info> &records){
+	verifyRecords(records);
 //	qfunction.updateQ(info.reward);
 //	if(currentTime%40)	qfunction.net->updateWeights();
 }
