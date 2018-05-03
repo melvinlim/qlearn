@@ -87,6 +87,7 @@ void Agent::train(Stack<Info> &records){
 	for(i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		targetQ+=info.reward;
+		assert(targetQ<100);
 		records.item[i].reward=targetQ;
 		targetQ*=DISCOUNT;
 		if(info.reward!=0){

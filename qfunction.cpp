@@ -1,7 +1,7 @@
 #include"qfunction.h"
 Qfunction::Qfunction(int nActions){
 	this->nActions=nActions;
-	net=new SingleHiddenLinear(STATEVARS,HIDDENUNITS,1,GAMMA);
+	net=new SingleHiddenLinear(4+STATEVARS,HIDDENUNITS,1,GAMMA);
 	rewardArray=new Array<double>(1);
 	stateArray=new Array<double>(4+STATEVARS);
 	previousStateArray=new Array<double>(4+STATEVARS);
@@ -19,13 +19,8 @@ void Qfunction::updateStateArray(Array<double> *array,int action,double *state){
 		array->item[p++]=state[i];
 	}
 }
-//this will need to be dynamically created to vary with different action space sizes;
 double Qfunction::getReward(int action,double *state){
 	double resp;
-	//should convert fully to Arrays to speed things up.
-	for(int i=0;i<4;i++){
-//		printf("%f\n", aStates[action][i]);
-	}
 	updateStateArray(stateArray,action,state);
 	net->forward(stateArray);
 	resp=net->response->item[0];
