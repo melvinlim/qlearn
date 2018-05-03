@@ -14,7 +14,6 @@ void Game::end(){
 }
 void Game::display(){
 	map.display();
-	printf(":");
 }
 void Game::step(Action action,Info &info){
 	int i=map.playerObject.i;
