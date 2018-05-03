@@ -22,8 +22,8 @@ double Qfunction::getReward(int action,double *state){
 	return resp;
 }
 void Qfunction::updateQ(double reward){
-//	previousStateArray;
-	Array<double> *rewardArray=new Array<double>(&reward,1);
+	double *var=new double(reward);
+	Array<double> *rewardArray=new Array<double>(var,1);
 	net->trainOnce(previousStateArray,rewardArray);
 	delete rewardArray;
 }
