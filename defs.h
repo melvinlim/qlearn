@@ -1,6 +1,6 @@
 #ifndef _DEFS_H
 #define _DEFS_H
-//#define HUMAN
+#define HUMAN
 #define STATEVARS 18
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
@@ -8,8 +8,18 @@
 #define GAMMA 0.01
 #define DISCOUNT 0.6
 #define HIDDENUNITS 100
-#define TRAININGTIME 60000
-typedef char Action;
+#ifdef HUMAN
+	#define TRAININGTIME 0
+#else
+	#define TRAININGTIME 60000
+#endif
+
+#define NORTH 0
+#define EAST 1
+#define SOUTH 2
+#define WEST 3
+
+typedef int Action;
 struct Info{
 	double targetQ;
 	double reward;

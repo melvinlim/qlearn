@@ -24,7 +24,7 @@ void GameController::step(Action action,Info &info){
 	bool result=false;
 	int reward=0;
 	switch(action){
-		case'n':
+		case NORTH:
 			if(i>0)
 				result=world.movePlayer(i-1,j);
 			else{
@@ -32,15 +32,7 @@ void GameController::step(Action action,Info &info){
 				running=false;
 			}
 		break;
-		case's':
-			if(i<9)
-				result=world.movePlayer(i+1,j);
-			else{
-				reward=-1;
-				running=false;
-			}
-		break;
-		case'e':
+		case EAST:
 			if(j<9)
 				result=world.movePlayer(i,j+1);
 			else{
@@ -48,7 +40,15 @@ void GameController::step(Action action,Info &info){
 				running=false;
 			}
 		break;
-		case'w':
+		case SOUTH:
+			if(i<9)
+				result=world.movePlayer(i+1,j);
+			else{
+				reward=-1;
+				running=false;
+			}
+		break;
+		case WEST:
 			if(j>0)
 				result=world.movePlayer(i,j-1);
 			else{
@@ -60,7 +60,9 @@ void GameController::step(Action action,Info &info){
 			printf("error\n");
 			printf("received: %c (%d)\n",action,action);
 			info.reward=0;
-			assert(0);
+			#ifndef HUMAN
+				assert(0);
+			#endif
 			return;
 		break;
 	}

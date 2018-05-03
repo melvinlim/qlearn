@@ -6,10 +6,29 @@ Human::Human(){}
 Human::~Human(){}
 void Human::decide(Action &action,Info &info){
 	printf(":");
-	Action tmp=0;
+	char tmp;
+	char prev;
+	tmp=' ';
 	while(tmp!='\n'){
-		action=tmp;
+		prev=tmp;
 		tmp=getchar();
+	}
+	switch(prev){
+		case 'n':
+			action=NORTH;
+		break;
+		case 'e':
+			action=EAST;
+		break;
+		case 's':
+			action=SOUTH;
+		break;
+		case 'w':
+			action=WEST;
+		break;
+		default:
+			action=4;
+		break;
 	}
 }
 Agent::Agent():
