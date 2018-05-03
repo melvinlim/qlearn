@@ -2,6 +2,7 @@
 #define _GAMEDATA_H
 #include"array.h"
 #include"mynn/data.h"
+#include"stack.h"
 #include"defs.h"
 #include<time.h>
 #define LINEARINPUTS 2
@@ -21,5 +22,7 @@ public:
 	GameData();
 	~GameData();
 	void status(Array<double> **,const Array<double> *,const Array<double> *);
+	void addFutureRewards(Stack<Info> &);
+	void verifyRecords(Stack<Info> &);
 };
 #endif

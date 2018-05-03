@@ -25,3 +25,51 @@ void GameData::status(Array<double> **ioArrays,const Array<double> *response,con
 	error->item[0],error->item[1]
 	);
 }
+void GameData::verifyRecords(Stack<Info> &records){
+	Info info;
+	int k;
+	int r=0;
+	while(!records.empty()){
+		r++;
+		info=records.pop_back();
+		printf("%d: %d\n",r,info.action);
+		printf("reward: %f\n",info.reward);
+		k=0;
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				printf("%+f,",info.state[k++]);
+			}
+			printf("\n");
+		}
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				printf("%+f,",info.state[k++]);
+			}
+			printf("\n");
+		}
+//if(info.reward!=0)
+		getchar();
+	}
+}
+void GameData::addFutureRewards(Stack<Info> &records){
+	Info info;
+	double targetQ;
+	targetQ=0;
+	info.reward=0;
+	int i=0;
+	bool resetQ=false;
+	for(i=records.size-1;i>=0;i--){
+		info=records.atIndex(i);
+		targetQ+=info.reward;
+		assert(targetQ<100);
+		records.item[i].reward=targetQ;
+		targetQ*=DISCOUNT;
+		if(info.reward!=0){
+			if(resetQ){
+				targetQ=0;
+				resetQ=false;
+			}else	resetQ=true;
+		}
+	}
+	info.reward=0;
+}

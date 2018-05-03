@@ -47,59 +47,12 @@ void Agent::decide(Action &action,Info &info){
 	if(currentTime>TRAININGTIME)
 		getchar();
 }
-void Agent::verifyRecords(Stack<Info> &records){
-	Info info;
-	int k;
-	int r=0;
-	while(!records.empty()){
-		r++;
-/*
-		info=records.back();
-		records.pop_back();
-*/
-		info=records.pop_back();
-		printf("%d: %c\n",r,info.action);
-		printf("reward: %f\n",info.reward);
-		k=0;
-		for(int i=0;i<3;i++){
-			for(int j=0;j<3;j++){
-				printf("%+f,",info.state[k++]);
-			}
-			printf("\n");
-		}
-		for(int i=0;i<3;i++){
-			for(int j=0;j<3;j++){
-				printf("%+f,",info.state[k++]);
-			}
-			printf("\n");
-		}
-//if(info.reward!=0)
-		getchar();
-	}
-}
 void Agent::train(Stack<Info> &records){
-//	verifyRecords(records);
+//	data.verifyRecords(records);
+	data.addFutureRewards(records);
+//	data.verifyRecords(records);
+//train
 	Info info;
-	double targetQ;
-	targetQ=0;
-	info.reward=0;
-	int i=0;
-	bool resetQ=false;
-	for(i=records.size-1;i>=0;i--){
-		info=records.atIndex(i);
-		targetQ+=info.reward;
-		assert(targetQ<100);
-		records.item[i].reward=targetQ;
-		targetQ*=DISCOUNT;
-		if(info.reward!=0){
-			if(resetQ){
-				targetQ=0;
-				resetQ=false;
-			}else	resetQ=true;
-		}
-	}
-	info.reward=0;
-//	verifyRecords(records);
 	double sse=1000;
 	while(sse>1){
 		sse=0;
