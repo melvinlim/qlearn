@@ -13,8 +13,8 @@
 	#define HIDDEN 15
 	#define EPOCHS 100000
 #elif defined SOLVELINEAR
-	#define NINPUTS 2
-	#define NOUTPUTS 2
+	#define NINPUTS 3
+	#define NOUTPUTS 1
 	#define HIDDEN 15
 	#define EPOCHS 100000
 #else
