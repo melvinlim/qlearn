@@ -18,11 +18,13 @@ public:
 		delete[] item;
 	}
 	void push_back(T &x){
+/*
 		T *p=item;
 		p+=size;
 		*p=x;
 		size++;
-//		item[size++]=x;
+*/
+		item[size++]=x;
 	}
 	T &pop_back(){
 		assert(size>0);
@@ -36,6 +38,9 @@ public:
 	}
 	T &atIndex(int i){
 		return item[i];
+	}
+	T &back(){
+		return item[size-1];
 	}
 	void clear(){
 		size=0;

@@ -72,28 +72,28 @@ void Agent::verifyRecords(Stack<Info> &records){
 			}
 			printf("\n");
 		}
-//if(info.reward>0)
+//if(info.reward!=0)
 		getchar();
 	}
 }
 void Agent::train(Stack<Info> &records){
-	verifyRecords(records);
-/*
+//	verifyRecords(records);
 	Info info;
 	double targetQ;
 	targetQ=0;
 	info.reward=0;
 	int i=0;
-	for(vector<Info>::reverse_iterator i=records.rbegin();i!=records.rend();i++){
+	for(i=records.size-1;i>=0;i--){
 		if(info.reward!=0){
 			targetQ=0;
 		}
 		info=records.back();
 		targetQ+=info.reward;
-		info.reward=targetQ;
+		records.atIndex(i).reward=targetQ;
 		targetQ*=DISCOUNT;
 	}
 	info.reward=0;
+	verifyRecords(records);
 	while(!records.empty()){
 		info=records.back();
 		qfunction.updateQ(info);
@@ -101,5 +101,4 @@ void Agent::train(Stack<Info> &records){
 		if(i++%BATCHSIZE==0)
 			qfunction.net->updateWeights();
 	}
-*/
 }
