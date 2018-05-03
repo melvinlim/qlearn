@@ -21,7 +21,7 @@ Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
 	int y;
 	currentTime++;
-	if(currentTime<2000)
+	if(currentTime<50000)
 		y=qfunction.getRandomAction(info.state);
 	else
 		y=qfunction.getBestAction(info.state);
@@ -43,5 +43,7 @@ void Agent::decide(Action &action,Info &info){
 		break;
 	}
 	qfunction.updateQ(info.reward);
-	getchar();
+	if(currentTime%40)	qfunction.net->updateWeights();
+	if(currentTime>50000)
+		getchar();
 }

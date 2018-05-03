@@ -39,12 +39,10 @@ void Qfunction::updateQ(double reward){
 	rewardArray->print();
 	previousStateArray->print();
 	printf("training w. reward=%f\n",reward);
-	do{
-		printf("before: %f\n",getReward(previousAction,previousState));
-		net->trainOnce(previousStateArray,rewardArray);
-		newReward=getReward(previousAction,previousState);
-		printf("after %f\n",newReward);
-	}while(fabs(newReward-reward)>0.1);
+	printf("before: %f\n",getReward(previousAction,previousState));
+	net->trainBatch(previousStateArray,rewardArray);
+	newReward=getReward(previousAction,previousState);
+	printf("after %f\n",newReward);
 }
 int Qfunction::getBestAction(double *state){
 	int best=0;
