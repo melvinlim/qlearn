@@ -29,7 +29,9 @@ double Qfunction::getReward(int action,double *state){
 	updateStateArray(stateArray,action,state);
 	net->forward(stateArray);
 	resp=net->response->item[0];
+#ifdef DEBUG
 	printf("resp: %f\n",resp);
+#endif
 	return resp;
 }
 void Qfunction::updateQ(Info &info){
@@ -50,14 +52,18 @@ void Qfunction::updateQ(Info &info){
 		break;
 	}
 	rewardArray->item[0]=info.reward;
-	rewardArray->print();
 	updateStateArray(previousStateArray,iAction,info.state);
+#ifdef DEBUG
 	previousStateArray->print();
+	rewardArray->print();
 	printf("training w. reward=%f -> ",info.reward);
+#endif
 	net->trainBatch(previousStateArray,rewardArray);
+#ifdef DEBUG
 	newReward=getReward(iAction,info.state);
 	printf("Q reward=%f\n",newReward);
 	getchar();
+#endif
 }
 void Qfunction::updateQ(double reward){
 	double newReward=0;

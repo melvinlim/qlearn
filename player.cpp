@@ -21,7 +21,7 @@ Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
 	int y;
 	currentTime++;
-	if(currentTime<50000)
+	if(currentTime<TRAININGTIME)
 		y=qfunction.getRandomAction(info.state);
 	else
 		y=qfunction.getBestAction(info.state);
@@ -42,7 +42,7 @@ void Agent::decide(Action &action,Info &info){
 			assert(false);
 		break;
 	}
-	if(currentTime>50000)
+	if(currentTime>TRAININGTIME)
 		getchar();
 }
 void Agent::verifyRecords(vector<Info> &records){

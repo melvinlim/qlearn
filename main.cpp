@@ -10,14 +10,17 @@ int main(){
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);
 	Action action;
+	int t=0;
 	for(;;){
 		for(int i=0;i<MEMORYSIZE;i++){
 			game.reset();
 			game.start();
 			while(game.running){
+				t++;
+				if(t>TRAININGTIME)
 					game.display();
-					player.decide(action,info);
-					game.step(action,info);
+				player.decide(action,info);
+				game.step(action,info);
 			}
 			game.end();
 		}

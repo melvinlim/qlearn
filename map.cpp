@@ -43,6 +43,8 @@ void Map::updateState(){
 		for(j=0;j<3;j++){
 			if(vision(i,j)=='.'){
 				*p++=1.;
+			}else if(vision(i,j)=='<'){
+				*p++=1.;
 			}else{
 				*p++=-1.;
 			}
@@ -57,7 +59,9 @@ void Map::updateState(){
 			}
 		}
 	}
+#ifdef DEBUG
 	debugState();
+#endif
 }
 void Map::debugState(){
 	for(int i=0;i<STATEVARS;i++){

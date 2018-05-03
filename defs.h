@@ -5,7 +5,8 @@
 #define MEMORYSIZE 500
 #define BATCHSIZE 20
 #define GAMMA 0.01
-#define HIDDENUNITS 50
+#define HIDDENUNITS 100
+#define TRAININGTIME 60000
 typedef char Action;
 struct Info{
 	double reward;
