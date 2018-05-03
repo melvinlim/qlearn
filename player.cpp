@@ -30,10 +30,10 @@ void Agent::decide(Action &action,Info &info){
 			action='n';
 		break;
 		case 1:
-			action='s';
+			action='e';
 		break;
 		case 2:
-			action='e';
+			action='s';
 		break;
 		case 3:
 			action='w';

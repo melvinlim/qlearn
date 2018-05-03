@@ -57,24 +57,24 @@ int Qfunction::getBestAction(double *state){
 			best=i;
 		}
 	}
-	previousAction=best;
 	updateStateArray(previousStateArray,best,state);
 	for(int i=0;i<STATEVARS;i++){
 		previousState[i]=state[i];
 	}
 	previousStateArray->print();
 	previousRewardEst=bestVal;
+	previousAction=best;
 	return best;
 }
 int Qfunction::getRandomAction(double *state){
 	int best=0;
 	best=random()%4;
-	previousAction=best;
 	updateStateArray(previousStateArray,best,state);
 	for(int i=0;i<STATEVARS;i++){
 		previousState[i]=state[i];
 	}
 	previousStateArray->print();
-	previousRewardEst=1234;
+	previousRewardEst=-4;
+	previousAction=best;
 	return best;
 }
