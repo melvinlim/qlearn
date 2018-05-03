@@ -7,6 +7,7 @@ Qfunction::Qfunction(int nActions){
 	rewardArray=new Array<double>(1);
 	stateArray=new Array<double>(4+STATEVARS);
 	previousStateArray=new Array<double>(4+STATEVARS);
+	previousState=new double[STATEVARS];
 }
 Qfunction::~Qfunction(){}
 double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
@@ -34,10 +35,17 @@ double Qfunction::getReward(int action,double *state){
 	return resp;
 }
 void Qfunction::updateQ(double reward){
-	double *var=new double(reward);
+	double newReward=0;
+	rewardArray->item[0]=reward;
 	rewardArray->print();
 	previousStateArray->print();
-	net->trainOnce(previousStateArray,rewardArray);
+	printf("training w. reward=%f\n",reward);
+	do{
+		printf("before: %f\n",getReward(previousAction,previousState));
+		net->trainOnce(previousStateArray,rewardArray);
+		newReward=getReward(previousAction,previousState);
+		printf("after %f\n",newReward);
+	}while(fabs(newReward-reward)>0.1);
 }
 int Qfunction::getBestAction(double *state){
 	int best=0;
@@ -50,7 +58,11 @@ int Qfunction::getBestAction(double *state){
 			best=i;
 		}
 	}
+	previousAction=best;
 	updateStateArray(previousStateArray,best,state);
+	for(int i=0;i<STATEVARS;i++){
+		previousState[i]=state[i];
+	}
 	previousStateArray->print();
 	previousRewardEst=bestVal;
 	return best;

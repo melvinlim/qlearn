@@ -11,6 +11,8 @@ public:
 	Array<double> *previousStateArray;
 	void updateStateArray(Array<double> *,int,double *);
 	double previousRewardEst;
+	double *previousState;
+	int previousAction;
 	Net *net;
 	int nActions;
 	Qfunction(int);
