@@ -37,7 +37,9 @@ void Map::updateState(){
 			}
 		}
 	}
+#ifdef DEBUG
 	displayMat(vision);
+#endif
 	double *p=state;
 	for(i=0;i<3;i++){
 		for(j=0;j<3;j++){

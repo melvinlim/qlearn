@@ -9,7 +9,9 @@ void Game::reset(){
 	map.reset();
 }
 void Game::end(){
+#ifdef DEBUG
 	printf("game over\n");
+#endif
 }
 void Game::display(){
 	map.display();
@@ -60,8 +62,10 @@ void Game::step(Action action,Info &info){
 		break;
 	}
 	if(result){
+#ifdef DEBUG
 		printf("win\n");
-		reward=1;
+#endif
+		reward=10;
 		running=false;
 	}
 	info.action=action;

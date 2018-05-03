@@ -103,7 +103,9 @@ int Qfunction::getRandomAction(double *state){
 	for(int i=0;i<STATEVARS;i++){
 		previousState[i]=state[i];
 	}
+#ifdef DEBUG
 	previousStateArray->print();
+#endif
 	previousRewardEst=-4;
 	previousAction=best;
 	return best;
