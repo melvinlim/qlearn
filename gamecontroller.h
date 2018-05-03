@@ -1,7 +1,7 @@
 #ifndef _GAMECONTROLLER_H
 #define _GAMECONTROLLER_H
 #include"defs.h"
-#include"map.h"
+#include"world.h"
 #include<stdio.h>
 #include<vector>
 #include"stack.h"
@@ -10,7 +10,7 @@ class GameController{
 public:
 	//vector<struct Info> records;
 	Stack<Info> records;
-	Map map;
+	World world;
 	bool running;
 	GameController();
 	~GameController();

@@ -8,7 +8,7 @@ void GameController::start(){
 	running=true;
 }
 void GameController::reset(){
-	map.reset();
+	world.reset();
 }
 void GameController::end(){
 #ifdef DEBUG
@@ -16,17 +16,17 @@ void GameController::end(){
 #endif
 }
 void GameController::display(){
-	map.display();
+	world.display();
 }
 void GameController::step(Action action,Info &info){
-	int i=map.playerObject.i;
-	int j=map.playerObject.j;
+	int i=world.playerObject.i;
+	int j=world.playerObject.j;
 	bool result=false;
 	int reward=0;
 	switch(action){
 		case'n':
 			if(i>0)
-				result=map.movePlayer(i-1,j);
+				result=world.movePlayer(i-1,j);
 			else{
 				reward=-1;
 				running=false;
@@ -34,7 +34,7 @@ void GameController::step(Action action,Info &info){
 		break;
 		case's':
 			if(i<9)
-				result=map.movePlayer(i+1,j);
+				result=world.movePlayer(i+1,j);
 			else{
 				reward=-1;
 				running=false;
@@ -42,7 +42,7 @@ void GameController::step(Action action,Info &info){
 		break;
 		case'e':
 			if(j<9)
-				result=map.movePlayer(i,j+1);
+				result=world.movePlayer(i,j+1);
 			else{
 				reward=-1;
 				running=false;
@@ -50,7 +50,7 @@ void GameController::step(Action action,Info &info){
 		break;
 		case'w':
 			if(j>0)
-				result=map.movePlayer(i,j-1);
+				result=world.movePlayer(i,j-1);
 			else{
 				reward=-1;
 				running=false;
@@ -79,8 +79,8 @@ void GameController::step(Action action,Info &info){
 	return;
 }
 void GameController::getState(Info &info){
-	memcpy(info.state,map.state,sizeof(double)*STATEVARS);
+	memcpy(info.state,world.state,sizeof(double)*STATEVARS);
 }
 void GameController::updateState(){
-	map.updateState();
+	world.updateState();
 }
