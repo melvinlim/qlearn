@@ -26,6 +26,9 @@ public:
 */
 		item[size++]=x;
 	}
+	void setIndex(T &x,int i){
+		item[i]=x;
+	}
 	T &pop_back(){
 		assert(size>0);
 		return item[--size];

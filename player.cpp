@@ -83,14 +83,18 @@ void Agent::train(Stack<Info> &records){
 	targetQ=0;
 	info.reward=0;
 	int i=0;
+	bool resetQ=false;
 	for(i=records.size-1;i>=0;i--){
-		if(info.reward!=0){
-			targetQ=0;
-		}
-		info=records.back();
+		info=records.atIndex(i);
 		targetQ+=info.reward;
-		records.atIndex(i).reward=targetQ;
+		records.item[i].reward=targetQ;
 		targetQ*=DISCOUNT;
+		if(info.reward!=0){
+			if(resetQ){
+				targetQ=0;
+				resetQ=false;
+			}else	resetQ=true;
+		}
 	}
 	info.reward=0;
 	verifyRecords(records);
