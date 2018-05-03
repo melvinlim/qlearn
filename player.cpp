@@ -13,7 +13,8 @@ void Human::decide(Action &action,Info &info){
 	}
 }
 Agent::Agent():
-qfunction(4)
+qfunction(4),
+trainSet(BATCHSIZE)
 {
 	currentTime=0;
 }
@@ -45,14 +46,17 @@ void Agent::decide(Action &action,Info &info){
 	if(currentTime>TRAININGTIME)
 		getchar();
 }
-void Agent::verifyRecords(vector<Info> &records){
+void Agent::verifyRecords(Stack<Info> &records){
 	Info info;
 	int k;
 	int r=0;
 	while(!records.empty()){
 		r++;
+/*
 		info=records.back();
 		records.pop_back();
+*/
+		info=records.pop_back();
 		printf("%d: %c\n",r,info.action);
 		printf("reward: %f\n",info.reward);
 		k=0;
@@ -72,8 +76,9 @@ void Agent::verifyRecords(vector<Info> &records){
 		getchar();
 	}
 }
-void Agent::train(vector<Info> &records){
-//	verifyRecords(records);
+void Agent::train(Stack<Info> &records){
+	verifyRecords(records);
+/*
 	Info info;
 	double targetQ;
 	targetQ=0;
@@ -96,4 +101,5 @@ void Agent::train(vector<Info> &records){
 		if(i++%BATCHSIZE==0)
 			qfunction.net->updateWeights();
 	}
+*/
 }

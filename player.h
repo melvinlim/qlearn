@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include<assert.h>
 #include<vector>
+#include"stack.h"
 using namespace std;
 class Player{
 public:
@@ -17,17 +18,17 @@ public:
 	Human();
 	~Human();
 	void decide(Action &,Info &);
-	void train(vector<Info> &){}
+	void train(Stack<Info> &){}
 };
 class Agent:public Player{
 public:
 	int currentTime;
 	Qfunction qfunction;
-	vector<Info> trainSet;
+	Stack<Info> trainSet;
 	Agent();
 	~Agent();
 	void decide(Action &,Info &);
-	void train(vector<Info> &);
-	void verifyRecords(vector<Info> &);
+	void train(Stack<Info> &);
+	void verifyRecords(Stack<Info> &);
 };
 #endif

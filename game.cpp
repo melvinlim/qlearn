@@ -1,5 +1,7 @@
 #include"game.h"
-Game::Game(){
+Game::Game():
+records(MEMORYSIZE)
+{
 }
 Game::~Game(){}
 void Game::start(){
