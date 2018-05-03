@@ -3,52 +3,36 @@ Qfunction::Qfunction(int nActions,int nStateVars){
 	this->nActions=nActions;
 	this->nStateVars=nStateVars;
 	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA);
-	rewardArray=new Array<double>(1);
-	stateArray=new Array<double>(nActions+nStateVars);
 }
 Qfunction::~Qfunction(){}
-const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
-void Qfunction::updateStateArray(Array<double> *array,int action,double *state){
-	assert(action<nActions);
-	int p=0;
-	for(int i=0;i<nActions;i++){
-		array->item[p++]=aStates[action][i];
-	}
-	for(int i=0;i<nStateVars;i++){
-		array->item[p++]=state[i];
-	}
-}
-double Qfunction::getReward(int action,double *state){
+double Qfunction::getReward(Array<double> *actionStateArray){
 	double resp;
-	updateStateArray(stateArray,action,state);
-	net->forward(stateArray);
+	net->forward(actionStateArray);
 	resp=net->response->item[0];
 #ifdef DEBUG
 	printf("resp: %f\n",resp);
 #endif
 	return resp;
 }
-void Qfunction::updateQ(Info &info){
-	rewardArray->item[0]=info.reward;
-	updateStateArray(stateArray,info.action,info.state);
+void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *rewardArray){
 #ifdef DEBUG
-	stateArray->print();
+	actionStateArray->print();
 	rewardArray->print();
-	printf("training w. reward=%f -> ",info.reward);
+	printf("training w. reward=%f -> ",rewardArray->item[0]);
 #endif
-	net->trainBatch(stateArray,rewardArray);
+	net->trainBatch(actionStateArray,rewardArray);
 #ifdef DEBUG
-	newReward=getReward(info.action,info.state);
+	int newReward=getReward(actionStateArray);
 	printf("Q reward=%f\n",newReward);
 	getchar();
 #endif
 }
-int Qfunction::getBestAction(double *state){
+int Qfunction::getBestAction(Array<double> *actionStateArray){
 	int best=0;
-	double bestVal=getReward(0,state);
+	double bestVal=getReward(actionStateArray);
 	double tmpVal;
 	for(int i=1;i<nActions;i++){
-		tmpVal=getReward(i,state);
+		tmpVal=getReward(actionStateArray);
 		if(tmpVal>bestVal){
 			bestVal=tmpVal;
 			best=i;
@@ -56,12 +40,8 @@ int Qfunction::getBestAction(double *state){
 	}
 	return best;
 }
-int Qfunction::getRandomAction(double *state){
+int Qfunction::getRandomAction(){
 	int best=0;
 	best=random()%nActions;
-	updateStateArray(stateArray,best,state);
-#ifdef DEBUG
-	stateArray->print();
-#endif
 	return best;
 }

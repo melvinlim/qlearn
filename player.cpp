@@ -40,10 +40,13 @@ trainSet(BATCHSIZE)
 Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
 	currentTime++;
-	if(currentTime<TRAININGTIME)
-		action=qfunction.getRandomAction(info.state);
-	else
-		action=qfunction.getBestAction(info.state);
+	if(currentTime<TRAININGTIME){
+		action=qfunction.getRandomAction();
+	}else{
+		data.updateActionStateArray(info);
+//passing ASA with action of 0 and expecting getBestAction to modify function and try other possibilities.
+		action=qfunction.getBestAction(data.actionStateArray);
+	}
 	if(currentTime>TRAININGTIME)
 		getchar();
 }
@@ -59,7 +62,8 @@ void Agent::train(Stack<Info> &records){
 		for(int i=0;i<BATCHSIZE;i++){
 			//info=records.item[random()%MEMORYSIZE];
 			info=records.item[i];
-			qfunction.updateQ(info);
+			data.updateActionStateArray(info);
+			qfunction.updateQ(data.actionStateArray,data.rewardArray);
 			sse+=data.sumSqError(&qfunction.net->error);
 		}
 		sse/=(float)BATCHSIZE;
