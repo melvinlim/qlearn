@@ -13,7 +13,7 @@ void Human::decide(Action &action,Info &info){
 	}
 }
 Agent::Agent():
-qfunction(4),
+qfunction(4,STATEVARS),
 trainSet(BATCHSIZE)
 {
 	currentTime=0;

@@ -12,7 +12,8 @@ public:
 	void updateStateArray(Array<double> *,int,double *);
 	Net *net;
 	int nActions;
-	Qfunction(int);
+	int nStateVars;
+	Qfunction(int,int);
 	~Qfunction();
 	double getReward(int,double *);
 	int getBestAction(double *);

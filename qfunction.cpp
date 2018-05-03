@@ -1,19 +1,20 @@
 #include"qfunction.h"
-Qfunction::Qfunction(int nActions){
+Qfunction::Qfunction(int nActions,int nStateVars){
 	this->nActions=nActions;
-	net=new SingleHiddenLinear(4+STATEVARS,HIDDENUNITS,1,GAMMA);
+	this->nStateVars=nStateVars;
+	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA);
 	rewardArray=new Array<double>(1);
-	stateArray=new Array<double>(4+STATEVARS);
+	stateArray=new Array<double>(nActions+nStateVars);
 }
 Qfunction::~Qfunction(){}
-double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
+const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 void Qfunction::updateStateArray(Array<double> *array,int action,double *state){
-	assert(action<4);
+	assert(action<nActions);
 	int p=0;
-	for(int i=0;i<4;i++){
+	for(int i=0;i<nActions;i++){
 		array->item[p++]=aStates[action][i];
 	}
-	for(int i=0;i<STATEVARS;i++){
+	for(int i=0;i<nStateVars;i++){
 		array->item[p++]=state[i];
 	}
 }
@@ -72,7 +73,7 @@ int Qfunction::getBestAction(double *state){
 }
 int Qfunction::getRandomAction(double *state){
 	int best=0;
-	best=random()%4;
+	best=random()%nActions;
 	updateStateArray(stateArray,best,state);
 #ifdef DEBUG
 	stateArray->print();
