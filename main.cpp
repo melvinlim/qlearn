@@ -4,8 +4,11 @@
 #include<string.h>
 int main(){
 	GameController gameController;
-//	Human player;
-	Agent player;
+	#ifdef HUMAN
+		Human player;
+	#else
+		Agent player;
+	#endif
 	Info info;
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);

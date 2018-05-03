@@ -1,5 +1,6 @@
 #ifndef _DEFS_H
 #define _DEFS_H
+//#define HUMAN
 #define STATEVARS 18
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
