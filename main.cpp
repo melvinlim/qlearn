@@ -1,9 +1,9 @@
-#include"game.h"
+#include"gamecontroller.h"
 #include"player.h"
 #include"defs.h"
 #include<string.h>
 int main(){
-	Game game;
+	GameController gameController;
 //	Human player;
 	Agent player;
 	Info info;
@@ -13,21 +13,21 @@ int main(){
 	int t=0;
 	int i=0;
 	for(;;){
-		game.reset();
-		game.start();
-		while(game.running){
+		gameController.reset();
+		gameController.start();
+		while(gameController.running){
 			t++;
 			i++;
 			if(t>TRAININGTIME)
-				game.display();
+				gameController.display();
 			player.decide(action,info);
-			game.step(action,info);
+			gameController.step(action,info);
 			if(i>=MEMORYSIZE){
-				player.train(game.records);
+				player.train(gameController.records);
 				i=0;
 			}
 		}
-		game.end();
+		gameController.end();
 	}
 	return 0;
 }
