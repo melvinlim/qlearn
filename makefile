@@ -1,6 +1,6 @@
 CXX =						g++
-CXXFLAGS =			-std=c++11 -Wall -Wextra -pedantic -g -c
-LFLAGS =				-std=c++11 -Wall -Wextra -pedantic -g -o qlearn
+CXXFLAGS =			-O3 -std=c++11 -Wall -Wextra -pedantic -g -c
+LFLAGS =				-O3 -std=c++11 -Wall -Wextra -pedantic -g -o qlearn
 OBJECTS =				main.o gamecontroller.o player.o world.o object.o qfunction.o gamedata.o
 OTHEROBJECTS =	mynn/layer.o mynn/net.o mynn/data.o mynn/idx.o mynn/mnist.o mynn/xor.o
 qlearn:		$(OBJECTS) $(OTHEROBJECTS)

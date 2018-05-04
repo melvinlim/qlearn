@@ -38,6 +38,8 @@ qfB(4,STATEVARS),
 trainSet(BATCHSIZE)
 {
 	currentTime=0;
+	QArrayA=new Array<double>(4+STATEVARS);
+	QArrayB=new Array<double>(4+STATEVARS);
 }
 Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
@@ -47,7 +49,18 @@ void Agent::decide(Action &action,Info &info){
 	}else{
 		data.updateActionStateArray(info);
 //passing ASA with action of 0 and expecting getBestAction to modify function and try other possibilities.
-		action=qfA.getBestAction(data.actionStateArray);
+		qfA.getQArray(QArrayA,data.actionStateArray);
+		qfB.getQArray(QArrayB,data.actionStateArray);
+		double bestQ,tmpQ;
+		action=0;
+		bestQ=QArrayA->item[0]+QArrayB->item[0];
+		for(int i=1;i<4;i++){
+			tmpQ=QArrayA->item[i]+QArrayB->item[i];
+			if(tmpQ>bestQ){
+				action=i;
+				bestQ=tmpQ;
+			}
+		}
 	}
 	if(currentTime>TRAININGTIME)
 		getchar();
@@ -67,6 +80,7 @@ void Agent::train(Stack<Info> &records){
 	int iA,iB;
 	iA=iB=0;
 	records.pop_back();
+//	for(int r=0;r<2;r++)
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info);
@@ -115,9 +129,9 @@ void Agent::train(Stack<Info> &records){
 */
 }
 void Agent::addFutureRewards(Stack<Info> &records){
-/*
 	Info info;
 	info=records.back();
+/*
 	data.updateActionStateArray(info);
 	double Q;
 	double QMax=qfA.getQMax(data.actionStateArray);

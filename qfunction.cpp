@@ -54,6 +54,12 @@ void Qfunction::modifyAction(Array<double> *actionStateArray,Action action){
 		}
 	}
 }
+void Qfunction::getQArray(Array<double> *QArray,Array<double> *actionStateArray){
+	for(int i=0;i<nActions;i++){
+		modifyAction(actionStateArray,i);
+		QArray->item[i]=getQ(actionStateArray);
+	}
+}
 int Qfunction::getBestAction(Array<double> *actionStateArray){
 	int best=0;
 	double bestVal;

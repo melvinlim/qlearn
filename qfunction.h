@@ -15,6 +15,7 @@ public:
 	double getQ(Array<double> *);
 	double getQMax(Array<double> *);
 	int getBestAction(Array<double> *);
+	void getQArray(Array<double> *,Array<double> *);
 	int getRandomAction();
 	void updateQ(Array<double> *,Array<double> *);
 	void modifyAction(Array<double> *,Action);

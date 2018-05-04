@@ -23,6 +23,8 @@ public:
 };
 class Agent:public Player{
 public:
+	Array<double> *QArrayA;
+	Array<double> *QArrayB;
 	GameData data;
 	int currentTime;
 	Qfunction qfA;
