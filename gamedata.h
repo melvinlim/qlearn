@@ -20,13 +20,13 @@ const double anslinear4[LINEAROUTPUTS]={-0.05,40};
 class GameData:public Data{
 public:
 	Array<double> *actionStateArray;
-	Array<double> *rewardArray;
+	Array<double> *targetArray;
 	int nActions;
 	int nStateVars;
 	GameData();
 	~GameData();
 	void status(Array<double> **,const Array<double> *,const Array<double> *);
-	void addFutureRewards(Stack<Info> &);
+//	void addFutureRewards(Stack<Info> &);
 	void verifyRecords(Stack<Info> &);
 	void updateActionStateArray(Info &);
 };

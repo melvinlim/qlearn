@@ -17,7 +17,7 @@ GameData::GameData():Data(){
 	pOutputs[2]=new Array<double>(anslinear3,LINEAROUTPUTS);
 	pOutputs[3]=new Array<double>(anslinear4,LINEAROUTPUTS);
 	actionStateArray=new Array<double>(nActions+nStateVars);
-	rewardArray=new Array<double>(1);
+	targetArray=new Array<double>(1);
 }
 void GameData::status(Array<double> **ioArrays,const Array<double> *response,const Array<double> *error){
 	Array<double> *pIn=ioArrays[0];
@@ -55,6 +55,7 @@ void GameData::verifyRecords(Stack<Info> &records){
 		getchar();
 	}
 }
+/*
 void GameData::addFutureRewards(Stack<Info> &records){
 	Info info;
 	double targetQ;
@@ -77,12 +78,11 @@ void GameData::addFutureRewards(Stack<Info> &records){
 	}
 	info.reward=0;
 }
+*/
 const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 void GameData::updateActionStateArray(Info &info){
 	Action action=info.action;
 	double *state=info.state;
-	double reward=info.reward;
-	rewardArray->item[0]=reward;
 	assert(action<nActions);
 	int p=0;
 	for(int i=0;i<nActions;i++){
