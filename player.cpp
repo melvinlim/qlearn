@@ -79,14 +79,14 @@ void Agent::addFutureRewards(Stack<Info> &records){
 	info=records.back();
 	data.updateActionStateArray(info);
 	double Q;
-	double Q0=qfunction.getReward(data.actionStateArray);
+	double Q0=qfunction.getQ(data.actionStateArray);
 	records.pop_back();
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info);
 		records.item[i].Q0=Q0;
-		Q=qfunction.getReward(data.actionStateArray);
-		records.item[i].targetQ=Q0+ALPHA*(info.reward+GAMMA*Q-Q0);
+		Q=qfunction.getQ(data.actionStateArray);
+		records.item[i].targetQ=Q0+ALPHA*(info.reward+DISCOUNT*Q-Q0);
 		Q0=Q;
 	}
 }

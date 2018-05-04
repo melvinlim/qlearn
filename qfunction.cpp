@@ -5,7 +5,7 @@ Qfunction::Qfunction(int nActions,int nStateVars){
 	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA);
 }
 Qfunction::~Qfunction(){}
-double Qfunction::getReward(Array<double> *actionStateArray){
+double Qfunction::getQ(Array<double> *actionStateArray){
 	double resp;
 	net->forward(actionStateArray);
 	resp=net->response->item[0];
@@ -22,7 +22,7 @@ void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *rewardArr
 #endif
 	net->trainBatch(actionStateArray,rewardArray);
 #ifdef DEBUG
-	int newReward=getReward(actionStateArray);
+	int newReward=getQ(actionStateArray);
 	printf("Q reward=%f\n",newReward);
 	getchar();
 #endif
@@ -38,7 +38,7 @@ void Qfunction::modifyAction(Array<double> *actionStateArray,Action action){
 }
 int Qfunction::getBestAction(Array<double> *actionStateArray){
 	int best=0;
-	double bestVal=getReward(actionStateArray);
+	double bestVal=getQ(actionStateArray);
 	double tmpVal;
 	modifyAction(actionStateArray,0);
 actionStateArray->print(3);
@@ -47,7 +47,7 @@ actionStateArray->print(3);
 		modifyAction(actionStateArray,i);
 //actionStateArray->print(3);
 //getchar();
-		tmpVal=getReward(actionStateArray);
+		tmpVal=getQ(actionStateArray);
 		if(tmpVal>bestVal){
 			bestVal=tmpVal;
 			best=i;

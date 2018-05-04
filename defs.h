@@ -7,7 +7,7 @@
 #define BATCHSIZE 10
 #define ALPHA 0.1
 #define GAMMA (0.01/(double)BATCHSIZE)
-#define DISCOUNT 0.6
+#define DISCOUNT 0.8
 #define HIDDENUNITS 500
 #ifdef HUMAN
 	#define TRAININGTIME 0

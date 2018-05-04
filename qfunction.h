@@ -12,7 +12,7 @@ public:
 	int nStateVars;
 	Qfunction(int,int);
 	~Qfunction();
-	double getReward(Array<double> *);
+	double getQ(Array<double> *);
 	int getBestAction(Array<double> *);
 	int getRandomAction();
 	void updateQ(Array<double> *,Array<double> *);
