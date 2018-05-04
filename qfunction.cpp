@@ -2,7 +2,7 @@
 Qfunction::Qfunction(int nActions,int nStateVars){
 	this->nActions=nActions;
 	this->nStateVars=nStateVars;
-	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA);
+	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY);
 }
 Qfunction::~Qfunction(){}
 double Qfunction::getQMax(Array<double> *actionStateArray){

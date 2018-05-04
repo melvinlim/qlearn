@@ -33,21 +33,33 @@ int main(){
 	}
 	int hidden=HIDDEN;
 	double gamma=GAMMA;
+	double lambda_decay=LAMBDA_DECAY;
 	for(int network=0;network<4;network++){
 		#ifdef SOLVELINEAR
-			net=new SingleHiddenLinear(NINPUTS,hidden++,NOUTPUTS,gamma);
+			net=new SingleHiddenLinear(NINPUTS,hidden++,NOUTPUTS,gamma,lambda_decay);
 		#else
-			net=new SingleHidden(NINPUTS,hidden++,NOUTPUTS,gamma);
+			net=new SingleHidden(NINPUTS,hidden++,NOUTPUTS,gamma,lambda_decay);
 		#endif
 		sumSqErr=0;
 		for(i=0;i<EPOCHS;i++){
 			arrays=trainingData.fillIOArrays();
 			pIn=arrays[0];
 			pOut=arrays[1];
+#ifdef TESTGRAD
+			net->gradientDescent(pIn,pOut);
+#endif
 #ifdef BATCH
 			net->trainBatch(pIn,pOut);
+#ifdef TESTGRAD
+			assert(net->L[0]->dgw==net->L[0]->dw);
+			assert(net->L[1]->dgw==net->L[1]->dw);
+#endif
 			sumSqErr+=trainingData.sumSqError(&net->error);
+#ifdef TESTGRAD
+			if(true){
+#else
 			if(i%4){
+#endif
 				net->updateWeights();
 			}
 #else
