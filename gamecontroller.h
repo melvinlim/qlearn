@@ -12,6 +12,7 @@ public:
 	Stack<Info> records;
 	World world;
 	bool running;
+	bool displayOutput;
 	GameController();
 	~GameController();
 	void start();

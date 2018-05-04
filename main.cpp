@@ -26,7 +26,9 @@ int main(){
 			i++;
 			if(t>TRAININGTIME){
 				time(&endTime);
+				gameController.displayOutput=true;
 				printf("training time: %d\n",(int)difftime(endTime,startTime));
+				printf("t: %d\n",gameController.t);
 				gameController.display();
 				gameController.getState(info);
 			}

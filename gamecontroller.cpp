@@ -3,6 +3,7 @@ GameController::GameController():
 records(MEMORYSIZE)
 {
 	t=0;
+	displayOutput=false;
 }
 GameController::~GameController(){}
 void GameController::start(){
@@ -12,9 +13,9 @@ void GameController::reset(){
 	world.reset();
 }
 void GameController::end(){
-#ifdef DEBUG
-	printf("game over\n");
-#endif
+	t=0;
+	if(displayOutput)
+		printf("game over\n");
 }
 void GameController::display(){
 	world.display();
@@ -68,16 +69,14 @@ void GameController::step(Action action,Info &info){
 		break;
 	}
 	if(result){
-#ifdef DEBUG
-		printf("win\n");
-#endif
+		if(displayOutput)
+			printf("win\n");
 		reward=1;
 		running=false;
 	}
 	if((t++>TIMELIMIT)&&(reward==0)){
-#ifdef DEBUG
-		printf("out of time\n");
-#endif
+		if(displayOutput)
+			printf("out of time\n");
 		reward=-0.5;
 		running=false;
 		t=0;
