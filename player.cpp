@@ -60,14 +60,14 @@ void Agent::train(Stack<Info> &records){
 	while(sse>1){
 		sse=0;
 		for(int i=0;i<BATCHSIZE;i++){
-			//info=records.item[random()%MEMORYSIZE];
-			info=records.item[i];
+			info=records.item[random()%MEMORYSIZE];
+			//info=records.item[i];
 			data.updateActionStateArray(info);
 			qfunction.updateQ(data.actionStateArray,data.rewardArray);
 			sse+=data.sumSqError(&qfunction.net->error);
 		}
 		sse/=(float)BATCHSIZE;
-		printf("sse:%f\n",sse);
+//		printf("sse:%f\n",sse);
 		assert(sse<1000);
 		qfunction.net->updateWeights();
 	}

@@ -16,5 +16,6 @@ public:
 	int getBestAction(Array<double> *);
 	int getRandomAction();
 	void updateQ(Array<double> *,Array<double> *);
+	void modifyAction(Array<double> *,Action);
 };
 #endif

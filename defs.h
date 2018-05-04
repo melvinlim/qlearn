@@ -4,14 +4,14 @@
 #define STATEVARS 18
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
-#define BATCHSIZE 50
+#define BATCHSIZE 5
 #define GAMMA 0.01
 #define DISCOUNT 0.6
 #define HIDDENUNITS 100
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
-	#define TRAININGTIME 60000
+	#define TRAININGTIME 6000000
 #endif
 
 #define NORTH 0

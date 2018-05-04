@@ -27,11 +27,26 @@ void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *rewardArr
 	getchar();
 #endif
 }
+void Qfunction::modifyAction(Array<double> *actionStateArray,Action action){
+	for(int i=0;i<4;i++){
+		if(i==action){
+			actionStateArray->item[i]=1;
+		}else{
+			actionStateArray->item[i]=-1;
+		}
+	}
+}
 int Qfunction::getBestAction(Array<double> *actionStateArray){
 	int best=0;
 	double bestVal=getReward(actionStateArray);
 	double tmpVal;
+	modifyAction(actionStateArray,0);
+//actionStateArray->print(3);
+//getchar();
 	for(int i=1;i<nActions;i++){
+		modifyAction(actionStateArray,i);
+//actionStateArray->print(3);
+//getchar();
 		tmpVal=getReward(actionStateArray);
 		if(tmpVal>bestVal){
 			bestVal=tmpVal;
