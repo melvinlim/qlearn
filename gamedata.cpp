@@ -16,7 +16,7 @@ GameData::GameData():Data(){
 	pOutputs[1]=new Array<double>(anslinear2,LINEAROUTPUTS);
 	pOutputs[2]=new Array<double>(anslinear3,LINEAROUTPUTS);
 	pOutputs[3]=new Array<double>(anslinear4,LINEAROUTPUTS);
-	actionStateArray=new Array<double>(STATEVARS);
+	actionStateArray=new Array<double>(nActions+nStateVars);
 	rewardArray=new Array<double>(1);
 }
 void GameData::status(Array<double> **ioArrays,const Array<double> *response,const Array<double> *error){
