@@ -6,6 +6,7 @@ GameData::GameData():Data(){
 	nStateVars=STATEVARS;
 	sz=4;
 	nOutputs=4;
+/*
 	pInputs=new Array<double> *[sz];
 	pOutputs=new Array<double> *[sz];
 	pInputs[0]=new Array<double>(exlinear1,LINEARINPUTS);
@@ -16,6 +17,7 @@ GameData::GameData():Data(){
 	pOutputs[1]=new Array<double>(anslinear2,LINEAROUTPUTS);
 	pOutputs[2]=new Array<double>(anslinear3,LINEAROUTPUTS);
 	pOutputs[3]=new Array<double>(anslinear4,LINEAROUTPUTS);
+*/
 	actionStateArray=new Array<double>(nActions+nStateVars);
 	targetArray=new Array<double>(1);
 }
@@ -58,31 +60,6 @@ if(info.reward>0)
 		getchar();
 	}
 }
-/*
-void GameData::addFutureRewards(Stack<Info> &records){
-	Info info;
-	double targetQ;
-	targetQ=0;
-	info.reward=0;
-	int i=0;
-	bool resetQ=false;
-	for(i=records.size-1;i>=0;i--){
-		info=records.atIndex(i);
-		targetQ+=info.reward;
-		assert(targetQ<100);
-		records.item[i].reward=targetQ;
-		targetQ*=DISCOUNT;
-		if(info.reward!=0){
-			if(resetQ){
-				targetQ=0;
-				resetQ=false;
-			}else	resetQ=true;
-		}
-	}
-	info.reward=0;
-}
-*/
-const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 void GameData::updateActionStateArray(Info &info){
 	Action action=info.action;
 	double *state=info.state;

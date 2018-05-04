@@ -8,6 +8,7 @@
 #define LINEARINPUTS 2
 #define LINEAROUTPUTS 2
 
+const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 const double exlinear1[LINEARINPUTS]={-1,-1};
 const double exlinear2[LINEARINPUTS]={-1,+1};
 const double exlinear3[LINEARINPUTS]={+1,-1};
