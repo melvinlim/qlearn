@@ -28,12 +28,14 @@ void World::updateState(){
 		vision(1,2)=' ';
 		vision(2,2)=' ';
 	}
-	for(int m=0;m<3;m++){
-		for(int n=0;n<3;n++){
-			if(vision(m,n)!=' '){
-				if(mat(i+m-1,j+n-1)=='<'){
-					vision(m,n)='<';
-				}
+	int iRel=stairs.i-i;
+	if(abs(iRel)<=1){
+		int jRel=stairs.j-j;
+		if(abs(jRel)<=1){
+			int iSt=iRel+1;
+			int jSt=jRel+1;
+			if(vision(iSt,jSt)!=' '){
+				vision(iSt,jSt)='<';
 			}
 		}
 	}
