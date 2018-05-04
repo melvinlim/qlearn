@@ -57,7 +57,7 @@ void Agent::train(Stack<Info> &records){
 //train
 	Info info;
 	double sse=1000;
-	while(sse>1){
+	for(int t=0;t<MEMORYSIZE;t++){
 		sse=0;
 		for(int i=0;i<BATCHSIZE;i++){
 			info=records.item[random()%MEMORYSIZE];
