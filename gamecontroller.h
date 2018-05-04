@@ -20,7 +20,7 @@ public:
 	void end();
 	void display();
 	void step(Action,Info &);
-	void getState(Info &);
+	void getState(double *);
 	void updateState();
 };
 #endif

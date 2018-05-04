@@ -82,14 +82,14 @@ void GameController::step(Action action,Info &info){
 		t=0;
 	}
 	info.action=action;
-	getState(info);
+	getState(info.state);
 	updateState();
 	info.reward=reward;
 	records.push_back(info);
 	return;
 }
-void GameController::getState(Info &info){
-	memcpy(info.state,world.state,sizeof(double)*STATEVARS);
+void GameController::getState(double *state){
+	memcpy(state,world.state,sizeof(double)*STATEVARS);
 }
 void GameController::updateState(){
 	world.updateState();

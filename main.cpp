@@ -30,7 +30,7 @@ int main(){
 				printf("training time: %d\n",(int)difftime(endTime,startTime));
 				printf("t: %d\n",gameController.t);
 				gameController.display();
-				gameController.getState(info);
+				gameController.getState(info.state);
 			}
 			player.decide(action,info);
 			gameController.step(action,info);
