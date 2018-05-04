@@ -78,9 +78,11 @@ void GameController::step(Action action,Info &info){
 #ifdef DEBUG
 		printf("out of time\n");
 #endif
+/*
 		reward=-0.5;
 		running=false;
 		t=0;
+*/
 	}
 	info.action=action;
 	getState(info);

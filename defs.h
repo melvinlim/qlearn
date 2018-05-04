@@ -13,7 +13,7 @@
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
-	#define TRAININGTIME 40000
+	#define TRAININGTIME 400000
 //	#define TRAININGTIME 0
 #endif
 #define TIMELIMIT 10

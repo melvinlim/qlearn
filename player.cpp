@@ -54,10 +54,47 @@ void Agent::decide(Action &action,Info &info){
 }
 void Agent::train(Stack<Info> &records){
 //	data.verifyRecords(records);
-	addFutureRewards(records);
+//	addFutureRewards(records);
 //	data.verifyRecords(records);
 //train
 	Info info;
+	info=records.back();
+	data.updateActionStateArray(info);
+	int nextQ=0;
+	double Q;
+	double targetQ;
+	double QMax=qfA.getQMax(data.actionStateArray);
+	int iA,iB;
+	iA=iB=0;
+	records.pop_back();
+	for(int i=records.size-1;i>=0;i--){
+		info=records.atIndex(i);
+		data.updateActionStateArray(info);
+		nextQ=random()%2;
+		if(nextQ==0){
+			Q=qfB.getQ(data.actionStateArray);
+			targetQ=Q+ALPHA*(info.reward+DISCOUNT*QMax-Q);
+			data.targetArray->item[0]=targetQ;
+			qfB.updateQ(data.actionStateArray,data.targetArray);
+			QMax=qfB.getQMax(data.actionStateArray);
+			if(iB++ >= BATCHSIZE){
+				qfB.net->updateWeights();
+				iB=0;
+			}
+		}else{
+			Q=qfA.getQ(data.actionStateArray);
+			targetQ=Q+ALPHA*(info.reward+DISCOUNT*QMax-Q);
+			data.targetArray->item[0]=targetQ;
+			qfA.updateQ(data.actionStateArray,data.targetArray);
+			QMax=qfA.getQMax(data.actionStateArray);
+			if(iA++ >= BATCHSIZE){
+				qfA.net->updateWeights();
+				iA=0;
+			}
+		}
+	}
+	records.clear();
+/*
 	double sse=1000;
 	for(int t=0;t<MEMORYSIZE;t++){
 		sse=0;
@@ -75,20 +112,23 @@ void Agent::train(Stack<Info> &records){
 		qfA.net->updateWeights();
 	}
 	records.clear();
+*/
 }
 void Agent::addFutureRewards(Stack<Info> &records){
+/*
 	Info info;
 	info=records.back();
 	data.updateActionStateArray(info);
 	double Q;
-	double Q0=qfA.getQMax(data.actionStateArray);
+	double QMax=qfA.getQMax(data.actionStateArray);
 	records.pop_back();
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info);
-		records.item[i].Q0=Q0;
+		records.item[i].QMax=QMax;
 		Q=qfA.getQ(data.actionStateArray);
-		records.item[i].targetQ=Q+ALPHA*(info.reward+DISCOUNT*Q0-Q);
-		Q0=qfA.getQMax(data.actionStateArray);
+		records.item[i].targetQ=Q+ALPHA*(info.reward+DISCOUNT*QMax-Q);
+		QMax=qfA.getQMax(data.actionStateArray);
 	}
+*/
 }
