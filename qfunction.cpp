@@ -5,6 +5,24 @@ Qfunction::Qfunction(int nActions,int nStateVars){
 	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA);
 }
 Qfunction::~Qfunction(){}
+double Qfunction::getQMax(Array<double> *actionStateArray){
+	double bestVal;
+	double tmpVal;
+	modifyAction(actionStateArray,0);
+	bestVal=getQ(actionStateArray);
+//actionStateArray->print(3);
+//getchar();
+	for(int i=1;i<nActions;i++){
+		modifyAction(actionStateArray,i);
+//actionStateArray->print(3);
+//getchar();
+		tmpVal=getQ(actionStateArray);
+		if(tmpVal>bestVal){
+			bestVal=tmpVal;
+		}
+	}
+	return bestVal;
+}
 double Qfunction::getQ(Array<double> *actionStateArray){
 	double resp;
 	net->forward(actionStateArray);

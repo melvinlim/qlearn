@@ -13,6 +13,7 @@ public:
 	Qfunction(int,int);
 	~Qfunction();
 	double getQ(Array<double> *);
+	double getQMax(Array<double> *);
 	int getBestAction(Array<double> *);
 	int getRandomAction();
 	void updateQ(Array<double> *,Array<double> *);

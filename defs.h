@@ -27,6 +27,7 @@ typedef int Action;
 struct Info{
 	double targetQ;
 	double Q;
+	double QMax;
 	double Q0;
 	double reward;
 	Action action;
@@ -34,6 +35,7 @@ struct Info{
 	Info &operator=(const Info &x){
 		targetQ=x.targetQ;
 		Q=x.Q;
+		QMax=x.QMax;
 		Q0=x.Q0;
 		reward=x.reward;
 		action=x.action;
