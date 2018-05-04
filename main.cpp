@@ -2,7 +2,9 @@
 #include"player.h"
 #include"defs.h"
 #include<string.h>
+#include<time.h>
 int main(){
+	time_t startTime,endTime;
 	GameController gameController;
 	#ifdef HUMAN
 		Human player;
@@ -15,6 +17,7 @@ int main(){
 	Action action;
 	unsigned long t=0;
 	int i=0;
+	time(&startTime);
 	for(;;){
 		gameController.reset();
 		gameController.start();
@@ -22,6 +25,8 @@ int main(){
 			t++;
 			i++;
 			if(t>TRAININGTIME){
+				time(&endTime);
+				printf("training time: %d\n",(int)difftime(endTime,startTime));
 				gameController.display();
 				gameController.getState(info);
 			}
