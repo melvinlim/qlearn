@@ -12,6 +12,7 @@ public:
 	Stack<Info> records;
 	World world;
 	bool running;
+	bool displayOutput;
 	GameController();
 	~GameController();
 	void start();
@@ -19,7 +20,7 @@ public:
 	void end();
 	void display();
 	void step(Action,Info &);
-	void getState(Info &);
+	void getState(double *);
 	void updateState();
 };
 #endif
