@@ -16,7 +16,7 @@
 	#define TRAININGTIME 20000
 //	#define TRAININGTIME 0
 #endif
-#define TIMELIMIT 50
+#define TIMELIMIT 10
 
 #define NORTH 0
 #define EAST 1
