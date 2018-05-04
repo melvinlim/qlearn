@@ -8,15 +8,19 @@
 class Layer{
 public:
 	double gamma;
+	double lambda_decay;
 	int nRows;
 	int nCols;
 	Matrix<double> mat;
 	Matrix<double> dw;
+#ifdef TESTGRAD
+	Matrix<double> dgw;
+#endif
 	Array<double> out;
 	Array<double> deriv;
 	Array<double> delta;
-	Layer(int,int,double);
-	Layer(Matrix<double> &,double);
+	Layer(int,int,double,double);
+	Layer(Matrix<double> &,double,double);
 	virtual ~Layer();
 	virtual Array<double> &forward(const Array<double> &);
 	void outputDelta(const Array<double> &);
@@ -28,8 +32,8 @@ public:
 };
 class LinearLayer:public Layer{
 public:
-	LinearLayer(int a,int b,double c):Layer(a,b,c){};
-	LinearLayer(Matrix<double> & a,double b):Layer(a,b){};
+	LinearLayer(int a,int b,double c,double d):Layer(a,b,c,d){};
+	LinearLayer(Matrix<double> & a,double b,double c):Layer(a,b,c){};
 	~LinearLayer(){};
 	Array<double> &forward(const Array<double> &);
 };
