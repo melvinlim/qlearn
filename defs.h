@@ -9,13 +9,14 @@
 #define ALPHA 0.1
 #define GAMMA (0.01/(double)BATCHSIZE)
 #define DISCOUNT 0.8
-#define HIDDENUNITS 500
+#define HIDDENUNITS 50
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
 	#define TRAININGTIME 20000
 //	#define TRAININGTIME 0
 #endif
+#define TIMELIMIT 50
 
 #define NORTH 0
 #define EAST 1

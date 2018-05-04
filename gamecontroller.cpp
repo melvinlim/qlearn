@@ -74,6 +74,14 @@ void GameController::step(Action action,Info &info){
 		reward=1;
 		running=false;
 	}
+	if((t>TIMELIMIT)&&(reward==0)){
+#ifdef DEBUG
+		printf("out of time\n");
+#endif
+		reward=-0.5;
+		running=false;
+		t=0;
+	}
 	info.action=action;
 	getState(info);
 	updateState();
