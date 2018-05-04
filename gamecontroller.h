@@ -8,7 +8,7 @@
 using namespace std;
 class GameController{
 public:
-	//vector<struct Info> records;
+	int t;
 	Stack<Info> records;
 	World world;
 	bool running;

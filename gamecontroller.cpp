@@ -2,6 +2,7 @@
 GameController::GameController():
 records(MEMORYSIZE)
 {
+	t=0;
 }
 GameController::~GameController(){}
 void GameController::start(){
@@ -22,7 +23,7 @@ void GameController::step(Action action,Info &info){
 	int i=world.playerObject.i;
 	int j=world.playerObject.j;
 	bool result=false;
-	int reward=0;
+	double reward=0;
 	switch(action){
 		case NORTH:
 			if(i>0)
@@ -70,8 +71,9 @@ void GameController::step(Action action,Info &info){
 #ifdef DEBUG
 		printf("win\n");
 #endif
-		reward=10;
+		info.reward=1;
 		running=false;
+		return;
 	}
 	info.action=action;
 	getState(info);
