@@ -53,7 +53,7 @@ void Agent::decide(Action &action,Info &info){
 void Agent::train(Stack<Info> &records){
 //	data.verifyRecords(records);
 	addFutureRewards(records);
-//	data.verifyRecords(records);
+	data.verifyRecords(records);
 //train
 	Info info;
 	double sse=1000;

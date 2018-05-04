@@ -62,7 +62,7 @@ void World::updateState(){
 		}
 	}
 #ifdef DEBUG
-	debugState();
+//	debugState();
 #endif
 }
 void World::debugState(){
