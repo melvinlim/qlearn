@@ -25,7 +25,8 @@ class Agent:public Player{
 public:
 	GameData data;
 	int currentTime;
-	Qfunction qfunction;
+	Qfunction qfA;
+	Qfunction qfB;
 	Stack<Info> trainSet;
 	Agent();
 	~Agent();

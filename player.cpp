@@ -33,7 +33,8 @@ void Human::decide(Action &action,Info &info){
 	}
 }
 Agent::Agent():
-qfunction(4,STATEVARS),
+qfA(4,STATEVARS),
+qfB(4,STATEVARS),
 trainSet(BATCHSIZE)
 {
 	currentTime=0;
@@ -42,11 +43,11 @@ Agent::~Agent(){}
 void Agent::decide(Action &action,Info &info){
 	currentTime++;
 	if(currentTime<TRAININGTIME){
-		action=qfunction.getRandomAction();
+		action=qfA.getRandomAction();
 	}else{
 		data.updateActionStateArray(info);
 //passing ASA with action of 0 and expecting getBestAction to modify function and try other possibilities.
-		action=qfunction.getBestAction(data.actionStateArray);
+		action=qfA.getBestAction(data.actionStateArray);
 	}
 	if(currentTime>TRAININGTIME)
 		getchar();
@@ -65,13 +66,13 @@ void Agent::train(Stack<Info> &records){
 			//info=records.item[i];
 			data.updateActionStateArray(info);
 			data.targetArray->item[0]=info.targetQ;
-			qfunction.updateQ(data.actionStateArray,data.targetArray);
-			sse+=data.sumSqError(&qfunction.net->error);
+			qfA.updateQ(data.actionStateArray,data.targetArray);
+			sse+=data.sumSqError(&qfA.net->error);
 		}
 		sse/=(float)BATCHSIZE;
 //		printf("sse:%f\n",sse);
 		assert(sse<1000);
-		qfunction.net->updateWeights();
+		qfA.net->updateWeights();
 	}
 	records.clear();
 }
@@ -80,14 +81,14 @@ void Agent::addFutureRewards(Stack<Info> &records){
 	info=records.back();
 	data.updateActionStateArray(info);
 	double Q;
-	double Q0=qfunction.getQMax(data.actionStateArray);
+	double Q0=qfA.getQMax(data.actionStateArray);
 	records.pop_back();
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info);
 		records.item[i].Q0=Q0;
-		Q=qfunction.getQ(data.actionStateArray);
+		Q=qfA.getQ(data.actionStateArray);
 		records.item[i].targetQ=Q+ALPHA*(info.reward+DISCOUNT*Q0-Q);
-		Q0=qfunction.getQMax(data.actionStateArray);
+		Q0=qfA.getQMax(data.actionStateArray);
 	}
 }
