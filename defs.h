@@ -8,11 +8,11 @@
 #define ALPHA 0.1
 #define GAMMA (0.1/(double)BATCHSIZE)
 #define DISCOUNT 0.6
-#define HIDDENUNITS 100
+#define HIDDENUNITS 500
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
-	#define TRAININGTIME 5000
+	#define TRAININGTIME 50000
 #endif
 
 #define NORTH 0

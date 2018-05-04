@@ -57,12 +57,16 @@ void Agent::train(Stack<Info> &records){
 //train
 	Info info;
 	double sse=1000;
+	double Q0,newReward;
 	for(int t=0;t<MEMORYSIZE;t++){
 		sse=0;
 		for(int i=0;i<BATCHSIZE;i++){
 			info=records.item[random()%MEMORYSIZE];
 			//info=records.item[i];
 			data.updateActionStateArray(info);
+			Q0=qfunction.getReward(data.actionStateArray);
+			newReward=data.rewardArray->item[0];
+			data.rewardArray->item[0]=(1.0-ALPHA)*Q0+ALPHA*newReward;
 			qfunction.updateQ(data.actionStateArray,data.rewardArray);
 			sse+=data.sumSqError(&qfunction.net->error);
 		}
