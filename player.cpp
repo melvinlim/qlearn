@@ -5,6 +5,7 @@ Player::~Player(){}
 Human::Human(){}
 Human::~Human(){}
 void Human::decide(Action &action,Info &info){
+	info.action=0;
 	printf(":");
 	char tmp;
 	char prev;
