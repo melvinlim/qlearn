@@ -41,7 +41,7 @@ int Qfunction::getBestAction(Array<double> *actionStateArray){
 	double bestVal=getReward(actionStateArray);
 	double tmpVal;
 	modifyAction(actionStateArray,0);
-//actionStateArray->print(3);
+actionStateArray->print(3);
 //getchar();
 	for(int i=1;i<nActions;i++){
 		modifyAction(actionStateArray,i);

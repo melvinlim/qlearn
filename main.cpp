@@ -13,7 +13,7 @@ int main(){
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);
 	Action action;
-	int t=0;
+	unsigned long t=0;
 	int i=0;
 	for(;;){
 		gameController.reset();
@@ -21,8 +21,10 @@ int main(){
 		while(gameController.running){
 			t++;
 			i++;
-			if(t>TRAININGTIME)
+			if(t>TRAININGTIME){
 				gameController.display();
+				gameController.getState(info);
+			}
 			player.decide(action,info);
 			gameController.step(action,info);
 			if(i>=MEMORYSIZE){
