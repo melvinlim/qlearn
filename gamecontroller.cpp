@@ -71,9 +71,8 @@ void GameController::step(Action action,Info &info){
 #ifdef DEBUG
 		printf("win\n");
 #endif
-		info.reward=1;
+		reward=1;
 		running=false;
-		return;
 	}
 	info.action=action;
 	getState(info);

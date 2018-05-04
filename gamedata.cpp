@@ -54,7 +54,7 @@ void GameData::verifyRecords(Stack<Info> &records){
 			}
 			printf("\n");
 		}
-//if(info.reward!=0)
+if(info.reward>0)
 		getchar();
 	}
 }
