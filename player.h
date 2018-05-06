@@ -35,6 +35,5 @@ public:
 	void decide(Action &,Info &);
 	void train(Stack<Info> &);
 	void verifyRecords(Stack<Info> &);
-	void addFutureRewards(Stack<Info> &);
 };
 #endif

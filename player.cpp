@@ -120,7 +120,3 @@ void Agent::train(Stack<Info> &records){
 	}
 	records.clear();
 }
-void Agent::addFutureRewards(Stack<Info> &records){
-	Info info;
-	info=records.back();
-}

@@ -5,7 +5,7 @@
 #define STATEVARS 18
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
-#define BATCHSIZE 40
+#define BATCHSIZE 100
 #define ALPHA 0.1
 #define GAMMA (0.01/(double)BATCHSIZE)
 #define LAMBDA_DECAY (0.008/(double)BATCHSIZE)
