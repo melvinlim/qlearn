@@ -76,6 +76,7 @@ void Agent::train(Stack<Info> &records){
 	int nextQ=0;
 	double Q;
 	double targetQ;
+	double reward;
 	double QMax=qfA.getQMax(data.actionStateArray);
 	int iA,iB;
 	iA=iB=0;
@@ -84,10 +85,15 @@ void Agent::train(Stack<Info> &records){
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info);
+		reward=info.reward;
 		nextQ=random()%2;
 		if(nextQ==0){
 			Q=qfB.getQ(data.actionStateArray);
-			targetQ=Q+ALPHA*(info.reward+DISCOUNT*QMax-Q);
+			if(reward!=0){
+				targetQ=Q+ALPHA*(reward-Q);
+			}else{
+				targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
+			}
 			data.targetArray->item[0]=targetQ;
 			qfB.updateQ(data.actionStateArray,data.targetArray);
 			QMax=qfB.getQMax(data.actionStateArray);
@@ -97,7 +103,11 @@ void Agent::train(Stack<Info> &records){
 			}
 		}else{
 			Q=qfA.getQ(data.actionStateArray);
-			targetQ=Q+ALPHA*(info.reward+DISCOUNT*QMax-Q);
+			if(reward!=0){
+				targetQ=Q+ALPHA*(reward-Q);
+			}else{
+				targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
+			}
 			data.targetArray->item[0]=targetQ;
 			qfA.updateQ(data.actionStateArray,data.targetArray);
 			QMax=qfA.getQMax(data.actionStateArray);
