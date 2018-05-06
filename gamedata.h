@@ -29,6 +29,6 @@ public:
 	void status(Array<double> **,const Array<double> *,const Array<double> *);
 //	void addFutureRewards(Stack<Info> &);
 	void verifyRecords(Stack<Info> &);
-	void updateActionStateArray(Info &);
+	void updateActionStateArray(const Action &,const double *);
 };
 #endif

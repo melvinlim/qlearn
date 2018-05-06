@@ -57,9 +57,7 @@ if(info.reward>0)
 		getchar();
 	}
 }
-void GameData::updateActionStateArray(Info &info){
-	Action action=info.action;
-	double *state=info.state;
+void GameData::updateActionStateArray(const Action &action,const double *state){
 	assert(action<nActions);
 	int p=0;
 	for(int i=0;i<nActions;i++){

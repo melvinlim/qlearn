@@ -29,9 +29,11 @@ struct Info{
 	double state[STATEVARS];
 	Action action;
 	double reward;
+	double *state0;
 	Info &operator=(const Info &x){
 		for(int i=0;i<STATEVARS;i++){
 			state[i]=x.state[i];
+			state0=x.state0;
 		}
 		action=x.action;
 		reward=x.reward;

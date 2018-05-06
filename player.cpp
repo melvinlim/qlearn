@@ -47,7 +47,7 @@ void Agent::decide(Action &action,Info &info){
 	if(currentTime<TRAININGTIME){
 		action=qfA.getRandomAction();
 	}else{
-		data.updateActionStateArray(info);
+		data.updateActionStateArray(info.action,info.state);
 //passing ASA with action of 0 and expecting getBestAction to modify function and try other possibilities.
 		qfA.getQArray(QArrayA,data.actionStateArray);
 		qfB.getQArray(QArrayB,data.actionStateArray);
@@ -72,7 +72,7 @@ void Agent::train(Stack<Info> &records){
 //train
 	Info info;
 	info=records.back();
-	data.updateActionStateArray(info);
+	data.updateActionStateArray(info.action,info.state);
 	int nextQ=1;
 	double Q;
 	double targetQ;
@@ -84,7 +84,7 @@ void Agent::train(Stack<Info> &records){
 //	for(int r=0;r<2;r++)
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
-		data.updateActionStateArray(info);
+		data.updateActionStateArray(info.action,info.state);
 		reward=info.reward;
 //		nextQ=random()%2;
 		nextQ=(nextQ+1)%2;
