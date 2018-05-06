@@ -7,7 +7,7 @@
 #include<stdlib.h>
 class Qfunction{
 public:
-	Net *net;
+	SingleHiddenLinear net;
 	int nActions;
 	int nStateVars;
 	Qfunction(int,int);

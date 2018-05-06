@@ -1,8 +1,9 @@
 #include"qfunction.h"
-Qfunction::Qfunction(int nActions,int nStateVars){
+Qfunction::Qfunction(int nActions,int nStateVars):
+net(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY)
+{
 	this->nActions=nActions;
 	this->nStateVars=nStateVars;
-	net=new SingleHiddenLinear(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY);
 }
 Qfunction::~Qfunction(){}
 double Qfunction::getQMax(Array<double> *actionStateArray){
@@ -25,8 +26,8 @@ double Qfunction::getQMax(Array<double> *actionStateArray){
 }
 double Qfunction::getQ(Array<double> *actionStateArray){
 	double resp;
-	net->forward(actionStateArray);
-	resp=net->response->item[0];
+	net.forward(actionStateArray);
+	resp=net.response->item[0];
 #ifdef DEBUG
 //	printf("resp: %f\n",resp);
 #endif
@@ -38,7 +39,7 @@ void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *targetArr
 	targetArray->print();
 	printf("target Q:%f",targetArray->item[0]);
 #endif
-	net->trainBatch(actionStateArray,targetArray);
+	net.trainBatch(actionStateArray,targetArray);
 #ifdef DEBUG
 	double response=getQ(actionStateArray);
 	printf("Q response after training:%f\n",response);
