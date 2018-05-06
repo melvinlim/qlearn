@@ -106,7 +106,7 @@ void Agent::train(Stack<Info> &records){
 				qfB.net.updateWeights();
 				sse+=currentError*currentError;
 				iB=0;
-				printf("qfB sse:%f\n",sse/(double)BATCHSIZE);
+//				printf("qfB sse:%f\n",sse/(double)BATCHSIZE);
 				sse=0;
 			}
 		}else{
@@ -125,7 +125,7 @@ void Agent::train(Stack<Info> &records){
 				qfA.net.updateWeights();
 				sse+=currentError*currentError;
 				iA=0;
-				printf("qfA sse:%f\n",sse/(double)BATCHSIZE);
+//				printf("qfA sse:%f\n",sse/(double)BATCHSIZE);
 				sse=0;
 			}
 		}
