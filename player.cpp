@@ -47,8 +47,8 @@ void Agent::decide(Action &action,Info &info){
 	if(currentTime<TRAININGTIME){
 		action=qfA.getRandomAction();
 	}else{
-		data.updateActionStateArray(info.action,info.state);
-//passing ASA with action of 0 and expecting getBestAction to modify function and try other possibilities.
+		data.updateActionStateArray(0,info.state);
+//passing ASArray with action of 0 and expecting getQArray to modify array to try all other possibilities.
 		qfA.getQArray(QArrayA,data.actionStateArray);
 		qfB.getQArray(QArrayB,data.actionStateArray);
 		double bestQ,tmpQ;
