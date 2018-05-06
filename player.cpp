@@ -73,7 +73,7 @@ void Agent::train(Stack<Info> &records){
 	Info info;
 	info=records.back();
 	data.updateActionStateArray(info);
-	int nextQ=0;
+	int nextQ=1;
 	double Q;
 	double targetQ;
 	double reward;
@@ -86,7 +86,8 @@ void Agent::train(Stack<Info> &records){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info);
 		reward=info.reward;
-		nextQ=random()%2;
+//		nextQ=random()%2;
+		nextQ=(nextQ+1)%2;
 		if(nextQ==0){
 			Q=qfB.getQ(data.actionStateArray);
 			if(reward!=0){
