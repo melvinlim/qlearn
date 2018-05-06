@@ -82,16 +82,17 @@ void Agent::train(Stack<Info> &records){
 	records.pop_back();
 	double currentError;
 	double sse=0;
+	int t;
 	Qfunction *qptr=&qfA;
-//	for(int r=0;r<2;r++)
-	for(int i=records.size-1;i>=0;i--){
-		info=records.atIndex(i);
+	for(int i=0;i<records.size;i++){
+//		t=random()%records.size;
+		t=i;
+		info=records.atIndex(t);
 		data.updateActionStateArray(info.action,info.state);
 		reward=info.reward;
-//		nextQ=random()%2;
-		//if(nextQ==0){
-		//}
-		qptr=qptr->nextQ;
+//		t=random()%2;
+//		if(t==0)
+			qptr=qptr->nextQ;
 		Q=qptr->getQ(data.actionStateArray);
 		if(reward!=0){
 			targetQ=Q+ALPHA*(reward-Q);
