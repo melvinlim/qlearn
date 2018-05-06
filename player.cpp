@@ -38,6 +38,8 @@ qfB(4,STATEVARS),
 trainSet(BATCHSIZE)
 {
 	currentTime=0;
+	qfA.nextQ=&qfB;
+	qfB.nextQ=&qfA;
 	QArrayA=new Array<double>(4+STATEVARS);
 	QArrayB=new Array<double>(4+STATEVARS);
 }
@@ -73,61 +75,40 @@ void Agent::train(Stack<Info> &records){
 	Info info;
 	info=records.back();
 	data.updateActionStateArray(info.action,info.state);
-	int nextQ=1;
 	double Q;
 	double targetQ;
 	double reward;
 	double QMax;
-	int iA,iB;
-	iA=iB=0;
 	records.pop_back();
 	double currentError;
 	double sse=0;
+	Qfunction *qptr=&qfA;
 //	for(int r=0;r<2;r++)
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
 		data.updateActionStateArray(info.action,info.state);
 		reward=info.reward;
 //		nextQ=random()%2;
-		nextQ=(nextQ+1)%2;
-		if(nextQ==0){
-			Q=qfB.getQ(data.actionStateArray);
-			if(reward!=0){
-				targetQ=Q+ALPHA*(reward-Q);
-			}else{
-				data.updateActionStateArray(info.action,info.nextState);
-				QMax=qfB.getQMax(data.actionStateArray);
-				targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
-			}
-			data.targetArray->item[0]=targetQ;
-			qfB.updateQ(data.actionStateArray,data.targetArray);
-			currentError=qfB.net.error.item[0];
-			if(iB++ >= BATCHSIZE){
-				qfB.net.updateWeights();
-				sse+=currentError*currentError;
-				iB=0;
-//				printf("qfB sse:%f\n",sse/(double)BATCHSIZE);
-				sse=0;
-			}
+		//if(nextQ==0){
+		//}
+		qptr=qptr->nextQ;
+		Q=qptr->getQ(data.actionStateArray);
+		if(reward!=0){
+			targetQ=Q+ALPHA*(reward-Q);
 		}else{
-			Q=qfA.getQ(data.actionStateArray);
-			if(reward!=0){
-				targetQ=Q+ALPHA*(reward-Q);
-			}else{
-				data.updateActionStateArray(info.action,info.nextState);
-				QMax=qfA.getQMax(data.actionStateArray);
-				targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
-			}
-			data.targetArray->item[0]=targetQ;
-			qfA.updateQ(data.actionStateArray,data.targetArray);
-			currentError=qfA.net.error.item[0];
-			if(iA++ >= BATCHSIZE){
-				qfA.net.updateWeights();
-				sse+=currentError*currentError;
-				iA=0;
-//				printf("qfA sse:%f\n",sse/(double)BATCHSIZE);
-				sse=0;
-			}
+			data.updateActionStateArray(info.action,info.nextState);
+			QMax=qptr->nextQ->getQMax(data.actionStateArray);
+			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
+		}
+		data.targetArray->item[0]=targetQ;
+		qptr->updateQ(data.actionStateArray,data.targetArray);
+		currentError=qptr->net.error.item[0];
+		if(qptr->iter++ >= BATCHSIZE){
+			qptr->net.updateWeights();
+			sse+=currentError*currentError;
+			qptr->iter=0;
+//			printf("%x sse:%f\n",qptr,sse/(double)BATCHSIZE);
+			sse=0;
 		}
 	}
 	records.clear();

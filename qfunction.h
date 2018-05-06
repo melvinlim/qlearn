@@ -8,8 +8,10 @@
 class Qfunction{
 public:
 	SingleHiddenLinear net;
+	int iter;
 	int nActions;
 	int nStateVars;
+	Qfunction *nextQ;
 	Qfunction(int,int);
 	~Qfunction();
 	double getQ(Array<double> *);

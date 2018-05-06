@@ -4,6 +4,7 @@ net(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY)
 {
 	this->nActions=nActions;
 	this->nStateVars=nStateVars;
+	iter=0;
 }
 Qfunction::~Qfunction(){}
 double Qfunction::getQMax(Array<double> *actionStateArray){
