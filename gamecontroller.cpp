@@ -20,7 +20,7 @@ void GameController::end(){
 void GameController::display(){
 	world.display();
 }
-void GameController::step(Action action,Info &info){
+double GameController::step(const Action &action){
 	int i=world.playerObject.i;
 	int j=world.playerObject.j;
 	bool result=false;
@@ -61,11 +61,11 @@ void GameController::step(Action action,Info &info){
 		default:
 			printf("error\n");
 			printf("received: %c (%d)\n",action,action);
-			info.reward=0;
+			reward=0;
 			#ifndef HUMAN
 				assert(0);
 			#endif
-			return;
+			return reward;
 		break;
 	}
 	if(result){
@@ -81,12 +81,7 @@ void GameController::step(Action action,Info &info){
 		running=false;
 		t=0;
 	}
-	info.action=action;
-	getState(info.state);
-	updateState();
-	info.reward=reward;
-	records.push_back(info);
-	return;
+	return reward;
 }
 void GameController::getState(double *state){
 	memcpy(state,world.state,sizeof(double)*STATEVARS);

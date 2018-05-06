@@ -19,7 +19,7 @@ public:
 	void reset();
 	void end();
 	void display();
-	void step(Action,Info &);
+	double step(const Action &);
 	void getState(double *);
 	void updateState();
 };

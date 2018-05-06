@@ -14,13 +14,13 @@ int main(){
 	Info info;
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);
-	Action action;
 	unsigned long t=0;
 	int i=0;
 	time(&startTime);
 	for(;;){
 		gameController.reset();
 		gameController.start();
+		gameController.updateState();
 		while(gameController.running){
 			t++;
 			i++;
@@ -30,10 +30,14 @@ int main(){
 				printf("training time: %d\n",(int)difftime(endTime,startTime));
 				printf("t: %d\n",gameController.t);
 				gameController.display();
-				gameController.getState(info.state);
 			}
-			player.decide(action,info);
-			gameController.step(action,info);
+			gameController.getState(info.state);
+			player.decide(info.action,info);
+			info.reward=gameController.step(info.action);
+			gameController.updateState();
+			if(info.reward!=0){	//if the game is over.
+			}
+			gameController.records.push_back(info);
 			if(i>=MEMORYSIZE){
 				player.train(gameController.records);
 				i=0;
