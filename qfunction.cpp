@@ -29,7 +29,7 @@ double Qfunction::getQ(Array<double> *actionStateArray){
 	net.forward(actionStateArray);
 	resp=net.response->item[0];
 #ifdef DEBUG
-//	printf("resp: %f\n",resp);
+	printf("resp: %f\n",resp);
 #endif
 	return resp;
 }
@@ -37,7 +37,7 @@ void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *targetArr
 #ifdef DEBUG
 	actionStateArray->print();
 	targetArray->print();
-	printf("target Q:%f",targetArray->item[0]);
+	printf("target Q:%f\n",targetArray->item[0]);
 #endif
 	net.trainBatch(actionStateArray,targetArray);
 #ifdef DEBUG

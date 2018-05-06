@@ -102,11 +102,11 @@ void Agent::train(Stack<Info> &records){
 			data.targetArray->item[0]=targetQ;
 			qfB.updateQ(data.actionStateArray,data.targetArray);
 			currentError=qfB.net.error.item[0];
-			sse+=currentError*currentError;
 			if(iB++ >= BATCHSIZE){
 				qfB.net.updateWeights();
+				sse+=currentError*currentError;
 				iB=0;
-//				printf("qfB sse:%f\n",sse/(double)BATCHSIZE);
+				printf("qfB sse:%f\n",sse/(double)BATCHSIZE);
 				sse=0;
 			}
 		}else{
@@ -121,11 +121,11 @@ void Agent::train(Stack<Info> &records){
 			data.targetArray->item[0]=targetQ;
 			qfA.updateQ(data.actionStateArray,data.targetArray);
 			currentError=qfA.net.error.item[0];
-			sse+=currentError*currentError;
 			if(iA++ >= BATCHSIZE){
 				qfA.net.updateWeights();
+				sse+=currentError*currentError;
 				iA=0;
-//				printf("qfA sse:%f\n",sse/(double)BATCHSIZE);
+				printf("qfA sse:%f\n",sse/(double)BATCHSIZE);
 				sse=0;
 			}
 		}
