@@ -40,9 +40,6 @@ void GameData::verifyRecords(Stack<Info> &records){
 		info=records.pop_back();
 		printf("%d: %d\n",r,info.action);
 		printf("reward: %f\n",info.reward);
-		printf("targetQ: %f\n",info.targetQ);
-		printf("Q: %f\n",info.Q);
-		printf("Q0: %f\n",info.Q0);
 		k=0;
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){

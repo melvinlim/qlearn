@@ -119,41 +119,8 @@ void Agent::train(Stack<Info> &records){
 		}
 	}
 	records.clear();
-/*
-	double sse=1000;
-	for(int t=0;t<MEMORYSIZE;t++){
-		sse=0;
-		for(int i=0;i<BATCHSIZE;i++){
-			info=records.item[random()%MEMORYSIZE];
-			//info=records.item[i];
-			data.updateActionStateArray(info);
-			data.targetArray->item[0]=info.targetQ;
-			qfA.updateQ(data.actionStateArray,data.targetArray);
-			sse+=data.sumSqError(&qfA.net->error);
-		}
-		sse/=(float)BATCHSIZE;
-//		printf("sse:%f\n",sse);
-		assert(sse<1000);
-		qfA.net->updateWeights();
-	}
-	records.clear();
-*/
 }
 void Agent::addFutureRewards(Stack<Info> &records){
 	Info info;
 	info=records.back();
-/*
-	data.updateActionStateArray(info);
-	double Q;
-	double QMax=qfA.getQMax(data.actionStateArray);
-	records.pop_back();
-	for(int i=records.size-1;i>=0;i--){
-		info=records.atIndex(i);
-		data.updateActionStateArray(info);
-		records.item[i].QMax=QMax;
-		Q=qfA.getQ(data.actionStateArray);
-		records.item[i].targetQ=Q+ALPHA*(info.reward+DISCOUNT*QMax-Q);
-		QMax=qfA.getQMax(data.actionStateArray);
-	}
-*/
 }

@@ -14,7 +14,7 @@
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
-	#define TRAININGTIME 1000000
+	#define TRAININGTIME 4000000
 //	#define TRAININGTIME 0
 #endif
 #define TIMELIMIT 10
@@ -26,23 +26,15 @@
 
 typedef int Action;
 struct Info{
-	double targetQ;
-	double Q;
-	double QMax;
-	double Q0;
-	double reward;
-	Action action;
 	double state[STATEVARS];
+	Action action;
+	double reward;
 	Info &operator=(const Info &x){
-		targetQ=x.targetQ;
-		Q=x.Q;
-		QMax=x.QMax;
-		Q0=x.Q0;
-		reward=x.reward;
-		action=x.action;
 		for(int i=0;i<STATEVARS;i++){
 			state[i]=x.state[i];
 		}
+		action=x.action;
+		reward=x.reward;
 		return *this;
 	}
 };
