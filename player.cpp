@@ -81,6 +81,8 @@ void Agent::train(Stack<Info> &records){
 	int iA,iB;
 	iA=iB=0;
 	records.pop_back();
+	double currentError;
+	double sse=0;
 //	for(int r=0;r<2;r++)
 	for(int i=records.size-1;i>=0;i--){
 		info=records.atIndex(i);
@@ -99,9 +101,13 @@ void Agent::train(Stack<Info> &records){
 			}
 			data.targetArray->item[0]=targetQ;
 			qfB.updateQ(data.actionStateArray,data.targetArray);
+			currentError=qfB.net->error.item[0];
+			sse+=currentError*currentError;
 			if(iB++ >= BATCHSIZE){
 				qfB.net->updateWeights();
 				iB=0;
+//				printf("qfB sse:%f\n",sse/(double)BATCHSIZE);
+				sse=0;
 			}
 		}else{
 			Q=qfA.getQ(data.actionStateArray);
@@ -114,9 +120,13 @@ void Agent::train(Stack<Info> &records){
 			}
 			data.targetArray->item[0]=targetQ;
 			qfA.updateQ(data.actionStateArray,data.targetArray);
+			currentError=qfA.net->error.item[0];
+			sse+=currentError*currentError;
 			if(iA++ >= BATCHSIZE){
 				qfA.net->updateWeights();
 				iA=0;
+//				printf("qfA sse:%f\n",sse/(double)BATCHSIZE);
+				sse=0;
 			}
 		}
 	}
