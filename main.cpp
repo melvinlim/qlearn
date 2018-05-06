@@ -36,6 +36,9 @@ int main(){
 			info.reward=gameController.step(info.action);
 			gameController.updateState();
 			if(info.reward!=0){	//if the game is over.
+				memset(info.nextState,0,sizeof(double)*STATEVARS);
+			}else{
+				gameController.getState(info.nextState);
 			}
 			gameController.records.push_back(info);
 			if(i>=MEMORYSIZE){

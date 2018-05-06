@@ -77,7 +77,7 @@ void Agent::train(Stack<Info> &records){
 	double Q;
 	double targetQ;
 	double reward;
-	double QMax=qfA.getQMax(data.actionStateArray);
+	double QMax;
 	int iA,iB;
 	iA=iB=0;
 	records.pop_back();
@@ -93,11 +93,12 @@ void Agent::train(Stack<Info> &records){
 			if(reward!=0){
 				targetQ=Q+ALPHA*(reward-Q);
 			}else{
+				data.updateActionStateArray(info.action,info.nextState);
+				QMax=qfB.getQMax(data.actionStateArray);
 				targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
 			}
 			data.targetArray->item[0]=targetQ;
 			qfB.updateQ(data.actionStateArray,data.targetArray);
-			QMax=qfB.getQMax(data.actionStateArray);
 			if(iB++ >= BATCHSIZE){
 				qfB.net->updateWeights();
 				iB=0;
@@ -107,11 +108,12 @@ void Agent::train(Stack<Info> &records){
 			if(reward!=0){
 				targetQ=Q+ALPHA*(reward-Q);
 			}else{
+				data.updateActionStateArray(info.action,info.nextState);
+				QMax=qfA.getQMax(data.actionStateArray);
 				targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
 			}
 			data.targetArray->item[0]=targetQ;
 			qfA.updateQ(data.actionStateArray,data.targetArray);
-			QMax=qfA.getQMax(data.actionStateArray);
 			if(iA++ >= BATCHSIZE){
 				qfA.net->updateWeights();
 				iA=0;
