@@ -101,7 +101,7 @@ void Agent::train(Stack<Info> &records){
 			QMax=qptr->nextQ->getQMax(data.actionStateArray);
 			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
 		}
-		info=records.atIndex(t);
+//		info=records.atIndex(t);
 		data.updateActionStateArray(info.action,info.state);
 		data.targetArray->item[0]=targetQ;
 		qptr->updateQ(data.actionStateArray,data.targetArray);
