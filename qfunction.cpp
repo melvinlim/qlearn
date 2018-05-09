@@ -4,6 +4,8 @@ net(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY)
 {
 	this->nActions=nActions;
 	this->nStateVars=nStateVars;
+	actionStateArray=new Array<double>(nActions+nStateVars);
+	targetArray=new Array<double>(1);
 	iter=0;
 }
 Qfunction::~Qfunction(){}
@@ -86,4 +88,14 @@ int Qfunction::getRandomAction(){
 	int best=0;
 	best=random()%nActions;
 	return best;
+}
+void Qfunction::updateActionStateArray(const Action &action,const double *state){
+	assert(action<nActions);
+	int p=0;
+	for(int i=0;i<nActions;i++){
+		actionStateArray->item[p++]=aStates[action][i];
+	}
+	for(int i=0;i<nStateVars;i++){
+		actionStateArray->item[p++]=state[i];
+	}
 }

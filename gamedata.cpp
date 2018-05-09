@@ -18,8 +18,8 @@ GameData::GameData():Data(){
 	pOutputs[2]=new Array<double>(anslinear3,LINEAROUTPUTS);
 	pOutputs[3]=new Array<double>(anslinear4,LINEAROUTPUTS);
 */
-	actionStateArray=new Array<double>(nActions+nStateVars);
-	targetArray=new Array<double>(1);
+//	actionStateArray=new Array<double>(nActions+nStateVars);
+//	targetArray=new Array<double>(1);
 }
 void GameData::status(Array<double> **ioArrays,const Array<double> *response,const Array<double> *error){
 	Array<double> *pIn=ioArrays[0];
@@ -57,6 +57,7 @@ if(info.reward>0)
 		getchar();
 	}
 }
+/*
 void GameData::updateActionStateArray(const Action &action,const double *state){
 	assert(action<nActions);
 	int p=0;
@@ -67,3 +68,4 @@ void GameData::updateActionStateArray(const Action &action,const double *state){
 		actionStateArray->item[p++]=state[i];
 	}
 }
+*/

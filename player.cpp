@@ -49,10 +49,10 @@ void Agent::decide(Action &action,Info &info){
 	if(currentTime<TRAININGTIME){
 		action=qfA.getRandomAction();
 	}else{
-		data.updateActionStateArray(0,info.state);
+		qfA.updateActionStateArray(0,info.state);
 //passing ASArray with action of 0 and expecting getQArray to modify array to try all other possibilities.
-		qfA.getQArray(QArrayA,data.actionStateArray);
-		qfB.getQArray(QArrayB,data.actionStateArray);
+		qfA.getQArray(QArrayA,qfA.actionStateArray);
+		qfB.getQArray(QArrayB,qfA.actionStateArray);
 		double bestQ,tmpQ;
 		action=0;
 		bestQ=QArrayA->item[0]+QArrayB->item[0];
@@ -74,7 +74,7 @@ void Agent::train(Stack<Info> &records){
 //train
 	Info info;
 	info=records.back();
-	data.updateActionStateArray(info.action,info.state);
+	qfA.updateActionStateArray(info.action,info.state);
 	double Q;
 	double targetQ;
 	double reward;
@@ -96,15 +96,15 @@ void Agent::train(Stack<Info> &records){
 			targetQ=reward;
 			//targetQ=Q+ALPHA*(reward-Q);
 		}else{
-			data.updateActionStateArray(info.action,info.state);
-			Q=qptr->getQ(data.actionStateArray);
-			data.updateActionStateArray(info.action,info.nextState);
-			QMax=qptr->nextQ->getQMax(data.actionStateArray);
+			qfA.updateActionStateArray(info.action,info.state);
+			Q=qptr->getQ(qfA.actionStateArray);
+			qfA.updateActionStateArray(info.action,info.nextState);
+			QMax=qptr->nextQ->getQMax(qfA.actionStateArray);
 			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
-			data.updateActionStateArray(info.action,info.state);
+			qfA.updateActionStateArray(info.action,info.state);
 		}
-		data.targetArray->item[0]=targetQ;
-		qptr->updateQ(data.actionStateArray,data.targetArray);
+		qfA.targetArray->item[0]=targetQ;
+		qptr->updateQ(qfA.actionStateArray,qfA.targetArray);
 		currentError=qptr->net.error.item[0];
 		if(qptr->iter++ >= BATCHSIZE){
 			qptr->net.updateWeights();

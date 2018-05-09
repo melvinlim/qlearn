@@ -8,7 +8,7 @@
 #define LINEARINPUTS 2
 #define LINEAROUTPUTS 2
 
-const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
+//const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 const double exlinear1[LINEARINPUTS]={-1,-1};
 const double exlinear2[LINEARINPUTS]={-1,+1};
 const double exlinear3[LINEARINPUTS]={+1,-1};
@@ -20,8 +20,8 @@ const double anslinear4[LINEAROUTPUTS]={-0.05,40};
 
 class GameData:public Data{
 public:
-	Array<double> *actionStateArray;
-	Array<double> *targetArray;
+//	Array<double> *actionStateArray;
+//	Array<double> *targetArray;
 	int nActions;
 	int nStateVars;
 	GameData();
@@ -29,6 +29,6 @@ public:
 	void status(Array<double> **,const Array<double> *,const Array<double> *);
 //	void addFutureRewards(Stack<Info> &);
 	void verifyRecords(Stack<Info> &);
-	void updateActionStateArray(const Action &,const double *);
+//	void updateActionStateArray(const Action &,const double *);
 };
 #endif
