@@ -32,7 +32,7 @@ int main(){
 				gameController.display();
 			}
 			gameController.getState(info.state);
-			player.decide(info.action,info);
+			player.decide(info.action,info.state);
 			info.reward=gameController.step(info.action);
 			gameController.updateState();
 			if(info.reward!=0){	//if the game is over.

@@ -18,7 +18,7 @@ class Human:public Player{
 public:
 	Human();
 	~Human();
-	void decide(Action &,Info &);
+	void decide(Action &,const double *);
 	void train(Stack<Info> &){}
 };
 class Agent:public Player{
@@ -32,7 +32,7 @@ public:
 	Stack<Info> trainSet;
 	Agent();
 	~Agent();
-	void decide(Action &,Info &);
+	void decide(Action &,const double *);
 	void train(Stack<Info> &);
 	void verifyRecords(Stack<Info> &);
 };
