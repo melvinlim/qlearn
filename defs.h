@@ -6,15 +6,15 @@
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
 #define BATCHSIZE 100
-#define ALPHA 0.1
+#define ALPHA 1
 #define GAMMA (0.01/(double)BATCHSIZE)
 #define LAMBDA_DECAY (0.008/(double)BATCHSIZE)
 #define DISCOUNT 0.8
-#define HIDDENUNITS 50
+#define HIDDENUNITS 100
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
-	#define TRAININGTIME 4000000
+	#define TRAININGTIME 40000000
 //	#define TRAININGTIME 0
 #endif
 #define TIMELIMIT 10

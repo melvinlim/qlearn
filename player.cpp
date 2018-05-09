@@ -88,15 +88,16 @@ void Agent::train(Stack<Info> &records){
 //		t=random()%records.size;
 		t=i;
 		info=records.atIndex(t);
-		data.updateActionStateArray(info.action,info.state);
 		reward=info.reward;
 //		t=random()%2;
 //		if(t==0)
 			qptr=qptr->nextQ;
-		Q=qptr->getQ(data.actionStateArray);
 		if(reward!=0){
-			targetQ=Q+ALPHA*(reward-Q);
+			targetQ=reward;
+			//targetQ=Q+ALPHA*(reward-Q);
 		}else{
+			data.updateActionStateArray(info.action,info.state);
+			Q=qptr->getQ(data.actionStateArray);
 			data.updateActionStateArray(info.action,info.nextState);
 			QMax=qptr->nextQ->getQMax(data.actionStateArray);
 			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
