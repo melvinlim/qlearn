@@ -4,8 +4,8 @@ void World::updateState(){
 	int j=playerObject.j;
 	double *p=state;
 	char tmp;
-	for(int m=0;m<3;m++){
-		for(int n=0;n<3;n++){
+	for(int m=0;m<vision.nRows;m++){
+		for(int n=0;n<vision.nCols;n++){
 			tmp=world(i+m-1,j+n-1);
 			switch(tmp){
 				case'.':
@@ -28,7 +28,7 @@ void World::updateState(){
 }
 void World::debugState(){
 	for(int i=0;i<STATEVARS;i++){
-		if(i%3==0){
+		if(i%vision.nCols==0){
 			printf("\n");
 		}
 		printf("%2.2f ",state[i]);
@@ -45,7 +45,7 @@ void World::displayMat(const Matrix<char> &m){
 }
 World::World():
 	world(10,10),
-	vision(3,3)
+	vision(VISIONX,VISIONY)
 {
 	nRows=nCols=10;
 	reset();

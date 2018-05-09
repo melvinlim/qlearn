@@ -1,8 +1,10 @@
 #ifndef _DEFS_H
 #define _DEFS_H
-//#define HUMAN
-//#define DEBUG
-#define STATEVARS 9
+#define HUMAN
+#define DEBUG
+#define VISIONX 3
+#define VISIONY 3
+#define STATEVARS (VISIONX*VISIONY)
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
 #define BATCHSIZE 100
