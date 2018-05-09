@@ -41,8 +41,8 @@ trainSet(BATCHSIZE)
 	currentTime=0;
 	qfA.nextQ=&qfB;
 	qfB.nextQ=&qfA;
-	QArrayA=new Array<double>(4+STATEVARS);
-	QArrayB=new Array<double>(4+STATEVARS);
+	QArrayA=new Array<double>(4);
+	QArrayB=new Array<double>(4);
 }
 Agent::~Agent(){}
 void Agent::decide(const double *state,Action &action){
