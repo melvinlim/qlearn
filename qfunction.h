@@ -7,6 +7,8 @@
 #include<stdlib.h>
 const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};
 class Qfunction{
+private:
+	double getQ(const Action &);
 public:
 	SingleHiddenLinear net;
 	int iter;
