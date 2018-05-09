@@ -87,32 +87,43 @@ World::World():
 void World::reset(){
 	generateWorld();
 	srand(time(0));
-	int i=random()%nRows;
-	int j=random()%nCols;
+	int i=1+random()%(nRows-2);
+	int j=1+random()%(nCols-2);
 	placeObject(playerObject,i,j);
 	int t=0;
 	do{
 		t=random()%nRows;
 	}while(t==i);
 	i=t;
-	j=random()%nCols;
+	j=1+random()%(nCols-2);
 	placeObject(stairs,i,j);
 	updateState();
 }
-bool World::movePlayer(int i,int j){
+int World::movePlayer(int i,int j){
 	int i0=playerObject.i;
 	int j0=playerObject.j;
-	bool result=false;
-	if(i==stairs.i&&j==stairs.j)	result=true;
+	if(world(i,j)==' ')	return -1;
+	int result=0;
+	if(i==stairs.i&&j==stairs.j)	result=1;
 	world(i0,j0)='.';
 	placeObject(playerObject,i,j);
 	return result;
 }
 void World::generateWorld(){
-	for(int i=0;i<world.nRows;i++){
-		for(int j=0;j<world.nCols;j++){
+	//for(int i=0;i<world.nRows;i++){
+	//	for(int j=0;j<world.nCols;j++){
+	for(int j=0;j<world.nCols;j++){
+		world(0,j)=' ';
+	}
+	for(int i=1;i<world.nRows-1;i++){
+		world(i,0)=' ';
+		for(int j=1;j<world.nCols-1;j++){
 			world(i,j)='.';
 		}
+		world(i,world.nCols-1)=' ';
+	}
+	for(int j=0;j<world.nCols;j++){
+		world(world.nRows-1,j)=' ';
 	}
 }
 World::~World(){}

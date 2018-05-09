@@ -23,40 +23,20 @@ void GameController::display(){
 double GameController::step(const Action &action){
 	int i=world.playerObject.i;
 	int j=world.playerObject.j;
-	bool result=false;
+	int result=0;
 	double reward=0;
 	switch(action){
 		case NORTH:
-			if(i>0)
-				result=world.movePlayer(i-1,j);
-			else{
-				reward=-1;
-				running=false;
-			}
+			result=world.movePlayer(i-1,j);
 		break;
 		case EAST:
-			if(j<9)
-				result=world.movePlayer(i,j+1);
-			else{
-				reward=-1;
-				running=false;
-			}
+			result=world.movePlayer(i,j+1);
 		break;
 		case SOUTH:
-			if(i<9)
-				result=world.movePlayer(i+1,j);
-			else{
-				reward=-1;
-				running=false;
-			}
+			result=world.movePlayer(i+1,j);
 		break;
 		case WEST:
-			if(j>0)
-				result=world.movePlayer(i,j-1);
-			else{
-				reward=-1;
-				running=false;
-			}
+			result=world.movePlayer(i,j-1);
 		break;
 		default:
 			printf("error\n");
@@ -68,7 +48,10 @@ double GameController::step(const Action &action){
 			return reward;
 		break;
 	}
-	if(result){
+	if(result<0){
+		reward=-1;
+		running=false;
+	}else if(result>0){
 		if(displayOutput)
 			printf("win\n");
 		reward=1;

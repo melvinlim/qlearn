@@ -22,7 +22,7 @@ public:
 	void generateWorld();
 	void updateState();
 	void placeObject(Object &,int,int);
-	bool movePlayer(int,int);
+	int movePlayer(int,int);
 	void debugState();
 };
 #endif
