@@ -46,17 +46,10 @@ void World::updateState(){
 	for(i=0;i<3;i++){
 		for(j=0;j<3;j++){
 			if(vision(i,j)=='.'){
-				*p++=1.;
+				*p++=0;
+			}else if(vision(i,j)=='@'){
+				*p++=0;
 			}else if(vision(i,j)=='<'){
-				*p++=1.;
-			}else{
-				*p++=-1.;
-			}
-		}
-	}
-	for(i=0;i<3;i++){
-		for(j=0;j<3;j++){
-			if(vision(i,j)=='<'){
 				*p++=1.;
 			}else{
 				*p++=-1.;

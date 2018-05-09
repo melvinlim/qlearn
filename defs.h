@@ -2,7 +2,7 @@
 #define _DEFS_H
 //#define HUMAN
 //#define DEBUG
-#define STATEVARS 18
+#define STATEVARS 9
 #define RANDSCALING 10
 #define MEMORYSIZE 1000
 #define BATCHSIZE 100
@@ -14,7 +14,7 @@
 #ifdef HUMAN
 	#define TRAININGTIME 0
 #else
-	#define TRAININGTIME 5000000
+	#define TRAININGTIME 20000000
 //	#define TRAININGTIME 0
 #endif
 #define TIMELIMIT 10
