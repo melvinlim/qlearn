@@ -60,7 +60,7 @@ void World::reset(){
 	placeObject(playerObject,i,j);
 	int t=0;
 	do{
-		t=random()%nRows;
+		t=1+random()%(nRows-2);
 	}while(t==i);
 	i=t;
 	j=1+random()%(nCols-2);
