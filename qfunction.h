@@ -16,14 +16,14 @@ public:
 	Qfunction *nextQ;
 	Qfunction(int,int);
 	~Qfunction();
-	double getQ(const Action &,const double *);
-	double getQMax(const Action &,const double *);
+	double getQ(const double *,const Action &);
+	double getQMax(const double *,const Action &);
 	int getBestAction(const double *);
 	void getQArray(Array<double> *,const double *);
 	int getRandomAction();
-	void updateQ(const Action &,const double *,const double &);
+	void updateQ(const double *,const Action &,const double &);
 	Array<double> *actionStateArray;
 	Array<double> *targetArray;
-	void updateActionStateArray(const Action &,const double *);
+	void updateActionStateArray(const double *,const Action &);
 };
 #endif
