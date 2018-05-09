@@ -2,8 +2,8 @@
 #define _DEFS_H
 #define HUMAN
 #define DEBUG
-#define VISIONX 3
-#define VISIONY 3
+#define VISIONX 5
+#define VISIONY 5
 #define STATEVARS (VISIONX*VISIONY)
 #define RANDSCALING 10
 #define MEMORYSIZE 1000

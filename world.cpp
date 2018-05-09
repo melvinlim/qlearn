@@ -6,7 +6,7 @@ void World::updateState(){
 	char tmp;
 	for(int m=0;m<vision.nRows;m++){
 		for(int n=0;n<vision.nCols;n++){
-			tmp=world(i+m-1,j+n-1);
+			tmp=world(i+m-(vision.nRows/2),j+n-(vision.nCols/2));
 			switch(tmp){
 				case'.':
 				case'@':
