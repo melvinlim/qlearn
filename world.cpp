@@ -4,39 +4,7 @@ void World::updateState(){
 	int j=playerObject.j;
 	for(int m=0;m<3;m++){
 		for(int n=0;n<3;n++){
-			vision(m,n)='.';
-		}
-	}
-	vision(1,1)='@';
-	if(i<=0){
-		vision(0,0)=' ';
-		vision(0,1)=' ';
-		vision(0,2)=' ';
-	}
-	if(i>=9){
-		vision(2,0)=' ';
-		vision(2,1)=' ';
-		vision(2,2)=' ';
-	}
-	if(j<=0){
-		vision(0,0)=' ';
-		vision(1,0)=' ';
-		vision(2,0)=' ';
-	}
-	if(j>=9){
-		vision(0,2)=' ';
-		vision(1,2)=' ';
-		vision(2,2)=' ';
-	}
-	int iRel=stairs.i-i;
-	if(abs(iRel)<=1){
-		int jRel=stairs.j-j;
-		if(abs(jRel)<=1){
-			int iSt=iRel+1;
-			int jSt=jRel+1;
-			if(vision(iSt,jSt)!=' '){
-				vision(iSt,jSt)='<';
-			}
+			vision(m,n)=world(i+m-1,j+n-1);
 		}
 	}
 #ifdef DEBUG
