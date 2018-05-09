@@ -14,13 +14,13 @@ double Qfunction::getQMax(const Action &action,const double *state){
 	updateActionStateArray(action,state);
 	double bestVal;
 	double tmpVal;
-	modifyAction(actionStateArray,0);
+	modifyAction(0);
 	//bestVal=getQ(actionStateArray);
 	bestVal=getQ(0,state);
 //actionStateArray->print(3);
 //getchar();
 	for(int i=1;i<nActions;i++){
-		modifyAction(actionStateArray,i);
+		modifyAction(i);
 //actionStateArray->print(3);
 //getchar();
 		//tmpVal=getQ(actionStateArray);
@@ -58,7 +58,7 @@ void Qfunction::updateQ(const Action &action,const double *state,const double &t
 	getchar();
 #endif
 }
-void Qfunction::modifyAction(Array<double> *actionStateArray,Action action){
+void Qfunction::modifyAction(Action action){
 	for(int i=0;i<4;i++){
 		if(i==action){
 			actionStateArray->item[i]=1;
@@ -71,7 +71,7 @@ void Qfunction::modifyAction(Array<double> *actionStateArray,Action action){
 void Qfunction::getQArray(Array<double> *QArray,const double *state){
 	updateActionStateArray(0,state);
 	for(int i=0;i<nActions;i++){
-		modifyAction(actionStateArray,i);
+		modifyAction(i);
 		//QArray->item[i]=getQ(actionStateArray);
 		QArray->item[i]=getQ(i,state);
 	}
@@ -82,13 +82,13 @@ int Qfunction::getBestAction(const double *state){
 	int best=0;
 	double bestVal;
 	double tmpVal;
-	modifyAction(actionStateArray,0);
+	modifyAction(0);
 	//bestVal=getQ(actionStateArray);
 	bestVal=getQ(0,state);
 actionStateArray->print(3);
 //getchar();
 	for(int i=1;i<nActions;i++){
-		modifyAction(actionStateArray,i);
+		modifyAction(i);
 //actionStateArray->print(3);
 //getchar();
 		//tmpVal=getQ(actionStateArray);
