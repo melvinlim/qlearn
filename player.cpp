@@ -4,7 +4,7 @@ Player::~Player(){}
 //void Player::decide(Action &action,Info &info){}
 Human::Human(){}
 Human::~Human(){}
-void Human::decide(Action &action,const double *state){
+void Human::decide(const double *state,Action &action){
 	action=0;
 	printf(":");
 	char tmp;
@@ -28,9 +28,8 @@ void Human::decide(Action &action,const double *state){
 			action=WEST;
 		break;
 		default:
-			//action=4;
 			action=(int)state[0];
-			assert(false);
+			action=4;
 		break;
 	}
 }
@@ -46,7 +45,7 @@ trainSet(BATCHSIZE)
 	QArrayB=new Array<double>(4+STATEVARS);
 }
 Agent::~Agent(){}
-void Agent::decide(Action &action,const double *state){
+void Agent::decide(const double *state,Action &action){
 	currentTime++;
 	if(currentTime<TRAININGTIME){
 		action=qfA.getRandomAction();
