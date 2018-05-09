@@ -33,8 +33,8 @@ void Human::decide(Action &action,Info &info){
 	}
 }
 Agent::Agent():
-qfA(4,STATEVARS),
-qfB(4,STATEVARS),
+qfA(STATEVARS,4),
+qfB(STATEVARS,4),
 trainSet(BATCHSIZE)
 {
 	currentTime=0;

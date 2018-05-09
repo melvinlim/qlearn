@@ -1,5 +1,5 @@
 #include"qfunction.h"
-Qfunction::Qfunction(int nActions,int nStateVars):
+Qfunction::Qfunction(int nStateVars,int nActions):
 net(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY)
 {
 	this->nActions=nActions;
