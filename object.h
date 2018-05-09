@@ -2,7 +2,7 @@
 #define _OBJECT_H
 class Object{
 public:
-	int id;
+	int stateId;
 	Object();
 	~Object();
 	int i;

@@ -6,7 +6,7 @@
 #include<vector>
 using namespace std;
 class World{
-	Matrix<char> mat;
+	Matrix<char> world;
 	Matrix<char> vision;
 public:
 	double state[STATEVARS];

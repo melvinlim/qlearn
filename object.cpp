@@ -2,17 +2,17 @@
 Object::Object(){}
 Object::~Object(){}
 Floor::Floor(){
-	id=0;
+	stateId=0;
 	self='.';
 }
 Floor::~Floor(){}
 Stairs::Stairs(){
-	id=2;
+	stateId=1;
 	self='<';
 }
 Stairs::~Stairs(){}
 PlayerObject::PlayerObject(){
-	id=1;
+	stateId=0;
 	self='@';
 }
 PlayerObject::~PlayerObject(){}

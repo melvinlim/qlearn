@@ -78,7 +78,7 @@ void World::displayMat(const Matrix<char> &m){
 	}
 }
 World::World():
-	mat(10,10),
+	world(10,10),
 	vision(3,3)
 {
 	nRows=nCols=10;
@@ -104,27 +104,27 @@ bool World::movePlayer(int i,int j){
 	int j0=playerObject.j;
 	bool result=false;
 	if(i==stairs.i&&j==stairs.j)	result=true;
-	mat(i0,j0)='.';
+	world(i0,j0)='.';
 	placeObject(playerObject,i,j);
 	return result;
 }
 void World::generateWorld(){
-	for(int i=0;i<mat.nRows;i++){
-		for(int j=0;j<mat.nCols;j++){
-			mat(i,j)='.';
+	for(int i=0;i<world.nRows;i++){
+		for(int j=0;j<world.nCols;j++){
+			world(i,j)='.';
 		}
 	}
 }
 World::~World(){}
 void World::placeObject(Object &obj,int i,int j){
-	mat(i,j)=obj.self;
+	world(i,j)=obj.self;
 	obj.i=i;
 	obj.j=j;
 }
 void World::display(){
 	for(int i=0;i<nRows;i++){
 		for(int j=0;j<nCols;j++){
-			printf("%c",mat(i,j));
+			printf("%c",world(i,j));
 		}
 		printf("\n");
 	}

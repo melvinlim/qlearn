@@ -1,6 +1,6 @@
 #ifndef _DEFS_H
 #define _DEFS_H
-//#define HUMAN
+#define HUMAN
 //#define DEBUG
 #define STATEVARS 9
 #define RANDSCALING 10
