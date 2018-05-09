@@ -2,29 +2,27 @@
 void World::updateState(){
 	int i=playerObject.i;
 	int j=playerObject.j;
+	double *p=state;
+	char tmp;
 	for(int m=0;m<3;m++){
 		for(int n=0;n<3;n++){
-			vision(m,n)=world(i+m-1,j+n-1);
+			tmp=world(i+m-1,j+n-1);
+			switch(tmp){
+				case'.':
+				case'@':
+					*p++=0;
+				break;
+				case'<':
+					*p++=1.;
+				break;
+				default:
+					*p++=-1.;
+			}
+			vision(m,n)=tmp;
 		}
 	}
 #ifdef DEBUG
 	displayMat(vision);
-#endif
-	double *p=state;
-	for(i=0;i<3;i++){
-		for(j=0;j<3;j++){
-			if(vision(i,j)=='.'){
-				*p++=0;
-			}else if(vision(i,j)=='@'){
-				*p++=0;
-			}else if(vision(i,j)=='<'){
-				*p++=1.;
-			}else{
-				*p++=-1.;
-			}
-		}
-	}
-#ifdef DEBUG
 //	debugState();
 #endif
 }
