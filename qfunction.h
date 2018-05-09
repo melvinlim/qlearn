@@ -15,10 +15,14 @@ public:
 	Qfunction *nextQ;
 	Qfunction(int,int);
 	~Qfunction();
-	double getQ(Array<double> *);
-	double getQMax(Array<double> *);
-	int getBestAction(Array<double> *);
-	void getQArray(Array<double> *,Array<double> *);
+	//double getQ(Array<double> *);
+	double getQ(const Action &,const double *);
+	//double getQMax(Array<double> *);
+	double getQMax(const Action &,const double *);
+	//int getBestAction(Array<double> *);
+	int getBestAction(const double *);
+	//void getQArray(Array<double> *,Array<double> *);
+	void getQArray(Array<double> *,const double *);
 	int getRandomAction();
 	void updateQ(Array<double> *,Array<double> *);
 	void modifyAction(Array<double> *,Action);
