@@ -105,10 +105,11 @@ void Agent::train(Stack<Info> &records){
 			//QMax=qptr->nextQ->getQMax(qfA.actionStateArray);
 			QMax=qptr->nextQ->getQMax(info.action,info.nextState);
 			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
-			qfA.updateActionStateArray(info.action,info.state);
+//			qfA.updateActionStateArray(info.action,info.state);
 		}
-		qfA.targetArray->item[0]=targetQ;
-		qptr->updateQ(qfA.actionStateArray,qfA.targetArray);
+//		qfA.targetArray->item[0]=targetQ;
+//		qptr->updateQ(qfA.actionStateArray,qfA.targetArray);
+		qptr->updateQ(info.action,info.state,targetQ);
 		currentError=qptr->net.error.item[0];
 		if(qptr->iter++ >= BATCHSIZE){
 			qptr->net.updateWeights();

@@ -24,7 +24,8 @@ public:
 	//void getQArray(Array<double> *,Array<double> *);
 	void getQArray(Array<double> *,const double *);
 	int getRandomAction();
-	void updateQ(Array<double> *,Array<double> *);
+	//void updateQ(Array<double> *,Array<double> *);
+	void updateQ(const Action &,const double *,const double &);
 	void modifyAction(Array<double> *,Action);
 	Array<double> *actionStateArray;
 	Array<double> *targetArray;

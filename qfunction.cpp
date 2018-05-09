@@ -42,7 +42,10 @@ double Qfunction::getQ(const Action &action,const double *state){
 #endif
 	return resp;
 }
-void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *targetArray){
+//void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *targetArray){
+void Qfunction::updateQ(const Action &action,const double *state,const double &target){
+	targetArray->item[0]=target;
+	updateActionStateArray(action,state);
 #ifdef DEBUG
 	actionStateArray->print();
 	targetArray->print();
