@@ -9,13 +9,11 @@ net(nActions+nStateVars,HIDDENUNITS,1,GAMMA,LAMBDA_DECAY)
 	iter=0;
 }
 Qfunction::~Qfunction(){}
-//double Qfunction::getQMax(Array<double> *actionStateArray){
 double Qfunction::getQMax(const Action &action,const double *state){
 	updateActionStateArray(action,state);
 	double bestVal;
 	double tmpVal;
 	modifyAction(0);
-	//bestVal=getQ(actionStateArray);
 	bestVal=getQ(0,state);
 //actionStateArray->print(3);
 //getchar();
@@ -23,7 +21,6 @@ double Qfunction::getQMax(const Action &action,const double *state){
 		modifyAction(i);
 //actionStateArray->print(3);
 //getchar();
-		//tmpVal=getQ(actionStateArray);
 		tmpVal=getQ(i,state);
 		if(tmpVal>bestVal){
 			bestVal=tmpVal;
@@ -31,7 +28,6 @@ double Qfunction::getQMax(const Action &action,const double *state){
 	}
 	return bestVal;
 }
-//double Qfunction::getQ(Array<double> *actionStateArray){
 double Qfunction::getQ(const Action &action,const double *state){
 	updateActionStateArray(action,state);
 	double resp;
@@ -42,7 +38,6 @@ double Qfunction::getQ(const Action &action,const double *state){
 #endif
 	return resp;
 }
-//void Qfunction::updateQ(Array<double> *actionStateArray,Array<double> *targetArray){
 void Qfunction::updateQ(const Action &action,const double *state,const double &target){
 	targetArray->item[0]=target;
 	updateActionStateArray(action,state);
@@ -67,23 +62,19 @@ void Qfunction::modifyAction(Action action){
 		}
 	}
 }
-//void Qfunction::getQArray(Array<double> *QArray,Array<double> *actionStateArray){
 void Qfunction::getQArray(Array<double> *QArray,const double *state){
 	updateActionStateArray(0,state);
 	for(int i=0;i<nActions;i++){
 		modifyAction(i);
-		//QArray->item[i]=getQ(actionStateArray);
 		QArray->item[i]=getQ(i,state);
 	}
 }
-//int Qfunction::getBestAction(Array<double> *actionStateArray){
 int Qfunction::getBestAction(const double *state){
 	updateActionStateArray(0,state);
 	int best=0;
 	double bestVal;
 	double tmpVal;
 	modifyAction(0);
-	//bestVal=getQ(actionStateArray);
 	bestVal=getQ(0,state);
 actionStateArray->print(3);
 //getchar();
@@ -91,7 +82,6 @@ actionStateArray->print(3);
 		modifyAction(i);
 //actionStateArray->print(3);
 //getchar();
-		//tmpVal=getQ(actionStateArray);
 		tmpVal=getQ(i,state);
 		if(tmpVal>bestVal){
 			bestVal=tmpVal;
