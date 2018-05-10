@@ -53,8 +53,14 @@ World::World():
 void World::reset(){
 	generateWorld();
 	srand(time(0));
-	int i=1+random()%(nRows-2);
-	int j=1+random()%(nCols-2);
+	int i=2+random()%(nRows-3);
+	int j=2+random()%(nCols-3);
+	world(i,j)=' ';
+	i=2+random()%(nRows-3);
+	j=2+random()%(nCols-3);
+	world(i,j)=' ';
+	i=1+random()%(nRows-2);
+	j=1+random()%(nCols-2);
 	placeObject(playerObject,i,j);
 	int t=0;
 	do{
