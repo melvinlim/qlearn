@@ -1,7 +1,7 @@
 #ifndef _DEFS_H
 #define _DEFS_H
 #define HUMAN
-#define DEBUG
+//#define DEBUG
 #define VISIONX 5
 #define VISIONY 5
 #define STATEVARS (VISIONX*VISIONY)

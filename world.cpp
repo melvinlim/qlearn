@@ -99,10 +99,14 @@ void World::placeObject(Object &obj,int i,int j){
 	obj.j=j;
 }
 void World::display(){
+	displayMat(vision);
+	//displayMat(world);
+/*
 	for(int i=0;i<nRows;i++){
 		for(int j=0;j<nCols;j++){
 			printf("%c",world(i,j));
 		}
 		printf("\n");
 	}
+*/
 }
