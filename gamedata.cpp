@@ -2,11 +2,12 @@
 
 GameData::~GameData(){}
 GameData::GameData():Data(){
-	nActions=4;
+	nActions=ACTIONVARS;
 	nStateVars=STATEVARS;
+	nOutputs=ACTIONVARS;
+/*
 	sz=4;
 	nOutputs=4;
-/*
 	pInputs=new Array<double> *[sz];
 	pOutputs=new Array<double> *[sz];
 	pInputs[0]=new Array<double>(exlinear1,LINEARINPUTS);

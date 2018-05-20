@@ -34,15 +34,15 @@ void Human::decide(const double *state,Action &action){
 	}
 }
 Agent::Agent():
-qfA(STATEVARS,4),
-qfB(STATEVARS,4),
+qfA(STATEVARS,ACTIONVARS),
+qfB(STATEVARS,ACTIONVARS),
 trainSet(BATCHSIZE)
 {
 	currentTime=0;
 	qfA.nextQ=&qfB;
 	qfB.nextQ=&qfA;
-	QArrayA=new Array<double>(4);
-	QArrayB=new Array<double>(4);
+	QArrayA=new Array<double>(ACTIONVARS);
+	QArrayB=new Array<double>(ACTIONVARS);
 }
 Agent::~Agent(){}
 void Agent::decide(const double *state,Action &action){
@@ -55,7 +55,7 @@ void Agent::decide(const double *state,Action &action){
 		double bestQ,tmpQ;
 		action=0;
 		bestQ=QArrayA->item[0]+QArrayB->item[0];
-		for(int i=1;i<4;i++){
+		for(int i=1;i<ACTIONVARS;i++){
 			tmpQ=QArrayA->item[i]+QArrayB->item[i];
 			if(tmpQ>bestQ){
 				action=i;
