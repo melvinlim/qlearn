@@ -43,6 +43,8 @@ int main(){
 			gameController.records.push_back(info);
 			if(i>=MEMORYSIZE){
 				player.train(gameController.records);
+				player.getSumSqErr(gameController.records);
+				gameController.records.clear();
 				i=0;
 			}
 		}

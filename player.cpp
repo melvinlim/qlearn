@@ -66,9 +66,7 @@ void Agent::decide(const double *state,Action &action){
 	if(currentTime>TRAININGTIME)
 		getchar();
 }
-void Agent::train(Stack<Info> &records){
-	//verifyRecords(records);
-//train
+void Agent::getSumSqErr(Stack<Info> &records){
 	Info info;
 	info=records.back();
 	double Q;
@@ -78,6 +76,35 @@ void Agent::train(Stack<Info> &records){
 	records.pop_back();
 	double currentError;
 	double sse=0;
+	int t;
+	Qfunction *qptr=&qfA;
+	for(int i=0;i<records.size;i++){
+		t=i;
+		info=records.atIndex(t);
+		reward=info.reward;
+		qptr=qptr->nextQ;
+		if(reward!=0){
+			targetQ=reward;
+		}else{
+			Q=qptr->getQ(info.state,info.action);
+			QMax=qptr->nextQ->getQMax(info.nextState,info.action);
+			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
+		}
+		currentError=qptr->getSqErr(info.state,info.action,targetQ);
+		sse+=currentError;
+	}
+	printf("sse:%f\n",sse/(double)records.size);
+	//printf("%x sse:%f\n",qptr,sse/(double)BATCHSIZE);
+}
+void Agent::train(Stack<Info> &records){
+	//verifyRecords(records);
+	Info info;
+	info=records.back();
+	double Q;
+	double targetQ;
+	double reward;
+	double QMax;
+	records.pop_back();
 	int t;
 	Qfunction *qptr=&qfA;
 	for(int i=0;i<records.size;i++){
@@ -97,16 +124,11 @@ void Agent::train(Stack<Info> &records){
 			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
 		}
 		qptr->updateQ(info.state,info.action,targetQ);
-		currentError=qptr->net.error.item[0];
 		if(qptr->iter++ >= BATCHSIZE){
 			qptr->net.updateWeights();
-			sse+=currentError*currentError;
 			qptr->iter=0;
-//			printf("%x sse:%f\n",qptr,sse/(double)BATCHSIZE);
-			sse=0;
 		}
 	}
-	records.clear();
 }
 void Player::verifyRecords(Stack<Info> &records){
 	Info info;

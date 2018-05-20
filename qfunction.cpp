@@ -36,6 +36,13 @@ double Qfunction::getQ(const double *state,const Action &action){
 #endif
 	return resp;
 }
+double Qfunction::getSqErr(const double *state,const Action &action,const double &target){
+	getQ(state,action);
+	targetArray->item[0]=target;
+	net.updateError(targetArray);
+	double error=net.error.item[0];
+	return (error*error);
+}
 void Qfunction::updateQ(const double *state,const Action &action,const double &target){
 	targetArray->item[0]=target;
 	updateActionStateArray(state,action);

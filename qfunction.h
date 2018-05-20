@@ -22,6 +22,7 @@ public:
 	void getQArray(Array<double> *,const double *);
 	int getRandomAction();
 	void updateQ(const double *,const Action &,const double &);
+	double getSqErr(const double *,const Action &,const double &);
 	Array<double> *actionStateArray;
 	Array<double> *targetArray;
 	void updateActionStateArray(const double *,const Action &);

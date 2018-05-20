@@ -34,5 +34,6 @@ public:
 	~Agent();
 	void decide(const double *,Action &);
 	void train(Stack<Info> &);
+	void getSumSqErr(Stack<Info> &);
 };
 #endif
