@@ -1,7 +1,7 @@
 CXX =						g++
 CXXFLAGS =			-O3 -std=c++11 -Wall -Wextra -pedantic -g -c
 LFLAGS =				-O3 -std=c++11 -Wall -Wextra -pedantic -g -o qlearn
-OBJECTS =				main.o gamecontroller.o player.o world.o object.o qfunction.o gamedata.o
+OBJECTS =				main.o gamecontroller.o player.o world.o object.o qfunction.o
 OTHEROBJECTS =	mynn/layer.o mynn/net.o mynn/data.o mynn/idx.o mynn/mnist.o mynn/xor.o
 qlearn:		$(OBJECTS) $(OTHEROBJECTS)
 	cd mynn;make
@@ -18,7 +18,5 @@ object:					object.cpp defs.h
 	$(CXX) $(CXXFLAGS) object.cpp
 qfunction:			qfunction.cpp defs.h
 	$(CXX) $(CXXFLAGS) qfunction.cpp
-gamedata:				gamedata.cpp defs.h
-	$(CXX) $(CXXFLAGS) gamedata.cpp
 clean:
 	rm -f qlearn *.o a.out mynn/mynn mynn/*.o mynn/a.out
