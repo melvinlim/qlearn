@@ -67,9 +67,7 @@ void Agent::decide(const double *state,Action &action){
 		getchar();
 }
 void Agent::train(Stack<Info> &records){
-//	data.verifyRecords(records);
-//	addFutureRewards(records);
-//	data.verifyRecords(records);
+	//verifyRecords(records);
 //train
 	Info info;
 	info=records.back();
@@ -109,4 +107,30 @@ void Agent::train(Stack<Info> &records){
 		}
 	}
 	records.clear();
+}
+void Player::verifyRecords(Stack<Info> &records){
+	Info info;
+	int k;
+	int r=0;
+	for(int i=0;i<records.size;i++){
+		r++;
+		info=records.atIndex(i);
+		printf("%d: %d\n",r,info.action);
+		printf("reward: %f\n",info.reward);
+		k=0;
+		for(int i=0;i<VISIONY;i++){
+			for(int j=0;j<VISIONX;j++){
+				printf("%+f,",info.state[k++]);
+			}
+			printf("\n");
+		}
+		for(int i=0;i<VISIONY;i++){
+			for(int j=0;j<VISIONX;j++){
+				printf("%+f,",info.state[k++]);
+			}
+			printf("\n");
+		}
+		if(info.reward>0)
+			getchar();
+	}
 }

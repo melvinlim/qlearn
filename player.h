@@ -13,6 +13,7 @@ public:
 	Player();
 	~Player();
 //	virtual void decide(Action &,Info &);
+	void verifyRecords(Stack<Info> &);
 };
 class Human:public Player{
 public:
@@ -34,6 +35,5 @@ public:
 	~Agent();
 	void decide(const double *,Action &);
 	void train(Stack<Info> &);
-	void verifyRecords(Stack<Info> &);
 };
 #endif
