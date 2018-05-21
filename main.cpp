@@ -25,6 +25,7 @@ int main(){
 			t++;
 			i++;
 			if(t>TRAININGTIME){
+				player.save();
 				time(&endTime);
 				gameController.displayOutput=true;
 				printf("training time: %d\n",(int)difftime(endTime,startTime));
@@ -43,7 +44,9 @@ int main(){
 			gameController.records.push_back(info);
 			if(i>=MEMORYSIZE){
 				player.train(gameController.records);
+#ifdef PRINTSSE
 				player.getSumSqErr(gameController.records);
+#endif
 				gameController.records.clear();
 				i=0;
 			}

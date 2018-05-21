@@ -34,5 +34,6 @@ public:
 	void decide(const double *,Action &);
 	void train(Stack<Info> &);
 	void getSumSqErr(Stack<Info> &);
+	void save();
 };
 #endif

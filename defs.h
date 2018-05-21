@@ -2,6 +2,7 @@
 #define _DEFS_H
 //#define HUMAN
 //#define DEBUG
+//#define PRINTSSE
 #define VISIONX 5
 #define VISIONY 5
 #define STATEVARS (VISIONX*VISIONY)
