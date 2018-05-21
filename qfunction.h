@@ -28,5 +28,6 @@ public:
 	Array<double> *targetArray;
 	void updateActionStateArray(const double *,const Action &);
 	void saveQf(const char *filename);
+	void loadQf(const char *filename);
 };
 #endif

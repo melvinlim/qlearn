@@ -160,3 +160,7 @@ void Agent::save(){
 	qfA.saveQf("qfA.qf");
 	qfB.saveQf("qfB.qf");
 }
+void Agent::load(){
+	qfA.loadQf("qfA.qf");
+	qfB.loadQf("qfB.qf");
+}

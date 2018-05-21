@@ -36,5 +36,6 @@ public:
 	void train(Stack<Info> &);
 	void getSumSqErr(Stack<Info> &);
 	void save();
+	void load();
 };
 #endif

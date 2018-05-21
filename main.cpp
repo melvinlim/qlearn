@@ -11,6 +11,9 @@ int main(){
 	#else
 		Agent player;
 	#endif
+	#ifdef LOADQ
+		player.load();
+	#endif
 	Info info;
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);

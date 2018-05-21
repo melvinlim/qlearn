@@ -99,3 +99,6 @@ void Qfunction::updateActionStateArray(const double *state,const Action &action)
 void Qfunction::saveQf(const char *filename){
 	IDX::saveNetwork(&net,filename);
 }
+void Qfunction::loadQf(const char *filename){
+//	IDX::loadNetwork(&net,filename);
+}
