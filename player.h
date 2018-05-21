@@ -6,7 +6,6 @@
 #include<assert.h>
 #include<vector>
 #include"stack.h"
-#include"gamedata.h"
 using namespace std;
 class Player{
 public:
