@@ -100,5 +100,7 @@ void Qfunction::saveQf(const char *filename){
 	IDX::saveNetwork(&net,filename);
 }
 void Qfunction::loadQf(const char *filename){
-	IDX::loadNetwork(&net,filename);
+	double gamma=GAMMA;
+	double ld=LAMBDA_DECAY;
+	IDX::loadNetwork(&net,filename,gamma,ld);
 }
