@@ -157,6 +157,6 @@ void Player::verifyRecords(Stack<Info> &records){
 	}
 }
 void Agent::save(){
-	qfA.saveQf("qfA");
-	qfB.saveQf("qfB");
+	qfA.saveQf("qfA.qf");
+	qfB.saveQf("qfB.qf");
 }
