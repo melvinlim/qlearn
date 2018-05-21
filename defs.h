@@ -3,6 +3,7 @@
 //#define HUMAN
 //#define DEBUG
 //#define PRINTSSE
+#define LOADQ
 #define VISIONX 5
 #define VISIONY 5
 #define STATEVARS (VISIONX*VISIONY)

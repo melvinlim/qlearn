@@ -11,14 +11,16 @@ int main(){
 	#else
 		Agent player;
 	#endif
-	#ifdef LOADQ
-		player.load();
-	#endif
 	Info info;
 	info.reward=0;
 	memset(info.state,0,sizeof(double)*STATEVARS);
 	unsigned long t=0;
 	int i=0;
+	#ifdef LOADQ
+		player.load();
+		t=TRAININGTIME;
+		player.currentTime=t;
+	#endif
 	time(&startTime);
 	for(;;){
 		gameController.reset();
