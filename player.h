@@ -11,6 +11,7 @@ class Player{
 public:
 	Player();
 	~Player();
+	virtual void save(){};
 //	virtual void decide(Action &,Info &);
 	void verifyRecords(Stack<Info> &);
 };

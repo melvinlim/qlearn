@@ -25,7 +25,6 @@ int main(){
 			t++;
 			i++;
 			if(t>TRAININGTIME){
-				player.save();
 				time(&endTime);
 				gameController.displayOutput=true;
 				printf("training time: %d\n",(int)difftime(endTime,startTime));
@@ -49,6 +48,10 @@ int main(){
 #endif
 				gameController.records.clear();
 				i=0;
+			}
+			if(t==TRAININGTIME){
+				printf("saving player\n");
+				player.save();
 			}
 		}
 		gameController.end();
