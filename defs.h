@@ -14,6 +14,7 @@
 #define ALPHA 0.1
 #define GAMMA (0.01/(double)BATCHSIZE)
 #define LAMBDA_DECAY (0.008/(double)BATCHSIZE)
+#define SCALE_FACTOR 10
 #define DISCOUNT 0.8
 #define HIDDENUNITS 100
 #ifdef HUMAN
