@@ -12,6 +12,7 @@ public:
 	Player();
 	~Player();
 	virtual void save(){};
+	virtual void load(){};
 //	virtual void decide(Action &,Info &);
 	void verifyRecords(Stack<Info> &);
 };
