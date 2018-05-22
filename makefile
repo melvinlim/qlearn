@@ -17,11 +17,11 @@ object:					object.cpp defs.h
 	$(CXX) $(CXXFLAGS) object.cpp
 qfunction:			qfunction.cpp defs.h
 	$(CXX) $(CXXFLAGS) qfunction.cpp
-mynn/layer:		layer.cpp defs.h
+mynn/layer:		layer.cpp
 	$(CXX) $(CXXFLAGS) layer.cpp
-mynn/net:			net.cpp defs.h
+mynn/net:			net.cpp
 	$(CXX) $(CXXFLAGS) net.cpp
-mynn/idx:			idx.cpp defs.h
+mynn/idx:			idx.cpp
 	$(CXX) $(CXXFLAGS) idx.cpp
 clean:
 	rm -f qlearn *.o mynn/*.o
