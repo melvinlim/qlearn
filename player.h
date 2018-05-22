@@ -29,7 +29,6 @@ public:
 	int currentTime;
 	Qfunction qfA;
 	Qfunction qfB;
-	Stack<Info> trainSet;
 	Agent();
 	~Agent();
 	void decide(const double *,Action &);
