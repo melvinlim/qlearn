@@ -1,7 +1,5 @@
 #include"gamecontroller.h"
-GameController::GameController():
-records(MEMORYSIZE)
-{
+GameController::GameController(){
 	t=0;
 	displayOutput=false;
 }

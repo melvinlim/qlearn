@@ -9,7 +9,6 @@ using namespace std;
 class GameController{
 public:
 	int t;
-	Stack<Info> records;
 	World world;
 	bool running;
 	bool displayOutput;

@@ -4,6 +4,7 @@
 #include<string.h>
 #include<time.h>
 int main(){
+	Stack<Info> records(MEMORYSIZE);
 	time_t startTime,endTime;
 	GameController gameController;
 	#ifdef HUMAN
@@ -46,13 +47,13 @@ int main(){
 			}else{
 				gameController.getState(info.nextState);
 			}
-			gameController.records.push_back(info);
+			records.push_back(info);
 			if(i>=MEMORYSIZE){
-				player.train(gameController.records);
+				player.train(records);
 #ifdef PRINTSSE
-				player.getSumSqErr(gameController.records);
+				player.getSumSqErr(records);
 #endif
-				gameController.records.clear();
+				records.clear();
 				i=0;
 			}
 			if(t==TRAININGTIME){
