@@ -17,9 +17,10 @@ int main(){
 	unsigned long t=0;
 	int i=0;
 	#ifdef LOADQ
+		printf("loading player\n");
 		player.load();
-		t=TRAININGTIME;
-		player.currentTime=t;
+//		t=TRAININGTIME;
+//		player.currentTime=t;
 	#endif
 	time(&startTime);
 	for(;;){
