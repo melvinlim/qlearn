@@ -3,7 +3,6 @@
 #include"array.h"
 #include<time.h>
 #include<assert.h>
-#include"defs.h"
 
 class Data{
 protected:

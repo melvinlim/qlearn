@@ -2,6 +2,7 @@
 #define _LAYER_H
 #include<assert.h>
 #include<math.h>
+#include"defs.h"
 #include"matrix.h"
 #include"array.h"
 class Layer{
@@ -27,7 +28,7 @@ public:
 	void saveErrors(const Array<double> &);
 	void updateWeights();
 	void directUpdateWeights(const Array<double> &);
-	void randomize(double);
+	void randomize();
 };
 class LinearLayer:public Layer{
 public:

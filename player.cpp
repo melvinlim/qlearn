@@ -35,7 +35,8 @@ void Human::decide(const double *state,Action &action){
 }
 Agent::Agent():
 qfA(STATEVARS,ACTIONVARS),
-qfB(STATEVARS,ACTIONVARS)
+qfB(STATEVARS,ACTIONVARS),
+trainSet(BATCHSIZE)
 {
 	currentTime=0;
 	qfA.nextQ=&qfB;
@@ -62,10 +63,10 @@ void Agent::decide(const double *state,Action &action){
 			}
 		}
 	}
-	if(currentTime>TRAININGTIME)
-		getchar();
+//	if(currentTime>TRAININGTIME)
+//		getchar();
 }
-void Agent::getSumSqErr(Stack<Info> &records){
+double Agent::getSumSqErr(Stack<Info> &records){
 	Info info;
 	info=records.back();
 	double Q;
@@ -92,8 +93,9 @@ void Agent::getSumSqErr(Stack<Info> &records){
 		currentError=qptr->getSqErr(info.state,info.action,targetQ);
 		sse+=currentError;
 	}
-	printf("sse:%f\n",sse/(double)records.size);
-	//printf("%x sse:%f\n",qptr,sse/(double)BATCHSIZE);
+	sse/=(double)records.size;
+	printf("sse:%f\n",sse);
+	return sse;
 }
 void Agent::train(Stack<Info> &records){
 	//verifyRecords(records);
@@ -136,20 +138,14 @@ void Player::verifyRecords(Stack<Info> &records){
 	for(int i=0;i<records.size;i++){
 		r++;
 		info=records.atIndex(i);
-		printf("%d: %d\n",r,info.action);
-		printf("reward: %f\n",info.reward);
-		k=0;
-		for(int i=0;i<VISIONY;i++){
-			for(int j=0;j<VISIONX;j++){
-				printf("%+f,",info.state[k++]);
-			}
-			printf("\n");
+		printf("record: %d\n",r);
+		for(int i=0;i<STATEVARS;i++){
+			printf("%+f,",info.state[i]);
 		}
-		for(int i=0;i<VISIONY;i++){
-			for(int j=0;j<VISIONX;j++){
-				printf("%+f,",info.state[k++]);
-			}
-			printf("\n");
+		printf("action: %d\n",info.action);
+		printf("reward: %f\n",info.reward);
+		for(int i=0;i<STATEVARS;i++){
+			printf("%+f,",info.nextState[i]);
 		}
 		if(info.reward>0)
 			getchar();

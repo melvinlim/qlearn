@@ -53,8 +53,7 @@ Matrix<double> *IDX::loadIDX(const char *filename){
 	assert(munmap(mem,MMAPSIZE)==0);
 	return mat;
 }
-Net *IDX::loadNetwork(const char *filename,const double &gamma,const double &lambda_decay){
-	double scale_factor=10;	//value unimportant as weights will be overwritten.
+Net *IDX::loadNetwork(const char *filename){
 	Net *net;
 	void *mem;
 	int offset;
@@ -82,12 +81,12 @@ Net *IDX::loadNetwork(const char *filename,const double &gamma,const double &lam
 		layers++;
 	}
 	int noutputs=idx2Header->nCols;
-	net=new SingleHidden(ninputs,hidden,noutputs,gamma,lambda_decay,scale_factor);
+	net=new SingleHidden(ninputs,hidden,noutputs,GAMMA,LAMBDA_DECAY);
 	idx2Header=(struct idx2 *)mem;
 	offset=0;
 	for(int i=0;i<layers;i++){
 		mat=loadIDXEntry(idx2Header);
-		net->insertLayer(i,*mat,gamma,lambda_decay);
+		net->insertLayer(i,*mat,GAMMA,LAMBDA_DECAY);
 		rows=idx2Header->nRows;
 		cols=idx2Header->nCols;
 		offset+=sizeof(struct idx2)+(rows*cols*sizeof(double));
@@ -125,7 +124,7 @@ void IDX::loadNetwork(Net *net,const char *filename,const double &gamma,const do
 		layers++;
 	}
 	//int noutputs=idx2Header->nCols;
-	//net=new SingleHidden(ninputs,hidden,noutputs,gamma,lambda_decay,scale_factor);
+	//net=new SingleHidden(ninputs,hidden,noutputs,gamma,lambda_decay);
 	idx2Header=(struct idx2 *)mem;
 	offset=0;
 	for(int i=0;i<layers;i++){

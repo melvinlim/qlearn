@@ -12,7 +12,6 @@ public:
 	Player();
 	~Player();
 	virtual void save(){};
-	virtual void load(){};
 //	virtual void decide(Action &,Info &);
 	void verifyRecords(Stack<Info> &);
 };
@@ -30,11 +29,12 @@ public:
 	int currentTime;
 	Qfunction qfA;
 	Qfunction qfB;
+	Stack<Info> trainSet;
 	Agent();
 	~Agent();
 	void decide(const double *,Action &);
 	void train(Stack<Info> &);
-	void getSumSqErr(Stack<Info> &);
+	double getSumSqErr(Stack<Info> &);
 	void save();
 	void load();
 };

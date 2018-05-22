@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include"defs.h"
 #include<algorithm>
 template<typename T>
 class Matrix{
