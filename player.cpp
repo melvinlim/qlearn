@@ -75,6 +75,7 @@ void Agent::train(Stack<Info> &records){
 	double QMax;
 	records.pop_back();
 	int t;
+	getSumSqErr(records);
 	Qfunction *qptr=&qfA;
 	for(int i=0;i<records.size;i++){
 //		t=random()%records.size;
