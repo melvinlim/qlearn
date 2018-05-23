@@ -1,0 +1,3 @@
+[submodule "nnet"]
+	path = nnet
+	url = http://github.com/melvinlim/nnet
