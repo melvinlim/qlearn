@@ -22,7 +22,8 @@ public:
 	int getBestAction(const double *);
 	void getQArray(Array<double> *,const double *);
 	int getRandomAction();
-	void updateQ(const double *,const Action &,const double &);
+	void trainBatchQ(const double *,const Action &,const double &);
+	void updateQ();
 	double getSqErr(const double *,const Action &,const double &);
 	Array<double> *actionStateArray;
 	Array<double> *targetArray;

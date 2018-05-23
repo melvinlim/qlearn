@@ -43,7 +43,10 @@ double Qfunction::getSqErr(const double *state,const Action &action,const double
 	double error=net.error.item[0];
 	return (error*error);
 }
-void Qfunction::updateQ(const double *state,const Action &action,const double &target){
+void Qfunction::updateQ(){
+	net.updateWeights();
+}
+void Qfunction::trainBatchQ(const double *state,const Action &action,const double &target){
 	targetArray->item[0]=target;
 	updateActionStateArray(state,action);
 #ifdef DEBUG
