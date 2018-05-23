@@ -1,7 +1,7 @@
 #ifndef _DEFS_H
 #define _DEFS_H
 //#define HUMAN
-//#define DEBUG
+#define DEBUG
 //#define PRINTSSE
 #define LOADQ
 #define VISIONX 5

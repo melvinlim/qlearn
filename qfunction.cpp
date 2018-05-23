@@ -57,7 +57,10 @@ void Qfunction::trainBatchQ(const double *state,const Action &action,const doubl
 	net.trainBatch(actionStateArray,targetArray);
 #ifdef DEBUG
 	double response=getQ(state,action);
-	printf("Q response after training:%f\n",response);
+	printf("Q response before training:\t%f\n",response);
+	updateQ();
+	response=getQ(state,action);
+	printf("Q response after training:\t%f\n",response);
 	getchar();
 #endif
 }
