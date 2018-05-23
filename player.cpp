@@ -93,9 +93,10 @@ void Agent::train(Stack<Info> &records){
 			QMax=qptr->nextQ->getQMax(info.nextState,info.action);
 			targetQ=Q+ALPHA*(reward+DISCOUNT*QMax-Q);
 		}
-		qptr->updateQ(info.state,info.action,targetQ);
+		qptr->trainBatchQ(info.state,info.action,targetQ);
 		if(qptr->iter++ >= BATCHSIZE){
-			qptr->net.updateWeights();
+			//qptr->net.updateWeights();
+			qptr->updateQ();
 			qptr->iter=0;
 		}
 	}
