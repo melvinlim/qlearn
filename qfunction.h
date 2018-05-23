@@ -1,9 +1,9 @@
 #ifndef _QFUNCTION_H
 #define _QFUNCTION_H
 #include"defs.h"
-#include"mynn/net.h"
-#include"mynn/idx.h"
-#include"mynn/array.h"
+#include"nnet/net.h"
+#include"nnet/idx.h"
+#include"nnet/array.h"
 #include<stdio.h>
 #include<stdlib.h>
 const double aStates[4][4]={{+1,-1,-1,-1},{-1,+1,-1,-1},{-1,-1,+1,-1},{-1,-1,-1,+1}};

@@ -51,7 +51,7 @@ int main(){
 			if(i>=MEMORYSIZE){
 				player.train(records);
 #ifdef PRINTSSE
-				player.getSumSqErr(records);
+//				player.getSumSqErr(records);
 #endif
 				records.clear();
 				i=0;
